@@ -6,12 +6,22 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Page;
+use creocoder\translateable\TranslateableBehavior;
 
 /**
  * PageSearch represents the model behind the search form about `common\models\Page`.
  */
 class PageSearch extends Page
 {
+    public function behaviors()
+    {
+        return [
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title', 'body', 'tkd_title', 'tkd_keyword', 'tkd_description'],
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -38,10 +48,21 @@ class PageSearch extends Page
      */
     public function search($params)
     {
-        $query = Page::find();
+        $query = Page::find()->joinWith(['translationDefault']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => [
+                    'title' => [
+                        'asc' => ['title' => SORT_ASC],
+                        'desc' => ['title' => SORT_DESC],
+                    ],
+                    'id',
+                    'slug',
+                    'status',
+                ],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
