@@ -10,14 +10,12 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
-
 /**
  * This is the model class for table "page".
  *
  * @property integer $id
+ * @property string $name
  * @property string $slug
- * @property string $title
- * @property string $body
  * @property string $view
  * @property integer $status
  * @property integer $created_at
@@ -63,6 +61,9 @@ class Page extends ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function transactions()
     {
         return [
@@ -85,13 +86,14 @@ class Page extends ActiveRecord
     {
         return $this->hasOne(PageTranslation::className(), ['page_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
     }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['title', 'body'], 'required'],
+            [['name', 'title', 'body'], 'required'],
             [['body'], 'string'],
             [['status'], 'integer'],
             [['slug'], 'unique'],
@@ -109,12 +111,23 @@ class Page extends ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'slug' => Yii::t('common', 'Slug'),
-            'title' => Yii::t('common', 'Title'),
-            'body' => Yii::t('common', 'Body'),
+            'name' => Yii::t('common', 'Inside Name'),
             'view' => Yii::t('common', 'Page View'),
             'status' => Yii::t('common', 'Active'),
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Updated At'),
+        ];
+    }
+
+    /**
+     * Return page statuses
+     * @return array
+     */
+    public static function statuses()
+    {
+        return [
+            self::STATUS_DRAFT => Yii::t('common', "Inactive"),
+            self::STATUS_PUBLISHED => Yii::t('common', "Active"),
         ];
     }
 }

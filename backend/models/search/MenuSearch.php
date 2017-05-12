@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\WidgetText;
+use common\models\Menu;
 
 /**
- * WidgetTextSearch represents the model behind the search form about `common\models\WidgetText`.
+ * MenuSearch represents the model behind the search form about `common\models\Menu`.
  */
-class WidgetTextSearch extends WidgetText
+class MenuSearch extends Menu
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class WidgetTextSearch extends WidgetText
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['key', 'name'], 'safe'],
+            [['id', 'active', 'position'], 'integer'],
+            [['name', 'slug'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class WidgetTextSearch extends WidgetText
      */
     public function search($params)
     {
-        $query = WidgetText::find();
+        $query = Menu::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -53,13 +53,12 @@ class WidgetTextSearch extends WidgetText
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'active' => $this->active,
+            'position' => $this->position,
         ]);
 
-        $query->andFilterWhere(['like', 'key', $this->key])
-            ->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'slug', $this->slug]);
 
         return $dataProvider;
     }

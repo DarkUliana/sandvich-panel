@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\WidgetText;
-use backend\models\search\WidgetTextSearch;
+use common\models\PanelProject;
+use backend\models\search\PanelProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * WidgetTextController implements the CRUD actions for WidgetText model.
+ * PanelProjectController implements the CRUD actions for PanelProject model.
  */
-class WidgetTextController extends Controller
+class PanelProjectController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Lists all WidgetText models.
+     * Lists all PanelProject models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new WidgetTextSearch();
+        $searchModel = new PanelProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Displays a single WidgetText model.
+     * Displays a single PanelProject model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Creates a new WidgetText model.
+     * Creates a new PanelProject model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new WidgetText();
+        $model = new PanelProject();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Updates an existing WidgetText model.
+     * Updates an existing PanelProject model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Deletes an existing WidgetText model.
+     * Deletes an existing PanelProject model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Finds the WidgetText model based on its primary key value.
+     * Finds the PanelProject model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return WidgetText the loaded model
+     * @return PanelProject the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = WidgetText::findOne($id)) !== null) {
+        if (($model = PanelProject::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

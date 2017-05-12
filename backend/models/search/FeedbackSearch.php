@@ -5,12 +5,12 @@ namespace backend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\WidgetText;
+use common\models\Feedback;
 
 /**
- * WidgetTextSearch represents the model behind the search form about `common\models\WidgetText`.
+ * FeedbackSearch represents the model behind the search form about `common\models\Feedback`.
  */
-class WidgetTextSearch extends WidgetText
+class FeedbackSearch extends Feedback
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class WidgetTextSearch extends WidgetText
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['key', 'name'], 'safe'],
+            [['id', 'check'], 'integer'],
+            [['name', 'phone', 'email', 'datetime'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class WidgetTextSearch extends WidgetText
      */
     public function search($params)
     {
-        $query = WidgetText::find();
+        $query = Feedback::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -53,13 +53,13 @@ class WidgetTextSearch extends WidgetText
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'datetime' => $this->datetime,
+            'check' => $this->check,
         ]);
 
-        $query->andFilterWhere(['like', 'key', $this->key])
-            ->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }

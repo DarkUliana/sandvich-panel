@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\WidgetText */
+/* @var $model common\models\Menu */
 
-$this->title = 'Create Widget Text';
-$this->params['breadcrumbs'][] = ['label' => 'Widget Texts', 'url' => ['index']];
+$this->title = 'Create Menu';
+$this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="widget-text-create">
+<div class="menu-create">
 
     <?php echo $this->render('_form', [
         'model' => $model,

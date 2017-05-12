@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\WidgetText;
-use backend\models\search\WidgetTextSearch;
+use common\models\Checkerboard;
+use backend\models\search\CheckerboardSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * WidgetTextController implements the CRUD actions for WidgetText model.
+ * CheckerboardController implements the CRUD actions for Checkerboard model.
  */
-class WidgetTextController extends Controller
+class CheckerboardController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Lists all WidgetText models.
+     * Lists all Checkerboard models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new WidgetTextSearch();
+        $searchModel = new CheckerboardSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Displays a single WidgetText model.
+     * Displays a single Checkerboard model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Creates a new WidgetText model.
+     * Creates a new Checkerboard model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new WidgetText();
+        $model = new Checkerboard();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Updates an existing WidgetText model.
+     * Updates an existing Checkerboard model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Deletes an existing WidgetText model.
+     * Deletes an existing Checkerboard model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class WidgetTextController extends Controller
     }
 
     /**
-     * Finds the WidgetText model based on its primary key value.
+     * Finds the Checkerboard model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return WidgetText the loaded model
+     * @return Checkerboard the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = WidgetText::findOne($id)) !== null) {
+        if (($model = Checkerboard::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
