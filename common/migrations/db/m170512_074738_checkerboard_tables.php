@@ -2,20 +2,20 @@
 
 class m170512_074738_checkerboard_tables extends studio32x32\components\migration\Migration
 {
+    private $_transTable;
     private $_tableName;
-    private $_widgetTable;
     
     public function init()
     {
         parent::init();
 
-        $this->_tableName = $this->tableName('{{%checkerboard_translation}}');
-        $this->_widgetTable = $this->tableName('{{%checkerboard}}');
+        $this->_transTable = $this->tableName('{{%checkerboard_translation}}');
+        $this->_tableName = $this->tableName('{{%checkerboard}}');
     }
     
     public function up()
     {
-        $this->createTable($this->_widgetTable, [
+        $this->createTable($this->_tableName, [
             'id' => $this->primaryKey(),
             'name' => $this->string(),
             'image' => $this->string()->notNull(),
@@ -24,24 +24,24 @@ class m170512_074738_checkerboard_tables extends studio32x32\components\migratio
         ], $this->tableOptions);
 
 
-        $this->createTable($this->_tableName, [
+        $this->createTable($this->_transTable, [
             'checkerboard_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
             'title' => $this->string(512)->notNull(),
-            'body' => $this->string(512)->notNull(),
+            'body' => $this->text()->notNull(),
         ]);
 
         $this->addPrimaryKey(
-            'pk-' . $this->_tableName . '-checkerboard_id-language',
-            $this->_tableName,
+            'pk-' . $this->_transTable . '-checkerboard_id-language',
+            $this->_transTable,
             ['checkerboard_id', 'language']
         );
 
         $this->addForeignKey(
-            'fk-' . $this->_tableName . '-checkerboard_id',
-            $this->_tableName,
+            'fk-' . $this->_transTable . '-checkerboard_id',
+            $this->_transTable,
             'checkerboard_id',
-            $this->_widgetTable,
+            $this->_tableName,
             'id',
             'cascade'
         );
@@ -49,8 +49,8 @@ class m170512_074738_checkerboard_tables extends studio32x32\components\migratio
 
     public function down()
     {
+        $this->dropTable($this->_transTable);
         $this->dropTable($this->_tableName);
-        $this->dropTable($this->_widgetTable);
 
     }
 }

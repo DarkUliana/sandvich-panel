@@ -27,7 +27,7 @@ class m170512_081128_panel_project_table extends studio32x32\components\migratio
         $this->createTable($this->_tableName, [
             'panel_project_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
-            'text' => $this->string(512)->notNull(),
+            'title' => $this->string(512)->notNull(),
         ]);
 
         $this->addPrimaryKey(

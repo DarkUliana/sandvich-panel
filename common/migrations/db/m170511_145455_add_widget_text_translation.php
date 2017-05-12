@@ -2,14 +2,14 @@
 
 class m170511_145455_add_widget_text_translation extends studio32x32\components\migration\Migration
 {
-    private $_tableName;
+    private $_transTable;
     private $_widgetTable;
     
     public function init()
     {
         parent::init();
 
-        $this->_tableName = $this->tableName('{{%widget_text_translation}}');
+        $this->_transTable = $this->tableName('{{%widget_text_translation}}');
         $this->_widgetTable = $this->tableName('{{%widget_text}}');
     }
     
@@ -20,23 +20,23 @@ class m170511_145455_add_widget_text_translation extends studio32x32\components\
 
         $this->addColumn($this->_widgetTable, 'name', $this->string()->notNull());
 
-        $this->createTable($this->_tableName, [
-            'page_id' => $this->integer()->notNull(),
+        $this->createTable($this->_transTable, [
+            'widget_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
             'title' => $this->string(512)->notNull(),
             'body' => $this->text(),
         ]);
 
         $this->addPrimaryKey(
-            'pk-' . $this->_tableName . '-page_id-language',
-            $this->_tableName,
-            ['page_id', 'language']
+            'pk-' . $this->_transTable . '-widget_id-language',
+            $this->_transTable,
+            ['widget_id', 'language']
         );
 
         $this->addForeignKey(
-            'fk-' . $this->_tableName . '-page_id',
-            $this->_tableName,
-            'page_id',
+            'fk-' . $this->_transTable . '-widget_id',
+            $this->_transTable,
+            'widget_id',
             $this->_widgetTable,
             'id',
             'cascade'
@@ -45,7 +45,7 @@ class m170511_145455_add_widget_text_translation extends studio32x32\components\
 
     public function down()
     {
-        $this->dropTable($this->_tableName);
+        $this->dropTable($this->_transTable);
 
         $this->dropColumn($this->_widgetTable, 'name');
 

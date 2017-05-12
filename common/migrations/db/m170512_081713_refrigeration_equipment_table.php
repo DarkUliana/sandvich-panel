@@ -27,7 +27,7 @@ class m170512_081713_refrigeration_equipment_table extends studio32x32\component
         $this->createTable($this->_tableName, [
             'equipment_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
-            'text' => $this->string(512)->notNull(),
+            'title' => $this->string(512)->notNull(),
         ]);
 
         $this->addPrimaryKey(
