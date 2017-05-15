@@ -12,6 +12,8 @@ use common\models\Feedback;
  */
 class FeedbackSearch extends Feedback
 {
+    public $datetime_range;
+    
     /** 
      * @inheritdoc
      */
@@ -19,7 +21,7 @@ class FeedbackSearch extends Feedback
     {
         return [
             [['id', 'check'], 'integer'],
-            [['name', 'phone', 'email', 'datetime'], 'safe'],
+            [['name', 'phone', 'email', 'datetime_range'], 'safe'],
         ];
     }
 
@@ -55,6 +57,17 @@ class FeedbackSearch extends Feedback
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
+        
+        // Set `datetime_range` where statement
+        if (!is_null($this->datetime_range)) {
+            $range = $this->dateFromRange($this->datetime_range);
+            if (!is_null($range[0])) {
+                $query->andFilterWhere(['>=', 'datetime', date('Y-m-d', strtotime($range[0]))]);
+            }
+            if (!is_null($range[1])) {
+                $query->andFilterWhere(['<=', 'datetime', date('Y-m-d', strtotime($range[1] . ' +1 day'))]);
+            }
+        }
 
         $query->andFilterWhere([
             'id' => $this->id,
@@ -68,4 +81,31 @@ class FeedbackSearch extends Feedback
 
         return $dataProvider;
     }
+    /**
+     * Method parse date range string to array
+     *
+     * @param $rangeStr
+     *
+     * @return array
+     */
+    public function dateFromRange($rangeStr)
+    {
+        // Verify argument
+        if (empty($rangeStr) || !is_string($rangeStr)) {
+            return [
+                0 => null,
+                1 => null,
+            ];
+        }
+
+        $dates = explode(' - ', $rangeStr);
+        if (empty($dates[0])) {
+            $dates[0] = null;
+        }
+        if (empty($dates[1])) {
+            $dates[1] = null;
+        }
+        return $dates;
+    }
+    
 }

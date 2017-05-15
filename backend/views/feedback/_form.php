@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use trntv\yii\datetime\DateTimeWidget;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Feedback */
@@ -20,9 +21,14 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?php echo $form->field($model, 'datetime')->textInput() ?>
+    <?php echo $form->field($model, 'datetime')->widget(
+        DateTimeWidget::className(),
+        [
+            'phpDatetimeFormat' => 'yyyy-MM-dd\'T\'HH:mm:ssZZZZZ'
+        ]
+    ) ?>
 
-    <?php echo $form->field($model, 'check')->textInput() ?>
+    <?php echo $form->field($model, 'check')->label(Yii::t('common', "Checked"))->checkbox() ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

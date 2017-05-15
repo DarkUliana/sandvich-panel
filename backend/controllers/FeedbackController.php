@@ -49,10 +49,10 @@ class FeedbackController extends Controller
             return;
         }
         
-        $widgetText = Feedback::findOne(Yii::$app->request->get('id'));
-        if ($widgetText instanceof Feedback) {
-            $status = (bool)Yii::$app->request->get('status');
-            $widgetText->updateAttributes(['status' => $status]);
+        $feedback = Feedback::findOne(Yii::$app->request->get('id'));
+        if ($feedback instanceof Feedback) {
+            $check = (bool)Yii::$app->request->get('status');
+            $feedback->updateAttributes(['check' => $check]);
         }
     }
 
@@ -78,7 +78,7 @@ class FeedbackController extends Controller
         $model = new Feedback();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -97,7 +97,7 @@ class FeedbackController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
