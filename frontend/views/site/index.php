@@ -1,8 +1,10 @@
 <?php
 
 /* @var $this yii\web\View */
+/** @var $model \frontend\forms\FeedbackForm */
 
 use \yii\helpers\Url;
+use \yii\bootstrap\ActiveForm;
 
 $this->title = Yii::$app->name;
 ?>
@@ -248,17 +250,38 @@ $this->title = Yii::$app->name;
         <div class="container">
             <div class="calculation__box zoomIn wow">
                 <div class="calculation__title">ОТРИМАЙТЕ індивідуальний прорахунок ВАРТОСТІ</div>
-                <form class="calculation__field" action="#" method="post">
+                <?php $form = ActiveForm::begin([
+                    'options' => [
+                        'class' => 'calculation__field',
+                    ],
+                    'action' => Url::to(['/send']),
+                    'enableClientValidation' => true,
+                    'validateOnBlur' => true,
+                    'validateOnChange' => true,
+                    'validateOnSubmit' => true,
+                ]); ?>
                     <div class="calculation__field-item calculation__field-item--email">
-                        <input class="calculation__input" type="text" placeholder="Введіть Ваше ім`я">
+                        <?= $form->field($model, 'name', [
+                            'template' => '{input}',
+                        ])->textInput([
+                            'class' => 'calculation__input',
+                            'maxlength' => true,
+                            'placeholder' => "Введіть Ваше ім`я",
+                        ]) ?>
                     </div>
                     <div class="calculation__field-item calculation__field-item--phone">
-                        <input class="calculation__input" type="text" placeholder="Введіть Ваш телефон">
+                        <?= $form->field($model, 'phone', [
+                            'template' => '{input}',
+                        ])->textInput([
+                            'class' => 'calculation__input',
+                            'maxlength' => true,
+                            'placeholder' => "Введіть Ваш телефон",
+                        ]) ?>
                     </div>
                     <div class="calculation__field-item">
-                        <input class="calculation__button" type="submit" value="Отримати розрахунок">
+                        <input class="calculation__button ajax-submit" type="button" value="Отримати розрахунок">
                     </div>
-                </form>
+                <?php ActiveForm::end(); ?>
             </div>
         </div>
     </div>

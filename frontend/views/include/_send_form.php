@@ -8,7 +8,10 @@
     <div class="ownbox-title">Замовити дзвінок</div>
     <div class="ownbox-description">Ми обов'язково зв'яжемося з Вами протягом 5 хвилин</div>
     <?php $form = \yii\bootstrap\ActiveForm::begin([
-        'enableAjaxValidation' => true,
+        'enableClientValidation' => true,
+        'validateOnBlur' => true,
+        'validateOnChange' => true,
+        'validateOnSubmit' => true,
     ]); ?>
         <div class="ownbox-field ownbox-field--user">
             <?= $form->field($model, 'name', [

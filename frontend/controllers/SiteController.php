@@ -6,6 +6,7 @@ use yii\web\Controller;
 use \yii\web\NotFoundHttpException;
 use yii\web\Response;
 use \yii\bootstrap\ActiveForm;
+use \frontend\forms\FeedbackForm;
 
 /**
  * Site controller
@@ -38,7 +39,9 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', [
+            'model' => Yii::createObject(FeedbackForm::className()),
+        ]);
     }
     
     public function actionSend()
@@ -47,7 +50,7 @@ class SiteController extends Controller
             throw new NotFoundHttpException();
         }
         
-        $form = Yii::createObject(\frontend\forms\FeedbackForm::className());
+        $form = Yii::createObject(FeedbackForm::className());
         
         if (Yii::$app->request->isAjax && $form->load(Yii::$app->request->post())) {
             $validate = ActiveForm::validate($form);

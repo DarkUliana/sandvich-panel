@@ -1,3 +1,5 @@
+var sending = false;
+
 $(document).ready(function() {
     new WOW().init();
 });
@@ -8,6 +10,13 @@ $(document).on('click', '.ownbox-show', function(e){
     own_box_show($(this).attr('href'));
 }).on('click', '.ajax-submit', function(e){
     e.preventDefault();
+    e.stopPropagation();
+    
+    if (sending) {
+        return;
+    }
+    
+    sending = true;
     
     var self = $(this),
         form = self.closest('form');
@@ -17,8 +26,12 @@ $(document).on('click', '.ownbox-show', function(e){
         type: form.attr('method').toUpperCase()  || 'POST',
         data: form.serialize(),
     }).done(function(response){
+        sending = false;
+        
         if ('status' in response && response.status) {
             own_box_show('/result');
         }
+    }).error(function(error) {
+        sending = false;
     });
 });
