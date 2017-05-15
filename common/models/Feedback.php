@@ -16,6 +16,8 @@ use Yii;
  */
 class Feedback extends \yii\db\ActiveRecord
 {
+    const STATUS_CHECKED = true;
+    
     /**
      * @inheritdoc
      */
@@ -30,9 +32,11 @@ class Feedback extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name', 'phone'], 'required'],
             [['datetime'], 'safe'],
-            [['check'], 'integer'],
-            [['name', 'phone', 'email'], 'string', 'max' => 255],
+            [['check'], 'boolean'],
+            [['name', 'phone'], 'string', 'max' => 255],
+            [['email'], 'email'],
         ];
     }
 
@@ -42,21 +46,29 @@ class Feedback extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'phone' => Yii::t('app', 'Phone'),
-            'email' => Yii::t('app', 'Email'),
-            'datetime' => Yii::t('app', 'Datetime'),
-            'check' => Yii::t('app', 'Check'),
+            'id' => Yii::t('common', 'ID'),
+            'name' => Yii::t('common', 'Name'),
+            'phone' => Yii::t('common', 'Phone'),
+            'email' => Yii::t('common', 'Email'),
+            'datetime' => Yii::t('common', 'Datetime'),
+            'check' => Yii::t('common', 'Check'),
         ];
     }
 
     /**
      * @inheritdoc
-     * @return FeedbackQuery the active query used by this AR class.
+     * @return \common\models\query\FeedbackQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new FeedbackQuery(get_called_class());
+        return new \common\models\query\FeedbackQuery(get_called_class());
+    }
+    
+    public static function statuses()
+    {
+        return [
+            !self::STATUS_CHECKED => Yii::t('common', "Not checked"),
+            self::STATUS_CHECKED => Yii::t('common', "Checked"),
+        ];
     }
 }

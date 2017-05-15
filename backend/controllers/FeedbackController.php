@@ -32,6 +32,8 @@ class FeedbackController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new FeedbackSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -39,6 +41,19 @@ class FeedbackController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $widgetText = Feedback::findOne(Yii::$app->request->get('id'));
+        if ($widgetText instanceof Feedback) {
+            $status = (bool)Yii::$app->request->get('status');
+            $widgetText->updateAttributes(['status' => $status]);
+        }
     }
 
     /**

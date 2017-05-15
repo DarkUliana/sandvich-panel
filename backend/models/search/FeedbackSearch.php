@@ -12,7 +12,7 @@ use common\models\Feedback;
  */
 class FeedbackSearch extends Feedback
 {
-    /**
+    /** 
      * @inheritdoc
      */
     public function rules()
@@ -45,6 +45,11 @@ class FeedbackSearch extends Feedback
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'datetime' => SORT_DESC,
+                ],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {

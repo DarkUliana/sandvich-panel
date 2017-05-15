@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Feedback */
 
-$this->title = 'Update Feedback: ' . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Feedbacks', 'url' => ['index']];
+$this->title = Yii::t('backend', 'Update {modelClass}: ', [
+    'modelClass' => 'Feedback',
+]) . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Feedbacks'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
 ?>
 <div class="feedback-update">
 
