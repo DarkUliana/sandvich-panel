@@ -7,5 +7,6 @@ return [
     'rules'=> [
         '/' => 'site/index',
         'send' => 'site/send',
+        'result' => 'site/result',
     ]
 ];

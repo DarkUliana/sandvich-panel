@@ -5,20 +5,6 @@
 use \yii\helpers\Url;
 
 $this->title = Yii::$app->name;
-
-$script = <<<JS
-    $(document).ready(function() {
-        new WOW().init();
-    });
-        
-    $(document).on('click', '.ownbox-show', function(e){
-        e.preventDefault();
-        
-        own_box_show($(this).attr('href'));
-    });
-JS;
-$this->registerJs($script, yii\web\View::POS_END);
-
 ?>
 <!--= Header =-->
 <header class="header" id="header">

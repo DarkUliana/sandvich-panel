@@ -38,6 +38,7 @@ class FrontendAsset extends AssetBundle
         'js/main.min.js',
         'js/own.box.min.js',
         'js/wow.min.js',
+        'js/index.js',
     ];
 
     /**

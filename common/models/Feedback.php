@@ -16,6 +16,7 @@ use Yii;
  */
 class Feedback extends \yii\db\ActiveRecord
 {
+    const STATUS_DEFAULT = false;
     const STATUS_CHECKED = true;
     
     /**
