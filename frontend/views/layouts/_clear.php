@@ -15,6 +15,7 @@ use yii\helpers\Html;
     <title><?php echo Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <?php echo Html::csrfMetaTags() ?>
+    <script type="text/javascript" language="JavaScript">CI_ROOT = '<?= rtrim(Yii::$app->homeUrl, '/'), '/' ?>';</script>
 </head>
 <body>
 <?php $this->beginBody() ?>
