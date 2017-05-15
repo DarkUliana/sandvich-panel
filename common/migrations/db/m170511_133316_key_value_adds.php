@@ -11,7 +11,7 @@ class m170511_133316_key_value_adds extends Migration
         $this->db->createCommand()->batchInsert($this->_tableName, [
             'key', 'value', 'comment', 'updated_at', 'created_at'
         ], [
-            ['backend.contentActivePages', 'page,phone,menu,widget-text,index-item,feedback,project,equipment,article,article-category,frontend-menu,slider,social,widget-text', 'Leftside menu content menu subpages', time(), time()],
+            ['backend.contentActivePages', 'page,phone,menu,widget-text,index-item,feedback,project,equipment,article,article-category,frontend-menu,slider,social,widget-text,refrigeration-equipment,checkerboard,panel-project,', 'Leftside menu content menu subpages', time(), time()],
             ['backend.otherActivePages', 'i18n,key-storage,file-storage,cache,file-manager,system-information,log', 'Leftside menu other menu subpages', time(), time()],
         ])->execute();
     }

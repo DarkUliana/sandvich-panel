@@ -28,6 +28,7 @@ class m170512_081128_panel_project_table extends studio32x32\components\migratio
             'panel_project_id' => $this->integer()->notNull(),
             'language' => $this->string(16)->notNull(),
             'title' => $this->string(512)->notNull(),
+            'body' => $this->text()
         ]);
 
         $this->addPrimaryKey(

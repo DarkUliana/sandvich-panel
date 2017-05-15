@@ -32,6 +32,8 @@ class WidgetTextController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new WidgetTextSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -39,6 +41,19 @@ class WidgetTextController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $widgetText = WidgetText::findOne(Yii::$app->request->get('id'));
+        if ($widgetText instanceof WidgetText) {
+            $status = (bool)Yii::$app->request->get('status');
+            $widgetText->updateAttributes(['status' => $status]);
+        }
     }
 
     /**
@@ -61,6 +76,7 @@ class WidgetTextController extends Controller
     public function actionCreate()
     {
         $model = new WidgetText();
+        $model->status = WidgetText::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

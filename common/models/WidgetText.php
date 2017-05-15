@@ -2,6 +2,10 @@
 
 namespace common\models;
 
+use backend\behaviors\PositionBehavior;
+use backend\behaviors\TranslationSaveBehavior;
+use common\models\translation\WidgetTextTranslation;
+use creocoder\translateable\TranslateableBehavior;
 use Yii;
 
 /**
@@ -18,6 +22,23 @@ use Yii;
  */
 class WidgetText extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = true;
+    
+    public function behaviors()
+    {
+        return [
+            \yii\behaviors\TimestampBehavior::className(),
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title'],
+            ],
+            [
+                'class' => TranslationSaveBehavior::className(),
+                'translationClassName' => WidgetTextTranslation::className(),
+            ],
+            PositionBehavior::className(),
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -32,8 +53,9 @@ class WidgetText extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['key', 'name'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['key'], 'required'],
+            [['created_at', 'updated_at'], 'integer'],
+            [['status'], 'boolean'],
             [['key', 'name'], 'string', 'max' => 255],
         ];
     }
@@ -44,13 +66,39 @@ class WidgetText extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'key' => Yii::t('app', 'Key'),
-            'status' => Yii::t('app', 'Status'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'name' => Yii::t('app', 'Name'),
+            'id' => Yii::t('common', 'ID'),
+            'key' => Yii::t('common', 'Key'),
+            'status' => Yii::t('common', 'Status'),
+            'created_at' => Yii::t('common', 'Created At'),
+            'updated_at' => Yii::t('common', 'Updated At'),
+            'name' => Yii::t('common', 'Name'),
         ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_INSERT | self::OP_UPDATE,
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslations()
+    {
+        return $this->hasMany(WidgetTextTranslation::className(), ['widget_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslationDefault()
+    {
+        return $this->hasOne(WidgetTextTranslation::className(), ['widget_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
     }
 
     /**
@@ -68,5 +116,13 @@ class WidgetText extends \yii\db\ActiveRecord
     public static function find()
     {
         return new WidgetTextQuery(get_called_class());
+    }
+    
+    public static function statuses()
+    {
+        return [
+            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+        ];
     }
 }

@@ -7,17 +7,17 @@ use yii\widgets\DetailView;
 /* @var $model common\models\RefrigerationEquipment */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Refrigeration Equipments', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Refrigeration Equipments'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="refrigeration-equipment-view">
 
     <p>
-        <?php echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php echo Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?php echo Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => Yii::t('backend', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\search\CheckerboardSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Checkerboards';
+$this->title = Yii::t('backend', 'Advantages of sandwich panels');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="checkerboard-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a('Create Checkerboard', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Create advantages of sandwich panels'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo GridView::widget([

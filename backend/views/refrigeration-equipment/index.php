@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\search\RefrigerationEquipmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Refrigeration Equipments';
+$this->title = Yii::t('backend', 'Refrigeration equipment');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="refrigeration-equipment-index">
@@ -15,7 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a('Create Refrigeration Equipment', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Create refrigeration equipment', [
+    'modelClass' => 'Refrigeration Equipment',
+]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php echo GridView::widget([
@@ -30,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'active',
             'position',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',],
         ],
     ]); ?>
 
