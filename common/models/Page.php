@@ -2,6 +2,9 @@
 
 namespace common\models;
 
+use backend\behaviors\TranslationSaveBehavior;
+use common\models\translation\PageTranslation;
+use creocoder\translateable\TranslateableBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -11,9 +14,8 @@ use yii\db\ActiveRecord;
  * This is the model class for table "page".
  *
  * @property integer $id
+ * @property string $name
  * @property string $slug
- * @property string $title
- * @property string $body
  * @property string $view
  * @property integer $status
  * @property integer $created_at
@@ -41,11 +43,48 @@ class Page extends ActiveRecord
             TimestampBehavior::className(),
             'slug' => [
                 'class' => SluggableBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_AFTER_VALIDATE => 'slug',
+                ],
                 'attribute' => 'title',
                 'ensureUnique' => true,
-                'immutable' => true
-            ]
+                'immutable' => true,
+            ],
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title', 'body', 'tkd_title', 'tkd_keyword', 'tkd_description'],
+            ],
+            [
+                'class' => TranslationSaveBehavior::className(),
+                'translationClassName' => PageTranslation::className(),
+            ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_INSERT | self::OP_UPDATE,
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslations()
+    {
+        return $this->hasMany(PageTranslation::className(), ['page_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslationDefault()
+    {
+        return $this->hasOne(PageTranslation::className(), ['page_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
     }
 
     /**
@@ -54,7 +93,7 @@ class Page extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'body'], 'required'],
+            [['name', 'title', 'body'], 'required'],
             [['body'], 'string'],
             [['status'], 'integer'],
             [['slug'], 'unique'],
@@ -72,12 +111,23 @@ class Page extends ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'slug' => Yii::t('common', 'Slug'),
-            'title' => Yii::t('common', 'Title'),
-            'body' => Yii::t('common', 'Body'),
+            'name' => Yii::t('common', 'Inside Name'),
             'view' => Yii::t('common', 'Page View'),
             'status' => Yii::t('common', 'Active'),
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Updated At'),
+        ];
+    }
+
+    /**
+     * Return page statuses
+     * @return array
+     */
+    public static function statuses()
+    {
+        return [
+            self::STATUS_DRAFT => Yii::t('common', "Inactive"),
+            self::STATUS_PUBLISHED => Yii::t('common', "Active"),
         ];
     }
 }

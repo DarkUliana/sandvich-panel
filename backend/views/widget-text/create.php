@@ -1,17 +1,19 @@
 <?php
+
+use yii\helpers\Html;
+
+
 /* @var $this yii\web\View */
 /* @var $model common\models\WidgetText */
 
-$this->title = Yii::t('backend', 'Create {modelClass}', [
-    'modelClass' => 'Text Block',
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Text Blocks'), 'url' => ['index']];
+$this->title = 'Create Widget Text';
+$this->params['breadcrumbs'][] = ['label' => 'Widget Texts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="text-block-create">
+<div class="widget-text-create">
 
     <?php echo $this->render('_form', [
-        'model' => $model
+        'model' => $model,
     ]) ?>
 
 </div>

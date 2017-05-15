@@ -17,4 +17,86 @@ body .user-panel > .info {
   padding-left: 10px;
 }
 
+.tab-content {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-left: 1px solid #f4f4f4;
+    border-right: 1px solid #f4f4f4;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.dotted-link {
+    border-bottom: 1px dotted #000;
+    text-decoration: none;
+}
+.dotted-link:hover {
+    border-bottom: none;
+}
+
+.dotted-primary {
+    color: #337ab7;
+    border-color: #337ab7;
+}
+.dotted-primary:hover,
+.dotted-primary:focus {
+    color: #286090;
+    border-color: #286090;
+}
+.dotted-success {
+    color: #3c763d;
+    border-color: #3c763d;
+}
+.dotted-success:hover,
+.dotted-success:focus {
+    color: #2b542c;
+    border-color: #2b542c;
+}
+.dotted-info {
+    color: #31708f;
+    border-color: #31708f;
+}
+.dotted-info:hover,
+.dotted-info:focus {
+    color: #245269;
+    border-color: #245269;
+}
+.dotted-warning {
+    color: #8a6d3b;
+    border-color: #8a6d3b;
+}
+.dotted-warning:hover,
+.dotted-warning:focus {
+    color: #66512c;
+    border-color: #66512c;
+}
+.dotted-danger {
+    color: #a94442;
+    border-color: #a94442;
+}
+.dotted-danger:hover,
+.dotted-danger:focus {
+    color: #843534;
+    border-color: #843534;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
 /*# sourceMappingURL=style.map *//*# sourceMappingURL=style.map */

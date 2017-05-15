@@ -2,25 +2,43 @@
 
 namespace common\models;
 
-use common\behaviors\CacheInvalidateBehavior;
+use backend\behaviors\PositionBehavior;
+use backend\behaviors\TranslationSaveBehavior;
+use common\models\translation\WidgetTextTranslation;
+use creocoder\translateable\TranslateableBehavior;
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "text_block".
+ * This is the model class for table "{{%widget_text}}".
  *
  * @property integer $id
  * @property string $key
- * @property string $title
- * @property string $body
  * @property integer $status
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property string $name
+ *
+ * @property WidgetTextTranslation[] $widgetTextTranslations
  */
-class WidgetText extends ActiveRecord
+class WidgetText extends \yii\db\ActiveRecord
 {
-    const STATUS_ACTIVE = 1;
-    const STATUS_DRAFT = 0;
-
+    const STATUS_ACTIVE = true;
+    
+    public function behaviors()
+    {
+        return [
+            \yii\behaviors\TimestampBehavior::className(),
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title'],
+            ],
+            [
+                'class' => TranslationSaveBehavior::className(),
+                'translationClassName' => WidgetTextTranslation::className(),
+            ],
+            PositionBehavior::className(),
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -32,36 +50,13 @@ class WidgetText extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-            'cacheInvalidate' => [
-                'class' => CacheInvalidateBehavior::className(),
-                'cacheComponent' => 'frontendCache',
-                'keys' => [
-                    function ($model) {
-                        return [
-                            self::className(),
-                            $model->key
-                        ];
-                    }
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
-            [['key', 'title', 'body'], 'required'],
-            [['key'], 'unique'],
-            [['body'], 'string'],
-            [['status'], 'integer'],
-            [['title', 'key'], 'string', 'max' => 255]
+            [['key'], 'required'],
+            [['created_at', 'updated_at'], 'integer'],
+            [['status'], 'boolean'],
+            [['key', 'name'], 'string', 'max' => 255],
         ];
     }
 
@@ -73,9 +68,61 @@ class WidgetText extends ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'key' => Yii::t('common', 'Key'),
-            'title' => Yii::t('common', 'Title'),
-            'body' => Yii::t('common', 'Body'),
-            'status' => Yii::t('common', 'Active'),
+            'status' => Yii::t('common', 'Status'),
+            'created_at' => Yii::t('common', 'Created At'),
+            'updated_at' => Yii::t('common', 'Updated At'),
+            'name' => Yii::t('common', 'Name'),
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_INSERT | self::OP_UPDATE,
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslations()
+    {
+        return $this->hasMany(WidgetTextTranslation::className(), ['widget_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslationDefault()
+    {
+        return $this->hasOne(WidgetTextTranslation::className(), ['widget_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWidgetTextTranslations()
+    {
+        return $this->hasMany(WidgetTextTranslation::className(), ['widget_id' => 'id']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return WidgetTextQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new WidgetTextQuery(get_called_class());
+    }
+    
+    public static function statuses()
+    {
+        return [
+            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('common', "Active"),
         ];
     }
 }

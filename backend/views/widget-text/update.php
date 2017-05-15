@@ -5,13 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\WidgetText */
 
-$this->title = Yii::t('backend', 'Update {modelClass}: ', [
-    'modelClass' => 'Text Block',
-]) . ' ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Text Blocks'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
+$this->title = 'Update Widget Text: ' . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Widget Texts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="text-block-update">
+<div class="widget-text-update">
 
     <?php echo $this->render('_form', [
         'model' => $model,

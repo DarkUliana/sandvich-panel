@@ -49,6 +49,7 @@ class PageController extends Controller
     public function actionCreate()
     {
         $model = new Page();
+        $model->status = Page::STATUS_PUBLISHED;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);

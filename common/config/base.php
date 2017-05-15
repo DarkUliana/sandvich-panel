@@ -152,6 +152,7 @@ $config = [
     'params' => [
         'adminEmail' => env('ADMIN_EMAIL'),
         'robotEmail' => env('ROBOT_EMAIL'),
+        'defaultLocale' => env('APP_LANG'),
         'availableLocales'=>[
 //            'en-US'=>'English (US)',
             'ru-RU'=>'Русский (РФ)',

@@ -197,6 +197,12 @@ $pathInfo = Yii::$app->request->getPathInfo();
                             ['label' => Yii::t('backend', 'Text Widgets'), 'url' => ['/widget-text/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
                             ['label' => Yii::t('backend', 'Menu Widgets'), 'url' => ['/widget-menu/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'visible' => false,],
                             ['label' => Yii::t('backend', 'Carousel Widgets'), 'url' => ['/widget-carousel/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'visible' => false,],
+                            ['label' => Yii::t('backend', 'Refrigeration equipment'), 'url' => ['/refrigeration-equipment/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>',],
+                            ['label' => Yii::t('backend', 'Panel projects'), 'url' => ['/panel-project/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>',],
+                            ['label' => Yii::t('backend', 'Advantages of sandwich panels'), 'url' => ['/checkerboard/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>',],
+                            ['label' => Yii::t('backend', 'Menu'), 'url' => ['/menu/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>',],
+                            ['label' => Yii::t('backend', 'Phones'), 'url' => ['/phone/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>',],
+                            
                         ]
                     ],
                     [

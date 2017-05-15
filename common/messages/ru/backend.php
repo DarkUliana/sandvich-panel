@@ -164,4 +164,14 @@ return [
     'i18n' => 'I18N',
     'i18n Message' => 'Перевод',
     'i18n Source Message' => 'Текст',
+    'Refrigeration equipment' => 'Холодильное оборудование',
+    'Panel projects' => 'Проекты из панелей',
+    'Advantages of sandwich panels' => 'Преимущества панелей',
+    'Menu' => 'Меню',
+    'Phones' => 'Телефоны',
+    'Create advantages of sandwich panels' => 'Создать преимущество панелей',
+    'Create phone' => 'Создать телефон',
+    'Create menu' => 'Создать меню',
+    'Create panel project' => 'Создать проект из панелей',
+    'Create refrigeration equipment' => 'Создать холодильное оборудование'
 ];
