@@ -34,12 +34,18 @@ class FrontendAsset extends AssetBundle
     /**
      * @var array
      */
-    public $js = [];
+    public $js = [
+        'js/main.min.js',
+        'js/own.box.min.js',
+        'js/wow.min.js',
+    ];
 
     /**
      * @var array
      */
-    public $depends = [];
+    public $depends = [
+        '\\frontend\\assets\\JqueryAsset',
+    ];
     
     /**
      * @inheritdoc
