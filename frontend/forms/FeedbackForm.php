@@ -39,6 +39,20 @@ class FeedbackForm extends \yii\base\Model
             'check' => Feedback::STATUS_DEFAULT,
             'datetime' => Yii::$app->formatter->asDatetime(time(), 'php:Y-m-d H:i:s'),
         ]);
-        return $feedback->save();
+        $res = $feedback->save();
+        
+        $feedEmail = Yii::$app->keyStorage->get('feedback.email');
+        if ($res && $feedEmail) {
+            Yii::$app->mailer
+                ->compose('feedback', [
+                    'model' => $feedback,
+                ])
+                ->setFrom(env('ROBOT_EMAIL'))
+                ->setTo($feedEmail)
+                ->setSubject("Зворотній зв'язок")
+                ->send();
+        }
+        
+        return $res;
     }
 }
