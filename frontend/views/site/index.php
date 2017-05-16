@@ -67,7 +67,7 @@ $this->title = Yii::$app->name;
 
                         <div class="mobile-menu__phones">
                             <a class="mobile-menu__phones-item" href="tel:+30731328156">(073) 132-81-56</a>
-                            <a class="mobile-menu__phones-link" href="#">замовити дзвінок</a>
+                            <a class="mobile-menu__phones-link ownbox-show" href="/send">замовити дзвінок</a>
                         </div>
 
                     </div>
