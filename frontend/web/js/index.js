@@ -27,6 +27,14 @@ $(document).on('click', '.ownbox-show', function(e){
         data: form.serialize(),
     }).done(function(response){
         sending = false;
+
+        if ('feedbackform-name' in response) {
+            $(form).find('#feedbackform-name').addClass('error');
+        }
+        
+        if ('feedbackform-phone' in response) {
+            $(form).find('#feedbackform-phone').addClass('error');
+        }
         
         if ('status' in response && response.status) {
             own_box_show('/result');
@@ -34,4 +42,6 @@ $(document).on('click', '.ownbox-show', function(e){
     }).error(function(error) {
         sending = false;
     });
+}).on('click', 'input', function(){
+    $(this).removeClass('error');
 });
