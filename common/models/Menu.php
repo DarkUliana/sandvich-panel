@@ -2,6 +2,10 @@
 
 namespace common\models;
 
+use backend\behaviors\PositionBehavior;
+use backend\behaviors\TranslationSaveBehavior;
+use common\models\translation\WidgetTextTranslation;
+use creocoder\translateable\TranslateableBehavior;
 use Yii;
 
 /**
@@ -17,6 +21,22 @@ use Yii;
  */
 class Menu extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = true;
+    
+    public function behaviors()
+    {
+        return [
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title'],
+            ],
+            [
+                'class' => TranslationSaveBehavior::className(),
+                'translationClassName' => WidgetTextTranslation::className(),
+            ],
+            PositionBehavior::className(),
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -43,12 +63,25 @@ class Menu extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'active' => Yii::t('app', 'Active'),
-            'position' => Yii::t('app', 'Position'),
-            'slug' => Yii::t('app', 'Slug'),
+            'id' => Yii::t('common', 'ID'),
+            'name' => Yii::t('common', 'Name'),
+            'active' => Yii::t('common', 'Active'),
+            'position' => Yii::t('common', 'Position'),
+            'slug' => Yii::t('common', 'Slug'),
         ];
+    }
+    
+    public function getTranslations()
+    {
+        return $this->hasMany(WidgetTextTranslation::className(), ['widget_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslationDefault()
+    {
+        return $this->hasOne(WidgetTextTranslation::className(), ['widget_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
     }
 
     /**
@@ -61,10 +94,18 @@ class Menu extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return MenuQuery the active query used by this AR class.
+     * @return \common\models\query\MenuQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new MenuQuery(get_called_class());
+        return new \common\models\query\MenuQuery(get_called_class());
+    }
+    
+    public static function statuses()
+    {
+        return [
+            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+        ];
     }
 }

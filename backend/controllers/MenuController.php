@@ -32,6 +32,8 @@ class MenuController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -39,6 +41,19 @@ class MenuController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $Menu = Menu::findOne(Yii::$app->request->get('id'));
+        if ($Menu instanceof Menu) {
+            $active = (bool)Yii::$app->request->get('active');
+            $Menu->updateAttributes(['active' => $active]);
+        }
     }
 
     /**

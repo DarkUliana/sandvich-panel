@@ -3,6 +3,7 @@
 namespace common\models\translation;
 
 use Yii;
+use common\models\Page;
 
 /**
  * This is the model class for table "{{%page_translation}}".
@@ -33,7 +34,6 @@ class PageTranslation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['page_id', 'language', 'title'], 'required'],
             [['page_id'], 'integer'],
             [['body', 'tkd_description'], 'string'],
             [['language'], 'string', 'max' => 16],

@@ -30,7 +30,6 @@ class PanelProjectTranslation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['panel_project_id', 'language', 'title'], 'required'],
             [['panel_project_id'], 'integer'],
             [['body'], 'string'],
             [['language'], 'string', 'max' => 16],

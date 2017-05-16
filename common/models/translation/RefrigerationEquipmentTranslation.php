@@ -29,7 +29,6 @@ class RefrigerationEquipmentTranslation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['equipment_id', 'language', 'title'], 'required'],
             [['equipment_id'], 'integer'],
             [['language'], 'string', 'max' => 16],
             [['title'], 'string', 'max' => 512],

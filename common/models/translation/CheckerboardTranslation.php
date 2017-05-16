@@ -30,7 +30,6 @@ class CheckerboardTranslation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['checkerboard_id', 'language', 'title', 'body'], 'required'],
             [['checkerboard_id'], 'integer'],
             [['body'], 'string'],
             [['language'], 'string', 'max' => 16],

@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Menu;
+use \yii\widgets\Pjax;
+use \backend\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\MenuSearch */
@@ -10,28 +12,45 @@ use yii\grid\GridView;
 $this->title = Yii::t('backend', 'Menu');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="menu-index">
+<div class="widget-text-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php echo Html::a(Yii::t('backend', 'Create menu'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php echo GridView::widget([
+    
+    <?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
-            'active',
             'position',
             'slug',
+            [
+                'attribute' => 'active',
+                'filter' => Menu::statuses(),
+                'content' => function ($model) {
+                    /** @var $model WidgetText */
+                    $text = $model->active ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
+                    $title = $model->active ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $class = $model->active ? 'success' : 'warning';
+                    return Html::a($text, ['index', 'id' => $model->id, 'active' => !$model->active], [
+                        'class' => 'btn btn-sm btn-' . $class,
+                        'title' => $title,
+                        'alt' => $text,
+                    ]);
+                },
+            ],
+            // 'name',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'header' => Html::clearSearchLink([
+                    'except' => ['id', 'active', '_pjax'],
+                ]),
+            ],
         ],
     ]); ?>
+    <?php Pjax::end(); ?>
 
 </div>

@@ -31,7 +31,6 @@ class WidgetTextTranslation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['widget_id', 'language', 'title'], 'required'],
             [['widget_id'], 'integer'],
             [['body'], 'string'],
             [['language'], 'string', 'max' => 16],

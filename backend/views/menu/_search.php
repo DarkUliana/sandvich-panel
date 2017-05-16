@@ -8,7 +8,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
-<div class="menu-search">
+<div class="widget-text-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -19,11 +19,12 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'name') ?>
 
-    <?php echo $form->field($model, 'active') ?>
-
     <?php echo $form->field($model, 'position') ?>
 
     <?php echo $form->field($model, 'slug') ?>
+    
+    <?php echo $form->field($model, 'active') ?>
+
 
     <div class="form-group">
         <?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

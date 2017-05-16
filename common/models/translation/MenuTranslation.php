@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models\translation;
+use \common\models\Menu;
 
 use Yii;
 
@@ -29,7 +30,6 @@ class MenuTranslation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['menu_id', 'language', 'title'], 'required'],
             [['menu_id'], 'integer'],
             [['language'], 'string', 'max' => 16],
             [['title'], 'string', 'max' => 512],
@@ -43,9 +43,9 @@ class MenuTranslation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'menu_id' => Yii::t('app', 'Menu ID'),
-            'language' => Yii::t('app', 'Language'),
-            'title' => Yii::t('app', 'Title'),
+            'menu_id' => Yii::t('backend', 'Menu ID'),
+            'language' => Yii::t('backend', 'Language'),
+            'title' => Yii::t('backend', 'Title'),
         ];
     }
 
