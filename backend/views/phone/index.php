@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Phone;
+use \yii\widgets\Pjax;
+use \backend\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\PhoneSearch */
@@ -18,20 +20,35 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php echo Html::a(Yii::t('backend', 'Create phone'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
             'phone',
-            'active',
             'position',
+            [
+                'attribute' => 'active',
+                'filter' => Phone::statuses(),
+                'content' => function ($model) {
+                    /** @var $model Phone */
+                    $text = $model->active ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
+                    $title = $model->active ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $class = $model->active ? 'success' : 'warning';
+                    return Html::a($text, ['index', 'id' => $model->id, 'active' => !$model->active], [
+                        'class' => 'btn btn-sm btn-' . $class,
+                        'title' => $title,
+                        'alt' => $text,
+                    ]);
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <?php Pjax::end(); ?>
 
 </div>

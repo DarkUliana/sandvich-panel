@@ -2,6 +2,11 @@
 
 namespace common\models;
 
+use backend\behaviors\PositionBehavior;
+use backend\behaviors\TranslationSaveBehavior;
+use common\models\translation\PanelProjectTranslation;
+use creocoder\translateable\TranslateableBehavior;
+use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 
 /**
@@ -17,6 +22,35 @@ use Yii;
  */
 class PanelProject extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = true;
+    
+    public function behaviors()
+    {
+        return [
+
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title'],
+            ],
+            [
+                'class' => TranslationSaveBehavior::className(),
+                'translationClassName' => PanelProjectTranslation::className(),
+            ],
+            PositionBehavior::className(),
+//            [
+//                'class' => UploadBehavior::className(),
+//                'attribute' => 'attachments',
+//                'multiple' => false,
+//                'uploadRelation' => 'articleAttachments',
+//                'pathAttribute' => 'path',
+//                'baseUrlAttribute' => 'base_url',
+//                'orderAttribute' => 'order',
+//                'typeAttribute' => 'type',
+//                'sizeAttribute' => 'size',
+//                'nameAttribute' => 'name',
+//            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -51,6 +85,18 @@ class PanelProject extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getTranslations()
+    {
+        return $this->hasMany(PanelProjectTranslation::className(), ['panel_project_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslationDefault()
+    {
+        return $this->hasOne(PanelProjectTranslation::className(), ['panel_project_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -66,5 +112,13 @@ class PanelProject extends \yii\db\ActiveRecord
     public static function find()
     {
         return new PanelProjectQuery(get_called_class());
+    }
+    
+    public static function statuses()
+    {
+        return [
+            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+        ];
     }
 }

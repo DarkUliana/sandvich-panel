@@ -15,6 +15,7 @@ use Yii;
  */
 class Phone extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = true;
     /**
      * @inheritdoc
      */
@@ -55,5 +56,13 @@ class Phone extends \yii\db\ActiveRecord
     public static function find()
     {
         return new PhoneQuery(get_called_class());
+    }
+    
+    public static function statuses()
+    {
+        return [
+            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+        ];
     }
 }

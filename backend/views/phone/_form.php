@@ -18,9 +18,9 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?php echo $form->field($model, 'active')->textInput() ?>
-
     <?php echo $form->field($model, 'position')->textInput() ?>
+    
+    <?php echo $form->field($model, 'active')->label(Yii::t('common', "Active"))->checkbox() ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -32,6 +32,8 @@ class PanelProjectController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new PanelProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -39,6 +41,19 @@ class PanelProjectController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $panelProject = panelProject::findOne(Yii::$app->request->get('id'));
+        if ($panelProject instanceof panelProject) {
+            $active = (bool)Yii::$app->request->get('active');
+            $panelProject->updateAttributes(['active' => $active]);
+        }
     }
 
     /**
@@ -63,7 +78,7 @@ class PanelProjectController extends Controller
         $model = new PanelProject();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

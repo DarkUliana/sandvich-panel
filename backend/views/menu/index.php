@@ -12,8 +12,11 @@ use \backend\helpers\Html;
 $this->title = Yii::t('backend', 'Menu');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="widget-text-index">
+<div class="menu-index">
 
+    <p>
+        <?php echo Html::a('Create element of menu', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
     
     <?php Pjax::begin(); ?>
     <?= GridView::widget([

@@ -32,6 +32,8 @@ class PhoneController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new PhoneSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -39,6 +41,19 @@ class PhoneController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $Phone = Phone::findOne(Yii::$app->request->get('id'));
+        if ($Phone instanceof Phone) {
+            $active = (bool)Yii::$app->request->get('active');
+            $Phone->updateAttributes(['active' => $active]);
+        }
     }
 
     /**
@@ -61,9 +76,10 @@ class PhoneController extends Controller
     public function actionCreate()
     {
         $model = new Phone();
+        $model->active = Phone::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

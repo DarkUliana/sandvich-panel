@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use backend\behaviors\PositionBehavior;
 use backend\behaviors\TranslationSaveBehavior;
 use common\models\translation\WidgetTextTranslation;
 use creocoder\translateable\TranslateableBehavior;
@@ -36,7 +35,7 @@ class WidgetText extends \yii\db\ActiveRecord
                 'class' => TranslationSaveBehavior::className(),
                 'translationClassName' => WidgetTextTranslation::className(),
             ],
-            PositionBehavior::className(),
+
         ];
     }
     /**

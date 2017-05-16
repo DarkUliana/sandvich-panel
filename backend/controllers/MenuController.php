@@ -76,9 +76,10 @@ class MenuController extends Controller
     public function actionCreate()
     {
         $model = new Menu();
+        $model->active = Menu::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

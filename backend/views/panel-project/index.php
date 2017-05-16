@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\PanelProject;
+use \yii\widgets\Pjax;
+use \backend\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\PanelProjectSearch */
@@ -19,21 +21,43 @@ $this->params['breadcrumbs'][] = $this->title;
     'modelClass' => 'Panel Project',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    
+    <?php Pjax::begin(); ?>
 
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
             'image',
-            'active',
             'position',
+            [
+                'attribute' => 'active',
+                'filter' => PanelProject::statuses(),
+                'content' => function ($model) {
+                    /** @var $model WidgetText */
+                    $text = $model->active ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
+                    $title = $model->active ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $class = $model->active ? 'success' : 'warning';
+                    return Html::a($text, ['index', 'id' => $model->id, 'active' => !$model->active], [
+                        'class' => 'btn btn-sm btn-' . $class,
+                        'title' => $title,
+                        'alt' => $text,
+                    ]);
+                },
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'header' => Html::clearSearchLink([
+                    'except' => ['id', 'active', '_pjax'],
+                ]),
+            ],
         ],
     ]); ?>
 
+    <?php Pjax::end(); ?>
 </div>
