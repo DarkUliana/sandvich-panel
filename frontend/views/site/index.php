@@ -463,7 +463,7 @@ $this->title = Yii::$app->name;
             <div class="contacts__wrapper">
                 <div class="contacts__title">КОНТАКТИ</div>
                 <div class="contacts__address">м.Рівне вул. Старицького 45</div>
-                <div class="contacts__phone">(073) 132 81 56</div>
+                <a class="contacts__phone" href="tel:+30731328156">(073) 132 81 56</a>
                 <div class="contacts__email">sandvich.panels@gmail.com</div>
                 <div class="contacts__subtitle">ЗАЛИШИЛИСЯ ЗАПИТАННЯ?</div>
                 <div class="contacts__text">Замовте зворотній дзвінок і наші менеджери зв'яжуться з Вами найближчим часом</div>
@@ -471,7 +471,7 @@ $this->title = Yii::$app->name;
             </div>
         </div>
         <!-- нужно попробовать повесить класс "contacts__map" на будуюший элемент iframe :)-->
-        <div class="contacts__map" style="background: url(data/contacts/map.png) 50% 50% no-repeat; background-size: cover;"></div>
+        <div class="contacts__map" style="background: url(data/contacts/map.png);"></div>
     </div>
     <!--= End contacts =-->
 
