@@ -6,7 +6,7 @@
 <div class="ownbox-content form form-content">
     <a class="ownbox-close" href="javascript:void(0);"></a>
     <div class="ownbox-title">Замовити дзвінок</div>
-    <div class="ownbox-description">Ми обов'язково зв'яжемося з Вами протягом 5 хвилин</div>
+    <div class="ownbox-description">Наші менеджери зв'яжуться з Вами найближчим часом</div>
     <?php $form = \yii\bootstrap\ActiveForm::begin([
         'enableClientValidation' => true,
         'validateOnBlur' => true,
