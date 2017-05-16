@@ -205,8 +205,7 @@ $this->title = Yii::$app->name;
                     <div class="profit__data">
                         <div class="profit__data-number">01</div>
                         <div class="profit__data-title">Тепло та звукоізоляця</div>
-                        <div class="profit__data-text">Сендвіч панелі мають також високі звукоізоляційні характеристики. Це робить їх особливо популярними в разі будівництва будівель і споруд поблизу залізничних магістралей, автострад і інших джерел шуму з підтримкою комфортного
-                            акустичного режиму усередині приміщень.</div>
+                        <div class="profit__data-text">Високі звукоізоляційні характеристики сендвіч-панелей роблять їх особливо популярними в разі будівництва будівель і споруд поблизу автострад, залізничних магістралей та інших джерел шуму й створюють чудову акустику всередині збудованих приміщень.</div>
                     </div>
                 </div>
                 <div class="profit__item profit__item--reverse bounceInUp wow">
@@ -216,7 +215,7 @@ $this->title = Yii::$app->name;
                     <div class="profit__data">
                         <div class="profit__data-number">02</div>
                         <div class="profit__data-title">Легкість монтажу</div>
-                        <div class="profit__data-text">Легкість збірки і невелика вага сендвіч панелей дозволяють створити конструкцію без особливих зусиль і в максимально короткі терміни. Подібні терміни збірки практично неможливі при використанні інших матеріалів для будівництва.</div>
+                        <div class="profit__data-text">Мала вага та легкість монтажу сендвіч-панелей дозволяють монтувати конструкції без додаткового обладнання та в максимально короткі строки, що практично неможливо при використанні інших будівельних матеріалів.</div>
                     </div>
                 </div>
                 <div class="profit__item undefined bounceInRight wow">
@@ -226,7 +225,7 @@ $this->title = Yii::$app->name;
                     <div class="profit__data">
                         <div class="profit__data-number">03</div>
                         <div class="profit__data-title">Естетика та високі гігієнічні якості</div>
-                        <div class="profit__data-text">Ця властивість дозволяє використовувати їх в будівництві об'єктів харчової промисловості. На нашому сайті Ви, можете подивитися галерею об'єктів побудованих з сендвіч-панелей</div>
+                        <div class="profit__data-text">Притаманні сендвіч панелям високі гігієнічні якості дозволяють використовувати їх в будівництві об'єктів з високими вимогами гігієни будь то заклади харчової промисловості чи медичні установи.</div>
                     </div>
                 </div>
                 <div class="profit__item profit__item--reverse bounceInUp wow">
@@ -236,8 +235,7 @@ $this->title = Yii::$app->name;
                     <div class="profit__data">
                         <div class="profit__data-number">04</div>
                         <div class="profit__data-title">Довговічність</div>
-                        <div class="profit__data-text">Властивості складових роблять сендвіч-панелі несприйнятливими до дії хімічних речовин, роблячи можливим їх вживання в агресивних середовищах. Окрім цього, наші сендвіч-панелі не схильні до дії грибків і цвілі, що значно
-                            збільшує термін їх служби (до 25 років).</div>
+                        <div class="profit__data-text"> Хімічні властивості сендвіч панелей роблять їх несприйнятливими до дії хімічних речовин, грибків і цвілі, що значно збільшує термін їх служби та робить можливим їх вживання в агресивних середовищах.</div>
                     </div>
                 </div>
             </div>
@@ -354,7 +352,6 @@ $this->title = Yii::$app->name;
                             <img class="projects__image" src="data/projects/8.png" alt="">
                         </div>
                         <div class="projects__name">Швидкомонтовані мобільні будівлі</div>
-                        <div class="projects__note">(такі як вагончики з сендвіч панелей, блок-пост з сендвіч панелі)</div>
                     </div>
                 </div>
                 <div class="projects__item zoomIn wow">
@@ -464,12 +461,12 @@ $this->title = Yii::$app->name;
     <div class="contacts bounceInUp wow" id="contacts">
         <div class="contacts__info">
             <div class="contacts__wrapper">
-                <div class="contacts__title">КОНТАКТи</div>
+                <div class="contacts__title">КОНТАКТИ</div>
                 <div class="contacts__address">м.Рівне вул. Старицького 45</div>
                 <div class="contacts__phone">(073) 132 81 56</div>
                 <div class="contacts__email">sandvich.panels@gmail.com</div>
                 <div class="contacts__subtitle">ЗАЛИШИЛИСЯ ЗАПИТАННЯ?</div>
-                <div class="contacts__text">Замовте зворотній дзвінок і наш менеджер зв'яжеться з Вами протягом 5 хвилин</div>
+                <div class="contacts__text">Замовте зворотній дзвінок і наші менеджери зв'яжуться з Вами найближчим часом</div>
                 <a class="contacts__button ownbox-show" href="<?= Url::to(['/send']) ?>">замовити дзвінок</a>
             </div>
         </div>

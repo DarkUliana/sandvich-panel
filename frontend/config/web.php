@@ -1,4 +1,9 @@
 <?php
+
+use \yii\web\Request;
+$baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
+
+
 $config = [
     'homeUrl'=>Yii::getAlias('@frontendUrl'),
     'controllerNamespace' => 'frontend\controllers',
@@ -49,7 +54,8 @@ $config = [
             }
         ],
         'request' => [
-            'cookieValidationKey' => env('FRONTEND_COOKIE_VALIDATION_KEY')
+            'cookieValidationKey' => env('FRONTEND_COOKIE_VALIDATION_KEY'),
+            'baseUrl' => env('FRONTEND_BASE_URL', $baseUrl)
         ],
         'user' => [
             'class'=>'yii\web\User',
