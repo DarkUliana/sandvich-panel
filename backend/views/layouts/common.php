@@ -14,12 +14,15 @@ use yii\log\Logger;
 use yii\widgets\Breadcrumbs;
 
 $bundle = BackendAsset::register($this);
+
+// Get path info
+$pathInfo = Yii::$app->request->getPathInfo();
 ?>
 <?php $this->beginContent('@backend/views/layouts/base.php'); ?>
 <div class="wrapper">
     <!-- header logo: style can be found in header.less -->
     <header class="main-header">
-        <a href="<?php echo Yii::$app->urlManagerFrontend->createAbsoluteUrl('/') ?>" class="logo">
+        <a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl('/') ?>" class="logo">
             <!-- Add the class icon to your logo image or logo icon to add the margining -->
             <?php echo Yii::$app->name ?>
         </a>
@@ -34,6 +37,12 @@ $bundle = BackendAsset::register($this);
             </a>
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li class="notifications-menu">
+                        <a href="<?php echo Yii::$app->urlManagerFrontend->createAbsoluteUrl('/') ?>" target="_blank" title="" alt="">
+                            <i class="fa fa-external-link"></i>
+                        </a>
+                    </li>
+                    <?php if (false) : ?>
                     <li id="timeline-notifications" class="notifications-menu">
                         <a href="<?php echo Url::to(['/timeline-event/index']) ?>">
                             <i class="fa fa-bell"></i>
@@ -42,6 +51,7 @@ $bundle = BackendAsset::register($this);
                                 </span>
                         </a>
                     </li>
+                    
                     <!-- Notifications: style can be found in dropdown.less -->
                     <li id="log-dropdown" class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -70,6 +80,7 @@ $bundle = BackendAsset::register($this);
                             </li>
                         </ul>
                     </li>
+                        <?php endif; ?>
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -102,9 +113,11 @@ $bundle = BackendAsset::register($this);
                             </li>
                         </ul>
                     </li>
+                    <?php if (Yii::$app->user->can(\common\models\User::ROLE_ADMINISTRATOR)) : ?>
                     <li>
                         <?php echo Html::a('<i class="fa fa-cogs"></i>', ['/site/settings']) ?>
                     </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </nav>
@@ -128,7 +141,31 @@ $bundle = BackendAsset::register($this);
                 </div>
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <?php echo Menu::widget([
+            <?php
+            
+            $contentActive = true;
+            $otherActive = false;
+
+            if (!empty($pathInfo)) {
+                // Get first route
+                $route = explode('/', $pathInfo)[0];
+                $contentPageArray = explode(',', Yii::$app->keyStorage->get('backend.contentActivePages'));
+                $otherPageArray = explode(',', Yii::$app->keyStorage->get('backend.otherActivePages'));
+
+                if (in_array($route, $contentPageArray)) {
+                    $contentActive = true;
+                } else {
+                    $contentActive = false;
+                }
+
+                if (in_array($route, $otherPageArray)) {
+                    $otherActive = true;
+                } else {
+                    $otherActive = false;
+                }
+            }
+            
+            echo Menu::widget([
                 'options' => ['class' => 'sidebar-menu'],
                 'linkTemplate' => '<a href="{url}">{icon}<span>{label}</span>{right-icon}{badge}</a>',
                 'submenuTemplate' => "\n<ul class=\"treeview-menu\">\n{items}\n</ul>\n",
@@ -136,7 +173,8 @@ $bundle = BackendAsset::register($this);
                 'items' => [
                     [
                         'label' => Yii::t('backend', 'Main'),
-                        'options' => ['class' => 'header']
+                        'options' => ['class' => 'header'],
+                        'visible' => false,
                     ],
                     [
                         'label' => Yii::t('backend', 'Timeline'),
@@ -144,19 +182,21 @@ $bundle = BackendAsset::register($this);
                         'url' => ['/timeline-event/index'],
                         'badge' => TimelineEvent::find()->today()->count(),
                         'badgeBgClass' => 'label-success',
+                        'visible' => false,
                     ],
                     [
                         'label' => Yii::t('backend', 'Content'),
                         'url' => '#',
                         'icon' => '<i class="fa fa-edit"></i>',
                         'options' => ['class' => 'treeview'],
+                        'active' => $contentActive,
                         'items' => [
                             ['label' => Yii::t('backend', 'Static pages'), 'url' => ['/page/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                            ['label' => Yii::t('backend', 'Articles'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                            ['label' => Yii::t('backend', 'Article Categories'), 'url' => ['/article-category/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                            ['label' => Yii::t('backend', 'Articles'), 'url' => ['/article/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'visible' => false,],
+                            ['label' => Yii::t('backend', 'Article Categories'), 'url' => ['/article-category/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'visible' => false,],
                             ['label' => Yii::t('backend', 'Text Widgets'), 'url' => ['/widget-text/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                            ['label' => Yii::t('backend', 'Menu Widgets'), 'url' => ['/widget-menu/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                            ['label' => Yii::t('backend', 'Carousel Widgets'), 'url' => ['/widget-carousel/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                            ['label' => Yii::t('backend', 'Menu Widgets'), 'url' => ['/widget-menu/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'visible' => false,],
+                            ['label' => Yii::t('backend', 'Carousel Widgets'), 'url' => ['/widget-carousel/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'visible' => false,],
                         ]
                     ],
                     [
@@ -167,13 +207,14 @@ $bundle = BackendAsset::register($this);
                         'label' => Yii::t('backend', 'Users'),
                         'icon' => '<i class="fa fa-users"></i>',
                         'url' => ['/user/index'],
-                        'visible' => Yii::$app->user->can('administrator')
+                        'visible' => Yii::$app->user->can('administrator'),
                     ],
                     [
                         'label' => Yii::t('backend', 'Other'),
                         'url' => '#',
                         'icon' => '<i class="fa fa-cogs"></i>',
                         'options' => ['class' => 'treeview'],
+                        'active' => $otherActive,
                         'items' => [
                             [
                                 'label' => Yii::t('backend', 'i18n'),
@@ -183,12 +224,13 @@ $bundle = BackendAsset::register($this);
                                 'items' => [
                                     ['label' => Yii::t('backend', 'i18n Source Message'), 'url' => ['/i18n/i18n-source-message/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
                                     ['label' => Yii::t('backend', 'i18n Message'), 'url' => ['/i18n/i18n-message/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                                ]
+                                ],
+                                'visible' => false
                             ],
                             ['label' => Yii::t('backend', 'Key-Value Storage'), 'url' => ['/key-storage/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                            ['label' => Yii::t('backend', 'File Storage'), 'url' => ['/file-storage/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                            ['label' => Yii::t('backend', 'File Storage'), 'url' => ['/file-storage/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'visible' => false],
                             ['label' => Yii::t('backend', 'Cache'), 'url' => ['/cache/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
-                            ['label' => Yii::t('backend', 'File Manager'), 'url' => ['/file-manager/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>'],
+                            ['label' => Yii::t('backend', 'File Manager'), 'url' => ['/file-manager/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>', 'visible' => false],
                             [
                                 'label' => Yii::t('backend', 'System Information'),
                                 'url' => ['/system-information/index'],

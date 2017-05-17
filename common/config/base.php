@@ -1,10 +1,10 @@
 <?php
 $config = [
-    'name'=>'Yii2 Starter Kit',
+    'name'=>env('APP_NAME'),
     'vendorPath'=>dirname(dirname(__DIR__)).'/vendor',
     'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
     'sourceLanguage'=>'en-US',
-    'language'=>'en-US',
+    'language'=>env('APP_LANG'),
     'bootstrap' => ['log'],
     'components' => [
 
@@ -152,14 +152,15 @@ $config = [
     'params' => [
         'adminEmail' => env('ADMIN_EMAIL'),
         'robotEmail' => env('ROBOT_EMAIL'),
+        'defaultLocale' => env('APP_LANG'),
         'availableLocales'=>[
-            'en-US'=>'English (US)',
+//            'en-US'=>'English (US)',
             'ru-RU'=>'Русский (РФ)',
             'uk-UA'=>'Українська (Україна)',
-            'es' => 'Español',
-            'vi' => 'Tiếng Việt',
-            'zh-CN' => '简体中文',
-            'pl-PL' => 'Polski (PL)',
+//            'es' => 'Español',
+//            'vi' => 'Tiếng Việt',
+//            'zh-CN' => '简体中文',
+//            'pl-PL' => 'Polski (PL)',
         ],
     ],
 ];

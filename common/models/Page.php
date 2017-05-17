@@ -2,10 +2,14 @@
 
 namespace common\models;
 
+use backend\behaviors\TranslationSaveBehavior;
+use common\models\translation\PageTranslation;
+use creocoder\translateable\TranslateableBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+
 
 /**
  * This is the model class for table "page".
@@ -41,13 +45,46 @@ class Page extends ActiveRecord
             TimestampBehavior::className(),
             'slug' => [
                 'class' => SluggableBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_AFTER_VALIDATE => 'slug',
+                ],
                 'attribute' => 'title',
                 'ensureUnique' => true,
-                'immutable' => true
-            ]
+                'immutable' => true,
+            ],
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title', 'body', 'tkd_title', 'tkd_keyword', 'tkd_description'],
+            ],
+            [
+                'class' => TranslationSaveBehavior::className(),
+                'translationClassName' => PageTranslation::className(),
+            ],
         ];
     }
 
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_INSERT | self::OP_UPDATE,
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslations()
+    {
+        return $this->hasMany(PageTranslation::className(), ['page_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslationDefault()
+    {
+        return $this->hasOne(PageTranslation::className(), ['page_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
+    }
     /**
      * @inheritdoc
      */

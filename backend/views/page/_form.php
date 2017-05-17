@@ -12,24 +12,18 @@ use yii\bootstrap\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?php echo $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+    <?php echo $form->field($model, 'slug')
+        ->hint(Yii::t('backend', 'If you\'ll leave this field empty, slug will be generated automatically'))
+        ->textInput(['maxlength' => true]) ?>
 
-    <?php echo $form->field($model, 'body')->widget(
-        \yii\imperavi\Widget::className(),
-        [
-            'plugins' => ['fullscreen', 'fontcolor', 'video'],
-            'options'=>[
-                'minHeight'=>400,
-                'maxHeight'=>400,
-                'buttonSource'=>true,
-                'imageUpload'=>Yii::$app->urlManager->createUrl(['/file-storage/upload-imperavi'])
-            ]
-        ]
-    ) ?>
-
-    <?php echo $form->field($model, 'view')->textInput(['maxlength' => true]) ?>
+    <?= \backend\widgets\TranslationWidget::widget([
+        'activeForm' => $form,
+        'modelObj' => $model,
+        'translationClass' => \common\models\translation\PageTranslation::className(),
+        'view' => '_form_lang',
+    ]) ?>
 
     <?php echo $form->field($model, 'status')->checkbox() ?>
 
