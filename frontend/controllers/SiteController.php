@@ -8,6 +8,8 @@ use yii\web\Response;
 use \yii\bootstrap\ActiveForm;
 use \frontend\forms\FeedbackForm;
 
+
+
 /**
  * Site controller
  */
@@ -22,6 +24,11 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction'
             ],
+            'glide' => '\\trntv\\glide\\actions\\GlideAction',
+            'set-locale'=>[
+                'class'=>'common\actions\SetLocaleAction',
+                'locales'=>array_keys(Yii::$app->params['availableLocales'])
+            ]
         ];
     }
     
@@ -41,6 +48,13 @@ class SiteController extends Controller
     {
         return $this->render('index', [
             'model' => Yii::createObject(FeedbackForm::className()),
+            'menu' => \frontend\models\search\MenuSearch::getAll(),
+            'page' => \frontend\models\search\PageSearch::getOne(),
+            'checkerboard' => \frontend\models\search\CheckerboardSearch::getAll(),
+            'project' => \frontend\models\search\PanelProjectSearch::getAll(),
+            'phone' => \frontend\models\search\PhoneSearch::getAll(),
+            'equipment' => \frontend\models\search\RefrigerationEquipmentSearch::getAll(),
+            'widgetText' => \frontend\models\search\WidgetTextSearch::getAll()
         ]);
     }
     

@@ -7,6 +7,7 @@ use \yii\helpers\Url;
 use \yii\bootstrap\ActiveForm;
 
 $this->title = Yii::$app->name;
+
 ?>
 <!--= Header =-->
 <header class="header" id="header">
@@ -18,7 +19,12 @@ $this->title = Yii::$app->name;
 
         <!--= Menu =-->
         <ul class="menu" id="menu">
-            <li class="menu__item">
+            <?php foreach ($menu as $value) : ?>
+                <li class="menu__item">
+                    <a class="menu__link" href="<?= $value['slug'] ?>"><?= $value['title'] ?></a>
+                </li>
+            <?php endforeach; ?>
+<!--            <li class="menu__item">
                 <a class="menu__link menu__link--active" href="#proposition">пропонуємо</a>
             </li>
             <li class="menu__item">
@@ -29,7 +35,7 @@ $this->title = Yii::$app->name;
             </li>
             <li class="menu__item">
                 <a class="menu__link" href="#contacts">контакти</a>
-            </li>
+            </li>-->
         </ul>
         <!--= End menu =-->
 

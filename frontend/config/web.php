@@ -10,16 +10,16 @@ $config = [
     'defaultRoute' => 'site/index',
     'bootstrap' => ['maintenance'],
     'modules' => [
-        'user' => [
-            'class' => 'frontend\modules\user\Module',
-            'shouldBeActivated' => false
-        ],
-        'api' => [
-            'class' => 'frontend\modules\api\Module',
-            'modules' => [
-                'v1' => 'frontend\modules\api\v1\Module'
-            ]
-        ]
+//        'user' => [
+//            'class' => 'frontend\modules\user\Module',
+//            'shouldBeActivated' => false
+//        ],
+//        'api' => [
+//            'class' => 'frontend\modules\api\Module',
+//            'modules' => [
+//                'v1' => 'frontend\modules\api\v1\Module'
+//            ]
+//        ]
     ],
     'components' => [
         'authClientCollection' => [

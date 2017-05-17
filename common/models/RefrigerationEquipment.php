@@ -72,7 +72,7 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
     
     public function getTranslations()
     {
-        return $this->hasMany(RefrigerationEquipmentTranslation::className(), ['widget_id' => 'id']);
+        return $this->hasMany(RefrigerationEquipmentTranslation::className(), ['equipment_id' => 'id']);
     }
 
     /**
@@ -80,7 +80,7 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
      */
     public function getTranslationDefault()
     {
-        return $this->hasOne(RefrigerationEquipmentTranslation::className(), ['widget_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
+        return $this->hasOne(RefrigerationEquipmentTranslation::className(), ['equipment_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
     }
 
     /**

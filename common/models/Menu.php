@@ -4,7 +4,7 @@ namespace common\models;
 
 use backend\behaviors\PositionBehavior;
 use backend\behaviors\TranslationSaveBehavior;
-use common\models\translation\WidgetTextTranslation;
+use common\models\translation\MenuTranslation;
 use creocoder\translateable\TranslateableBehavior;
 use Yii;
 
@@ -32,7 +32,7 @@ class Menu extends \yii\db\ActiveRecord
             ],
             [
                 'class' => TranslationSaveBehavior::className(),
-                'translationClassName' => WidgetTextTranslation::className(),
+                'translationClassName' => MenuTranslation::className(),
             ],
             PositionBehavior::className(),
         ];
@@ -73,7 +73,7 @@ class Menu extends \yii\db\ActiveRecord
     
     public function getTranslations()
     {
-        return $this->hasMany(WidgetTextTranslation::className(), ['widget_id' => 'id']);
+        return $this->hasMany(MenuTranslation::className(), ['menu_id' => 'id']);
     }
 
     /**
@@ -81,7 +81,7 @@ class Menu extends \yii\db\ActiveRecord
      */
     public function getTranslationDefault()
     {
-        return $this->hasOne(WidgetTextTranslation::className(), ['widget_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
+        return $this->hasOne(MenuTranslation::className(), ['menu_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
     }
 
     /**
