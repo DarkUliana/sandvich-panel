@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Checkerboard;
+use \yii\widgets\Pjax;
+use \backend\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\CheckerboardSearch */
@@ -18,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php echo Html::a(Yii::t('backend', 'Create advantages of sandwich panels'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -27,11 +30,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'image',
-            'active',
+            [
+                'attribute' => 'active',
+                'filter' => Checkerboard::statuses(),
+                'content' => function ($model) {
+                    /** @var $model WidgetText */
+                    $text = $model->active ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
+                    $title = $model->active ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $class = $model->active ? 'success' : 'warning';
+                    return Html::a($text, ['index', 'id' => $model->id, 'active' => !$model->active], [
+                        'class' => 'btn btn-sm btn-' . $class,
+                        'title' => $title,
+                        'alt' => $text,
+                    ]);
+                },
+            ],
             'position',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'header' => Html::clearSearchLink([
+                    'except' => ['id', 'status', '_pjax'],
+                ]),
+            ],
         ],
     ]); ?>
 
+    <?php Pjax::end(); ?>
 </div>

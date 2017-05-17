@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use common\models\translation\CheckerboardTranslation;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Checkerboard */
@@ -18,10 +19,17 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
-    <?php echo $form->field($model, 'active')->textInput() ?>
-
     <?php echo $form->field($model, 'position')->textInput() ?>
 
+    <?= \backend\widgets\TranslationWidget::widget([
+        'activeForm' => $form,
+        'modelObj' => $model,
+        'translationClass' => CheckerboardTranslation::className(),
+        'view' => '_form_lang',
+    ]) ?>
+    
+    <?php echo $form->field($model, 'active')->label(Yii::t('common', "Active"))->checkbox() ?>
+    
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

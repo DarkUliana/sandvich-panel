@@ -3,6 +3,7 @@
 namespace common\models\translation;
 
 use Yii;
+use \common\models\PanelProject;
 
 /**
  * This is the model class for table "{{%panel_project_translation}}".

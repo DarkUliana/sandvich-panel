@@ -32,6 +32,8 @@ class CheckerboardController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new CheckerboardSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -39,6 +41,19 @@ class CheckerboardController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $Checkerboard = Checkerboard::findOne(Yii::$app->request->get('id'));
+        if ($Checkerboard instanceof Checkerboard) {
+            $active = (bool)Yii::$app->request->get('active');
+            $Checkerboard->updateAttributes(['active' => $active]);
+        }
     }
 
     /**
@@ -52,6 +67,8 @@ class CheckerboardController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+    
+    
 
     /**
      * Creates a new Checkerboard model.
@@ -61,9 +78,10 @@ class CheckerboardController extends Controller
     public function actionCreate()
     {
         $model = new Checkerboard();
+        $model->active = Checkerboard::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +100,7 @@ class CheckerboardController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -20,6 +20,13 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'position')->textInput() ?>
     
+    <?= \backend\widgets\TranslationWidget::widget([
+        'activeForm' => $form,
+        'modelObj' => $model,
+        'translationClass' => \common\models\translation\PanelProjectTranslation::className(),
+        'view' => '_form_lang',
+    ]) ?>
+    
     <?php echo $form->field($model, 'active')->label(Yii::t('common', "Active"))->checkbox() ?>
 
     <div class="form-group">

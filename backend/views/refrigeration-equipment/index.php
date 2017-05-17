@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\RefrigerationEquipment;
+use \yii\widgets\Pjax;
+use \backend\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\RefrigerationEquipmentSearch */
@@ -20,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -29,11 +32,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'image',
-            'active',
+            [
+                'attribute' => 'active',
+                'filter' => RefrigerationEquipment::statuses(),
+                'content' => function ($model) {
+                    /** @var $model WidgetText */
+                    $text = $model->active ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
+                    $title = $model->active ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $class = $model->active ? 'success' : 'warning';
+                    return Html::a($text, ['index', 'id' => $model->id, 'active' => !$model->active], [
+                        'class' => 'btn btn-sm btn-' . $class,
+                        'title' => $title,
+                        'alt' => $text,
+                    ]);
+                },
+            ],
             'position',
 
             ['class' => 'yii\grid\ActionColumn',],
         ],
     ]); ?>
+    <?php Pjax::end(); ?>
 
 </div>

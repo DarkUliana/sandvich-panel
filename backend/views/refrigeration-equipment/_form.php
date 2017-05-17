@@ -18,9 +18,16 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
-    <?php echo $form->field($model, 'active')->textInput() ?>
-
     <?php echo $form->field($model, 'position')->textInput() ?>
+    
+    <?= \backend\widgets\TranslationWidget::widget([
+        'activeForm' => $form,
+        'modelObj' => $model,
+        'translationClass' => \common\models\translation\WidgetTextTranslation::className(),
+        'view' => '_form_lang',
+    ]) ?>
+    
+    <?php echo $form->field($model, 'active')->label(Yii::t('common', "Active"))->checkbox() ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use backend\behaviors\TranslationSaveBehavior;
+use common\models\translation\RefrigerationEquipmentTranslation;
+use creocoder\translateable\TranslateableBehavior;
 
 /**
  * This is the model class for table "{{%refrigeration_equipment}}".
@@ -17,9 +20,25 @@ use Yii;
  */
 class RefrigerationEquipment extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = true;
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title'],
+            ],
+            [
+                'class' => TranslationSaveBehavior::className(),
+                'translationClassName' => RefrigerationEquipmentTranslation::className(),
+            ],
+
+        ];
+    }
+    
     public static function tableName()
     {
         return '{{%refrigeration_equipment}}';
@@ -50,6 +69,19 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
             'position' => Yii::t('app', 'Position'),
         ];
     }
+    
+    public function getTranslations()
+    {
+        return $this->hasMany(RefrigerationEquipmentTranslation::className(), ['widget_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslationDefault()
+    {
+        return $this->hasOne(RefrigerationEquipmentTranslation::className(), ['widget_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -66,5 +98,13 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
     public static function find()
     {
         return new RefrigerationEquipmentQuery(get_called_class());
+    }
+    
+    public static function statuses()
+    {
+        return [
+            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+        ];
     }
 }

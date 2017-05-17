@@ -173,5 +173,13 @@ return [
     'Create phone' => 'Создать телефон',
     'Create menu' => 'Создать меню',
     'Create panel project' => 'Создать проект из панелей',
-    'Create refrigeration equipment' => 'Создать холодильное оборудование'
+    'Create refrigeration equipment' => 'Создать холодильное оборудование',
+    'Feedback' => 'Обратная связь',
+    'Other' => 'Другие',
+    'Phone' => 'Телефон',
+    'Revised' => 'Рассмотрен',
+    'Not revised' => 'Не рассмотрен',
+    'Datetime' => 'Дата и время',
+    'Update feedback' => 'Редактирование запроса обратно связи',
+    'Name' => 'Имя'
 ];

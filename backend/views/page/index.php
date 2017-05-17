@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Page;
+use \yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel \backend\models\search\PageSearch */
@@ -15,11 +17,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
+        
+        
+        
         <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
     'modelClass' => 'Page',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
+    
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -30,7 +37,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'slug',
-            'status',
+            [
+                'attribute' => 'status',
+                'filter' => Page::statuses(),
+                'content' => function ($model) {
+                    /** @var $model WidgetText */
+                    $text = $model->status ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
+                    $title = $model->status ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $class = $model->status ? 'success' : 'warning';
+                    return Html::a($text, ['index', 'id' => $model->id, 'status' => !$model->status], [
+                        'class' => 'btn btn-sm btn-' . $class,
+                        'title' => $title,
+                        'alt' => $text,
+                    ]);
+                },
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -38,5 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+    
+    <?php Pjax::end(); ?>
 
 </div>

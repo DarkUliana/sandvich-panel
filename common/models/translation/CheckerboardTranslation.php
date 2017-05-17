@@ -3,6 +3,7 @@
 namespace common\models\translation;
 
 use Yii;
+use common\models\Checkerboard;
 
 /**
  * This is the model class for table "{{%checkerboard_translation}}".

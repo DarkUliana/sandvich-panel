@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Feedback */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Feedbacks'), 'url' => ['index']];
+$this->title = Yii::t('backend', 'Feedback');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Feedback'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="feedback-view">
@@ -27,11 +27,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'phone',
+            
+            [
+                'attribute' => 'name',
+                'label' => Yii::t('backend', 'Name')
+            ],
+            [
+                'attribute' => 'phone',
+                'label' => Yii::t('backend', 'Phone')
+            ],
+            [
+                
+                'attribute' => 'datetime',
+                'label' => Yii::t('backend', 'Datetime')
+            ],
+            
+            
             'email:email',
-            'datetime',
-            'check',
+            [
+                'attribute' => 'check',
+                'label' => Yii::t('backend', 'Revised')
+            ],
+            
         ],
     ]) ?>
 

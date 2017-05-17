@@ -7,7 +7,6 @@ use common\models\translation\PageTranslation;
 use creocoder\translateable\TranslateableBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -40,7 +39,6 @@ class Page extends ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
             'slug' => [
                 'class' => SluggableBehavior::className(),
                 'attributes' => [

@@ -32,6 +32,8 @@ class RefrigerationEquipmentController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new RefrigerationEquipmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -39,6 +41,19 @@ class RefrigerationEquipmentController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $Equipment = RefrigerationEquipment::findOne(Yii::$app->request->get('id'));
+        if ($Equipment instanceof RefrigerationEquipment) {
+            $active = (bool)Yii::$app->request->get('active');
+            $Equipment->updateAttributes(['active' => $active]);
+        }
     }
 
     /**
@@ -61,9 +76,10 @@ class RefrigerationEquipmentController extends Controller
     public function actionCreate()
     {
         $model = new RefrigerationEquipment();
+        $model->active = RefrigerationEquipment::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +98,7 @@ class RefrigerationEquipmentController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

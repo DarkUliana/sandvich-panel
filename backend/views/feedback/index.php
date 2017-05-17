@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\FeedbackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('backend', 'Feedbacks');
+$this->title = Yii::t('backend', 'Feedback');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="feedback-index">
@@ -28,11 +28,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            'name',
-            'phone',
+            
+            [
+                'attribute' => 'name',
+                'label' => Yii::t('backend', 'Name')
+            ],
+            [
+                'attribute' => 'phone',
+                'label' => Yii::t('backend', 'Phone')
+            ],
             'email:email',
             [
                 'attribute' => 'datetime',
+                'label' => Yii::t('backend', 'Datetime'),
                 'filter' => kartik\daterange\DateRangePicker::widget([
                     'model' => $searchModel,
                     'attribute' => 'datetime_range',
@@ -49,11 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'check',
+                'label' => Yii::t('backend', 'Revised'),
                 'filter' => \common\models\Feedback::statuses(),
                 'content' => function ($model) {
                     /** @var $model \common\models\Feedback */
-                    $text = $model->check ? Yii::t('common', "Checked") : Yii::t('common', "Not checked");
-                    $title = $model->check ? Yii::t('common', "Set not checked") : Yii::t('common', "Set checked");
+                    $text = $model->check ? Yii::t('backend', "Revised") : Yii::t('backend', "Not revised");
+                    $title = $model->check ? Yii::t('backend', "Not revised") : Yii::t('backend', "Set revised");
                     $class = $model->check ? 'success' : 'warning';
                     return Html::a($text, ['index', 'id' => $model->id, 'status' => !$model->check], [
                         'class' => 'btn btn-sm btn-' . $class,

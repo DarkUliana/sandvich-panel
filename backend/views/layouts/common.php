@@ -203,16 +203,11 @@ $pathInfo = Yii::$app->request->getPathInfo();
                             ['label' => Yii::t('backend', 'Advantages of sandwich panels'), 'url' => ['/checkerboard/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>',],
                             ['label' => Yii::t('backend', 'Menu'), 'url' => ['/menu/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>',],
                             ['label' => Yii::t('backend', 'Phones'), 'url' => ['/phone/index'], 'icon' => '<i class="fa fa-angle-double-right"></i>',],
-                            [
-                                'label' => Yii::t('backend', 'Feedback'),
-                                'url' => ['/feedback/index'],
-                                'icon' => '<i class="fa fa-angle-double-right"></i>',
-                                'badge' => Feedback::find()->notCheck()->count(),
-                                'badgeBgClass' => 'label-danger',
-                            ],
+                            
                             
                         ]
                     ],
+                    
                     [
                         'label' => Yii::t('backend', 'System'),
                         'options' => ['class' => 'header']
@@ -258,8 +253,15 @@ $pathInfo = Yii::$app->request->getPathInfo();
                                 'badgeBgClass' => 'label-danger',
                             ],
                         ]
-                    ]
-                ]
+                    ],
+                    [
+                        'label' => Yii::t('backend', 'Feedback'),
+                        'url' => ['/feedback/index'],
+                        'icon' => '<i class="fa fa-phone"></i>',
+                        'badge' => Feedback::find()->notCheck()->count(),
+                        'badgeBgClass' => 'label-danger',
+                    ],
+    ]
             ]) ?>
         </section>
         <!-- /.sidebar -->

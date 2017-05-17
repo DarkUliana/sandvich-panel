@@ -17,7 +17,7 @@ use yii\helpers\Html;
             'target' => '.seo-container',
         ],
     ]) ?></h4>
-<div class="panel panel-default seo-container" style="display: none;">
+<div class="panel panel-default seo-container">
     <div class="panel-body">
         <?= $form->field($model, "[$lang]tkd_title")->label($model->getAttributeLabel('tkd_title') . ' (' . $langName . ')')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, "[$lang]tkd_keyword")->label($model->getAttributeLabel('tkd_keyword') . ' (' . $langName . ')')->textInput(['maxlength' => true]) ?>

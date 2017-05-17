@@ -2,6 +2,9 @@
 
 namespace common\models;
 
+use backend\behaviors\TranslationSaveBehavior;
+use common\models\translation\CheckerboardTranslation;
+use creocoder\translateable\TranslateableBehavior;
 use Yii;
 
 /**
@@ -17,6 +20,22 @@ use Yii;
  */
 class Checkerboard extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = true;
+    
+    public function behaviors()
+    {
+        return [
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title'],
+            ],
+            [
+                'class' => TranslationSaveBehavior::className(),
+                'translationClassName' => CheckerboardTranslation::className(),
+            ],
+
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -54,6 +73,19 @@ class Checkerboard extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getTranslations()
+    {
+        return $this->hasMany(CheckerboardTranslation::className(), ['checkerboard_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTranslationDefault()
+    {
+        return $this->hasOne(CheckerboardTranslation::className(), ['checkerboard_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
+    }
+    
     public function getCheckerboardTranslations()
     {
         return $this->hasMany(CheckerboardTranslation::className(), ['checkerboard_id' => 'id']);
@@ -66,5 +98,13 @@ class Checkerboard extends \yii\db\ActiveRecord
     public static function find()
     {
         return new CheckerboardQuery(get_called_class());
+    }
+    
+    public static function statuses()
+    {
+        return [
+            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+        ];
     }
 }
