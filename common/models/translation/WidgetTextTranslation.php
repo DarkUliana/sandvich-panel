@@ -45,10 +45,10 @@ class WidgetTextTranslation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'widget_id' => Yii::t('common', 'Widget ID'),
-            'language' => Yii::t('common', 'Language'),
-            'title' => Yii::t('common', 'Title'),
-            'body' => Yii::t('common', 'Body'),
+            'widget_id' => Yii::t('backend', 'ID'),
+            'language' => Yii::t('backend', 'Language'),
+            'title' => Yii::t('backend', 'Title'),
+            'body' => Yii::t('backend', 'Body'),
         ];
     }
 

@@ -65,12 +65,12 @@ class WidgetText extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'key' => Yii::t('common', 'Key'),
-            'status' => Yii::t('common', 'Status'),
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At'),
-            'name' => Yii::t('common', 'Name'),
+            'id' => Yii::t('backend', 'ID'),
+            'key' => Yii::t('backend', 'Key'),
+            'status' => Yii::t('backend', 'Status'),
+            'created_at' => Yii::t('backend', 'Created At'),
+            'updated_at' => Yii::t('backend', 'Updated At'),
+            'name' => Yii::t('backend', 'Name'),
         ];
     }
     
@@ -120,8 +120,8 @@ class WidgetText extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
-            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+            !self::STATUS_ACTIVE => Yii::t('backend', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('backend', "Active"),
         ];
     }
 }

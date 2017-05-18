@@ -62,17 +62,17 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'image' => Yii::t('app', 'Image'),
-            'active' => Yii::t('app', 'Active'),
-            'position' => Yii::t('app', 'Position'),
+            'id' => Yii::t('backend', 'ID'),
+            'name' => Yii::t('backend', 'Name'),
+            'image' => Yii::t('backend', 'Image'),
+            'active' => Yii::t('backend', 'Active'),
+            'position' => Yii::t('backend', 'Position'),
         ];
     }
     
     public function getTranslations()
     {
-        return $this->hasMany(RefrigerationEquipmentTranslation::className(), ['widget_id' => 'id']);
+        return $this->hasMany(RefrigerationEquipmentTranslation::className(), ['equipment_id' => 'id']);
     }
 
     /**
@@ -80,7 +80,7 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
      */
     public function getTranslationDefault()
     {
-        return $this->hasOne(RefrigerationEquipmentTranslation::className(), ['widget_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
+        return $this->hasOne(RefrigerationEquipmentTranslation::className(), ['equipment_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
     }
 
     /**
@@ -103,8 +103,8 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
-            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+            !self::STATUS_ACTIVE => Yii::t('backend', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('backend', "Active"),
         ];
     }
 }

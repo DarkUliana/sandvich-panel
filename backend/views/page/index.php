@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use \backend\helpers\Html;
 use yii\grid\GridView;
 use common\models\Page;
 use \yii\widgets\Pjax;
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         
         
         
-        <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
+        <?php echo Html::a(Yii::t('backend', 'Create page', [
     'modelClass' => 'Page',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -30,20 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'options' => [
-            'class' => 'grid-view table-responsive'
-        ],
+
         'columns' => [
             'id',
-            'title',
+            'name',
             'slug',
             [
                 'attribute' => 'status',
                 'filter' => Page::statuses(),
                 'content' => function ($model) {
                     /** @var $model WidgetText */
-                    $text = $model->status ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
-                    $title = $model->status ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $text = $model->status ? Yii::t('backend', "Active") : Yii::t('backend', "Inactive");
+                    $title = $model->status ? Yii::t('backend', "Set inactive") : Yii::t('backend', "Set active");
                     $class = $model->status ? 'success' : 'warning';
                     return Html::a($text, ['index', 'id' => $model->id, 'status' => !$model->status], [
                         'class' => 'btn btn-sm btn-' . $class,
@@ -55,7 +53,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update} {delete}'
+                'template'=>'{update} {delete}',
+                'header' => Html::clearSearchLink([
+                    'except' => ['id', 'active', '_pjax'],
+                    ]),
             ],
         ],
     ]); ?>

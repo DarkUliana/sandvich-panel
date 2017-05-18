@@ -77,11 +77,11 @@ class PanelProject extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'image' => Yii::t('app', 'Image'),
-            'active' => Yii::t('app', 'Active'),
-            'position' => Yii::t('app', 'Position'),
+            'id' => Yii::t('backend', 'ID'),
+            'name' => Yii::t('backend', 'Name'),
+            'image' => Yii::t('backend', 'Image'),
+            'active' => Yii::t('backend', 'Active'),
+            'position' => Yii::t('backend', 'Position'),
         ];
     }
 
@@ -117,8 +117,8 @@ class PanelProject extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
-            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+            !self::STATUS_ACTIVE => Yii::t('backend', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('backend', "Active"),
         ];
     }
 }

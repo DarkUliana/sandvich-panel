@@ -94,7 +94,7 @@ class Page extends ActiveRecord
             [['status'], 'integer'],
             [['slug'], 'unique'],
             [['slug'], 'string', 'max' => 2048],
-            [['view'], 'string', 'max' => 255]
+            [['view', 'name'], 'string', 'max' => 255]
         ];
     }
 
@@ -106,8 +106,8 @@ class Page extends ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'slug' => Yii::t('common', 'Slug'),
-            'name' => Yii::t('common', 'Inside Name'),
-            'view' => Yii::t('common', 'Page View'),
+            'name' => Yii::t('backend', 'Name'),
+            'view' => Yii::t('backend', 'Page View'),
             'status' => Yii::t('common', 'Active'),
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Updated At'),
@@ -121,8 +121,9 @@ class Page extends ActiveRecord
     public static function statuses()
     {
         return [
-            self::STATUS_DRAFT => Yii::t('common', "Inactive"),
-            self::STATUS_PUBLISHED => Yii::t('common', "Active"),
+            self::STATUS_DRAFT => Yii::t('backend', "Inactive"),
+            self::STATUS_PUBLISHED => Yii::t('backend', "Active"),
         ];
     }
+    
 }

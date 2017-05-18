@@ -64,8 +64,8 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('common', 'ID'),
-            'name' => Yii::t('common', 'Name'),
-            'active' => Yii::t('common', 'Active'),
+            'name' => Yii::t('backend', 'Name'),
+            'active' => Yii::t('backend', 'Active'),
             'position' => Yii::t('backend', 'Position'),
             'slug' => Yii::t('common', 'Slug'),
         ];
@@ -104,8 +104,8 @@ class Menu extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
-            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+            !self::STATUS_ACTIVE => Yii::t('backend', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('backend', "Active"),
         ];
     }
 }

@@ -42,10 +42,10 @@ class Phone extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'phone' => Yii::t('app', 'Phone'),
-            'active' => Yii::t('app', 'Active'),
-            'position' => Yii::t('app', 'Position'),
+            'name' => Yii::t('backend', 'Name'),
+            'phone' => Yii::t('backend', 'Phone'),
+            'active' => Yii::t('backend', 'Active'),
+            'position' => Yii::t('backend', 'Position'),
         ];
     }
 
@@ -61,8 +61,8 @@ class Phone extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            !self::STATUS_ACTIVE => Yii::t('common', "Inactive"),
-            self::STATUS_ACTIVE => Yii::t('common', "Active"),
+            !self::STATUS_ACTIVE => Yii::t('backend', "Inactive"),
+            self::STATUS_ACTIVE => Yii::t('backend', "Active"),
         ];
     }
 }

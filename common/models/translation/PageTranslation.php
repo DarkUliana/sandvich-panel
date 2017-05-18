@@ -49,13 +49,13 @@ class PageTranslation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'page_id' => Yii::t('app', 'Page ID'),
-            'language' => Yii::t('app', 'Language'),
-            'title' => Yii::t('app', 'Title'),
-            'body' => Yii::t('app', 'Body'),
-            'tkd_title' => Yii::t('app', 'Tkd Title'),
-            'tkd_keyword' => Yii::t('app', 'Tkd Keyword'),
-            'tkd_description' => Yii::t('app', 'Tkd Description'),
+            'page_id' => Yii::t('app', 'ID'),
+            'language' => Yii::t('backend', 'Language'),
+            'title' => Yii::t('backend', 'Title'),
+            'body' => Yii::t('backend', 'Body'),
+            'tkd_title' => Yii::t('backend', 'Tkd Title'),
+            'tkd_keyword' => Yii::t('backend', 'Tkd Keyword'),
+            'tkd_description' => Yii::t('backend', 'Tkd Description'),
         ];
     }
 

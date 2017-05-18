@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => RefrigerationEquipment::statuses(),
                 'content' => function ($model) {
                     /** @var $model WidgetText */
-                    $text = $model->active ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
-                    $title = $model->active ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $text = $model->active ? Yii::t('backend', "Active") : Yii::t('backend', "Inactive");
+                    $title = $model->active ? Yii::t('backend', "Set inactive") : Yii::t('backend', "Set active");
                     $class = $model->active ? 'success' : 'warning';
                     return Html::a($text, ['index', 'id' => $model->id, 'active' => !$model->active], [
                         'class' => 'btn btn-sm btn-' . $class,
@@ -49,7 +49,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'position',
 
-            ['class' => 'yii\grid\ActionColumn',],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{update} {delete}',
+                'header' => Html::clearSearchLink([
+                    'except' => ['id', 'active', '_pjax'],
+                    ]),
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

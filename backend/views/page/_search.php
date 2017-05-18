@@ -17,11 +17,9 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'id') ?>
 
+    <?php echo $form->field($model, 'name') ?>
+
     <?php echo $form->field($model, 'slug') ?>
-
-    <?php echo $form->field($model, 'title') ?>
-
-    <?php echo $form->field($model, 'body') ?>
 
     <?php echo $form->field($model, 'status') ?>
 

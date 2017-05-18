@@ -3,6 +3,7 @@
 namespace common\models\translation;
 
 use Yii;
+use \common\models\RefrigerationEquipment;
 
 /**
  * This is the model class for table "{{%refrigeration_equipment_translation}}".
@@ -42,9 +43,9 @@ class RefrigerationEquipmentTranslation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'equipment_id' => Yii::t('app', 'Equipment ID'),
-            'language' => Yii::t('app', 'Language'),
-            'title' => Yii::t('app', 'Title'),
+            'equipment_id' => Yii::t('backend', 'ID'),
+            'language' => Yii::t('backend', 'Language'),
+            'title' => Yii::t('backend', 'Title'),
         ];
     }
 

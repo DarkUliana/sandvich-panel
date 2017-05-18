@@ -9,7 +9,7 @@ use \backend\helpers\Html;
 /* @var $searchModel backend\models\search\WidgetTextSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Widget Texts';
+$this->title = Yii::t('backend', 'Text Widgets');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="widget-text-index">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a('Create Widget Text', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Create widget text'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => WidgetText::statuses(),
                 'content' => function ($model) {
                     /** @var $model WidgetText */
-                    $text = $model->status ? Yii::t('common', "Active") : Yii::t('common', "Inactive");
-                    $title = $model->status ? Yii::t('common', "Set inactive") : Yii::t('common', "Set active");
+                    $text = $model->status ? Yii::t('backend', "Active") : Yii::t('backend', "Inactive");
+                    $title = $model->status ? Yii::t('backend', "Set inactive") : Yii::t('backend', "Set active");
                     $class = $model->status ? 'success' : 'warning';
                     return Html::a($text, ['index', 'id' => $model->id, 'status' => !$model->status], [
                         'class' => 'btn btn-sm btn-' . $class,

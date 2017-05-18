@@ -45,10 +45,10 @@ class PanelProjectTranslation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'panel_project_id' => Yii::t('app', 'Panel Project ID'),
-            'language' => Yii::t('app', 'Language'),
-            'title' => Yii::t('app', 'Title'),
-            'body' => Yii::t('app', 'Body'),
+            'panel_project_id' => Yii::t('backend', 'ID'),
+            'language' => Yii::t('backend', 'Language'),
+            'title' => Yii::t('backend', 'Title'),
+            'body' => Yii::t('backend', 'Body'),
         ];
     }
 
