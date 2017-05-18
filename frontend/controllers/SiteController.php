@@ -7,7 +7,13 @@ use \yii\web\NotFoundHttpException;
 use yii\web\Response;
 use \yii\bootstrap\ActiveForm;
 use \frontend\forms\FeedbackForm;
-
+use \frontend\models\search\MenuSearch;
+use \frontend\models\search\PageSearch;
+use \frontend\models\search\CheckerboardSearch;
+use \frontend\models\search\PanelProjectSearch;
+use \frontend\models\search\PhoneSearch;
+use \frontend\models\search\RefrigerationEquipmentSearch;
+use \frontend\models\search\WidgetTextSearch;
 
 
 /**
@@ -48,13 +54,13 @@ class SiteController extends Controller
     {
         return $this->render('index', [
             'model' => Yii::createObject(FeedbackForm::className()),
-            'menu' => \frontend\models\search\MenuSearch::getAll(),
-            'page' => \frontend\models\search\PageSearch::getOne(),
-            'checkerboard' => \frontend\models\search\CheckerboardSearch::getAll(),
-            'project' => \frontend\models\search\PanelProjectSearch::getAll(),
-            'phone' => \frontend\models\search\PhoneSearch::getAll(),
-            'equipment' => \frontend\models\search\RefrigerationEquipmentSearch::getAll(),
-            'widgetText' => \frontend\models\search\WidgetTextSearch::getAll()
+            'menu' => MenuSearch::getAll(),
+            'page' => PageSearch::getOne(),
+            'checkerboard' => CheckerboardSearch::getAll(),
+            'project' => PanelProjectSearch::getAll(),
+            'phone' => PhoneSearch::getAll(),
+            'equipment' => RefrigerationEquipmentSearch::getAll(),
+            'widgetText' => WidgetTextSearch::getAll(),
         ]);
     }
     

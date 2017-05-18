@@ -17,6 +17,8 @@ use yii\bootstrap\ActiveForm;
     <?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+    
+    <?php echo $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'position')->textInput() ?>
     

@@ -46,7 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'header' => Html::clearSearchLink([
+                    'except' => ['id', 'active', '_pjax'],
+                ]),
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

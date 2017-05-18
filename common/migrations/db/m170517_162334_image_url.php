@@ -14,7 +14,7 @@ class m170517_162334_image_url extends studio32x32\components\migration\Migratio
     public function down()
     {
         foreach ($this->_tables as $value) {
-            $this->dropColumn($value, 'image_url', $this->string()->notNull());
+            $this->dropColumn($value, 'image_url');
         }
     }
 

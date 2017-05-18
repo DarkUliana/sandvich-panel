@@ -31,7 +31,7 @@ class Phone extends \yii\db\ActiveRecord
     {
         return [
             [['active', 'position'], 'integer'],
-            [['name', 'phone'], 'string', 'max' => 255],
+            [['name', 'phone', 'slug'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,6 +46,7 @@ class Phone extends \yii\db\ActiveRecord
             'phone' => Yii::t('app', 'Phone'),
             'active' => Yii::t('app', 'Active'),
             'position' => Yii::t('app', 'Position'),
+            'slug' => Yii::t('app', 'Slug'),
         ];
     }
 
