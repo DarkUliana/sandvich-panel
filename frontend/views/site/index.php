@@ -471,7 +471,9 @@ $this->title = Yii::$app->name;
             </div>
         </div>
         <!-- нужно попробовать повесить класс "contacts__map" на будуюший элемент iframe :)-->
-        <div class="contacts__map" style="background: url(data/contacts/map.png);"></div>
+        <div class="contacts__map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2530.68939202178!2d26.2295899!3d50.6327763!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472f6ca0fd276da7%3A0xb5b2d6886f2af092!2z0LLRg9C70LjRhtGPINCc0LjRhdCw0LnQu9CwINCh0YLQsNGA0LjRhtGM0LrQvtCz0L4sIDQ1LCDQoNGW0LLQvdC1LCDQoNGW0LLQvdC10L3RgdGM0LrQsCDQvtCx0LvQsNGB0YLRjCwg0KPQutGA0LDQuNC90LA!5e0!3m2!1sru!2sua!4v1495011064407"></iframe>
+        </div>
     </div>
     <!--= End contacts =-->
 
