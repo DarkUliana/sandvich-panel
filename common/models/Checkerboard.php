@@ -14,6 +14,7 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property string $image
+ * @property string $image_url
  * @property integer $active
  * @property integer $position
  *
@@ -107,6 +108,11 @@ class Checkerboard extends \yii\db\ActiveRecord
     public static function find()
     {
         return new CheckerboardQuery(get_called_class());
+    }
+    
+    public function getGlideImage()
+    {
+        return ['/glide', 'path' => $this->image, 'w' => 570, 'h' => 290, 'fit' => 'fill'];
     }
     
     public static function statuses()

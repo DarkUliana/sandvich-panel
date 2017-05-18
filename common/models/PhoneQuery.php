@@ -9,15 +9,16 @@ namespace common\models;
  */
 class PhoneQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+   public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
-    /**
-     * @inheritdoc
-     * @return Phone[]|array
-     */
+        return $this->andWhere([Phone::tableName() . '.active' => true]);
+    }
+    
+    public function defaultOrder()
+    {
+        return $this->orderBy([Phone::tableName() . '.position' => 'SORT_ASC']);
+    }
+    
     public function all($db = null)
     {
         return parent::all($db);

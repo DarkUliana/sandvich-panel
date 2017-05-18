@@ -2,6 +2,8 @@
 
 namespace common\models\query;
 
+use common\models\Menu;
+
 /**
  * This is the ActiveQuery class for [[\common\models\Menu]].
  *
@@ -9,10 +11,15 @@ namespace common\models\query;
  */
 class MenuQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+    public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere([Menu::tableName() . '.active' => true]);
+    }
+    
+    public function defaultOrder()
+    {
+        return $this->orderBy([Menu::tableName() . '.position' => 'SORT_ASC']);
+    }
 
     /**
      * @inheritdoc

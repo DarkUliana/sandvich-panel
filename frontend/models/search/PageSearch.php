@@ -40,7 +40,7 @@ class PageSearch extends Page
     public static function getOne()
     {
         return self::find()->joinWith(['translationDefault'])
-                ->Andwhere('status = 1')
+                ->andWhere('status = 1')->limit(1)
                 ->asArray()->one();
     }
 }

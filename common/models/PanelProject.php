@@ -111,6 +111,11 @@ class PanelProject extends \yii\db\ActiveRecord
         return new PanelProjectQuery(get_called_class());
     }
     
+    public function getGlideImage()
+    {
+        return ['/glide', 'path' => $this->image, 'w' => 210, 'h' => 158, 'fit' => 'fill'];
+    }
+    
     public static function statuses()
     {
         return [

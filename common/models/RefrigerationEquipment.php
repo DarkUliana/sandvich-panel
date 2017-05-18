@@ -107,6 +107,11 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
         return new RefrigerationEquipmentQuery(get_called_class());
     }
     
+    public function getGlideImage()
+    {
+        return ['/glide', 'path' => $this->image, 'w' => 250, 'h' => 154, 'fit' => 'fill'];
+    }
+    
     public static function statuses()
     {
         return [

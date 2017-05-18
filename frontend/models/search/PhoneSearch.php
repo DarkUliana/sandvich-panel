@@ -36,8 +36,8 @@ class PhoneSearch extends Phone
     public static function getAll()
     {
         return self::find()
-                ->andWhere('active = 1')
-                ->orderBy(['position' => 'SORT_ASC'])
+                ->active()
+                ->defaultOrder()
                 ->asArray()->all();
     }
 

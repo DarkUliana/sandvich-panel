@@ -2,7 +2,6 @@
 
 namespace frontend\models\search;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Menu;
@@ -43,9 +42,9 @@ class MenuSearch extends Menu
     public static function getAll()
     {
         return self::find()->joinWith(['translationDefault'])
-                //->andWhere('language', Yii::$app->language)
-                ->andWhere('active = 1')
-                ->orderBy(['position' => 'SORT_ASC'])
-                ->asArray()->all();
+                ->active()
+                ->defaultOrder()
+                ->asArray()
+                ->all();
     }
 }

@@ -35,7 +35,7 @@ class WidgetTextSearch extends WidgetText
     public static function getAll()
     {
         return self::find()->joinWith(['translationDefault'])
-                ->andWhere('status = 1')
+                ->active()
                 ->asArray()->all();
     }
 }

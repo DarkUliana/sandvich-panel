@@ -44,6 +44,6 @@ class CheckerboardSearch extends Checkerboard
         return self::find()->joinWith(['translationDefault'])
                 ->andWhere('active = 1')
                 ->orderBy(['position' => 'SORT_ASC'])
-                ->asArray()->all();
+                ->all();
     }
 }
