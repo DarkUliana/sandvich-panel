@@ -66,7 +66,7 @@ class Menu extends \yii\db\ActiveRecord
             'id' => Yii::t('common', 'ID'),
             'name' => Yii::t('common', 'Name'),
             'active' => Yii::t('common', 'Active'),
-            'position' => Yii::t('common', 'Position'),
+            'position' => Yii::t('backend', 'Position'),
             'slug' => Yii::t('common', 'Slug'),
         ];
     }

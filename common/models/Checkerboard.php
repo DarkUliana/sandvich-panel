@@ -62,11 +62,11 @@ class Checkerboard extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'image' => Yii::t('app', 'Image'),
-            'active' => Yii::t('app', 'Active'),
-            'position' => Yii::t('app', 'Position'),
+            'id' => Yii::t('backend', 'ID'),
+            'name' => Yii::t('backend', 'Name'),
+            'image' => Yii::t('backend', 'Image'),
+            'active' => Yii::t('backend', 'Active'),
+            'position' => Yii::t('backend', 'Position'),
         ];
     }
 

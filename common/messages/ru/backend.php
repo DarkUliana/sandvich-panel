@@ -171,7 +171,7 @@ return [
     'Phones' => 'Телефоны',
     'Create advantages of sandwich panels' => 'Создать преимущество панелей',
     'Create phone' => 'Создать телефон',
-    'Create menu' => 'Создать меню',
+    'Create element of menu' => 'Создать элемент меню',
     'Create panel project' => 'Создать проект из панелей',
     'Create refrigeration equipment' => 'Создать холодильное оборудование',
     'Feedback' => 'Обратная связь',
@@ -181,5 +181,13 @@ return [
     'Not revised' => 'Не рассмотрен',
     'Datetime' => 'Дата и время',
     'Update feedback' => 'Редактирование запроса обратно связи',
-    'Name' => 'Имя'
+    'Update element of menu' => 'Редактировать элемент меню',
+    'Name' => 'Имя',
+    'Active' => 'Активный',
+    'Position' => 'Позиция',
+    'Image' => 'Изображение',
+    'Language' => 'Язык',
+    'Title' => 'Заголовок',
+    'Body' => 'Текст',
+    'Checkerboards' => 'Преимущества панелей',
 ];

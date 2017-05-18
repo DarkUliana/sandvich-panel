@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="menu-index">
 
     <p>
-        <?php echo Html::a('Create element of menu', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Create element of menu'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     
     <?php Pjax::begin(); ?>
