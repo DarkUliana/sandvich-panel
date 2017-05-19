@@ -22,15 +22,7 @@
                 'placeholder' => "Введіть Ваше ім`я",
             ]) ?>
         </div>
-        <div class="ownbox-field ownbox-field--email">
-            <?= $form->field($model, 'email', [
-                'template' => '{input}',
-            ])->textInput([
-                'class' => 'ownbox-field-input',
-                'maxlength' => true,
-                'placeholder' => "Введіть Ваш email",
-            ]) ?>
-        </div>
+
         <div class="ownbox-field ownbox-field--phone">
             <?= $form->field($model, 'phone', [
                 'template' => '{input}',
@@ -38,6 +30,16 @@
                 'class' => 'ownbox-field-input',
                 'maxlength' => true,
                 'placeholder' => "Введіть Ваш телефон",
+            ]) ?>
+        </div>
+    
+        <div class="ownbox-field ownbox-field--email">
+            <?= $form->field($model, 'email', [
+                'template' => '{input}',
+            ])->textInput([
+                'class' => 'ownbox-field-input',
+                'maxlength' => true,
+                'placeholder' => "Введіть повідомлення",
             ]) ?>
         </div>
         <div class="ownbox-field">

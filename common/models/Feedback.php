@@ -50,7 +50,7 @@ class Feedback extends \yii\db\ActiveRecord
             'id' => Yii::t('backend', 'ID'),
             'name' => Yii::t('backend', 'Name'),
             'phone' => Yii::t('backend', 'Phone'),
-            'email' => Yii::t('backend', 'Email'),
+            'email' => Yii::t('backend', 'Message'),
             'datetime' => Yii::t('backend', 'Datetime'),
             'check' => Yii::t('backend', 'Revised'),
         ];
