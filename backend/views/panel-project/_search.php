@@ -17,13 +17,12 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'id') ?>
 
-    <?php echo $form->field($model, 'name') ?>
+    <?php echo $form->field($model, 'title') ?>
 
     <?php echo $form->field($model, 'image') ?>
 
     <?php echo $form->field($model, 'active') ?>
 
-    <?php echo $form->field($model, 'position') ?>
 
     <div class="form-group">
         <?php echo Html::submitButton(Yii::t('backend', 'Search'), ['class' => 'btn btn-primary']) ?>

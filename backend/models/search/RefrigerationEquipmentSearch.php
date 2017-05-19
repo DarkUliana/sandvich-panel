@@ -19,7 +19,7 @@ class RefrigerationEquipmentSearch extends RefrigerationEquipment
     {
         return [
             [['id', 'active', 'position'], 'integer'],
-            [['name', 'image'], 'safe'],
+            [['title', 'image'], 'safe'],
         ];
     }
 
@@ -41,10 +41,20 @@ class RefrigerationEquipmentSearch extends RefrigerationEquipment
      */
     public function search($params)
     {
-        $query = RefrigerationEquipment::find();
+        $query = RefrigerationEquipment::find()->joinWith(['translationDefault']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => [
+                    'title' => [
+                        'asc' => ['title' => SORT_ASC],
+                        'desc' => ['title' => SORT_DESC],
+                    ],
+                    'id',
+                    'active',
+                ],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -54,11 +64,9 @@ class RefrigerationEquipmentSearch extends RefrigerationEquipment
         $query->andFilterWhere([
             'id' => $this->id,
             'active' => $this->active,
-            'position' => $this->position,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'image', $this->image]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }

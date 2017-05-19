@@ -6,12 +6,23 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Menu;
+use creocoder\translateable\TranslateableBehavior;
+
 
 /**
  * MenuSearch represents the model behind the search form about `common\models\Menu`.
  */
 class MenuSearch extends Menu
 {
+    public function behaviors()
+    {
+        return [
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title'],
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -19,7 +30,7 @@ class MenuSearch extends Menu
     {
         return [
             [['id', 'active', 'position'], 'integer'],
-            [['name', 'slug'], 'safe'],
+            [['title', 'slug'], 'safe'],
         ];
     }
 
@@ -41,10 +52,24 @@ class MenuSearch extends Menu
      */
     public function search($params)
     {
-        $query = Menu::find();
+        $query = Menu::find()->joinWith(['translationDefault']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => [
+                    'title' => [
+                        'asc' => ['title' => SORT_ASC],
+                        'desc' => ['title' => SORT_DESC],
+                    ],
+                    'id',
+                    'slug',
+                    'active' => [
+                        'asc' => ['active' => SORT_ASC],
+                        'desc' => ['active' => SORT_DESC],
+                    ],
+                ],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {

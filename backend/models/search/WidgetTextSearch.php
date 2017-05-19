@@ -41,7 +41,7 @@ class WidgetTextSearch extends WidgetText
      */
     public function search($params)
     {
-        $query = WidgetText::find();
+        $query = WidgetText::find()->joinWith(['translationDefault']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -25,8 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            'name',
-            'position',
+            'title',
             'slug',
             [
                 'attribute' => 'active',

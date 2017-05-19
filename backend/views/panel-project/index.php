@@ -30,9 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            'name',
+            'title',
             'image',
-            'position',
             [
                 'attribute' => 'active',
                 'filter' => PanelProject::statuses(),

@@ -6,12 +6,22 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\PanelProject;
+use creocoder\translateable\TranslateableBehavior;
 
 /**
  * PanelProjectSearch represents the model behind the search form about `common\models\PanelProject`.
  */
 class PanelProjectSearch extends PanelProject
 {
+    public function behaviors()
+    {
+        return [
+            'translateable' => [
+                'class' => TranslateableBehavior::className(),
+                'translationAttributes' => ['title', 'body'],
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -19,7 +29,7 @@ class PanelProjectSearch extends PanelProject
     {
         return [
             [['id', 'active', 'position'], 'integer'],
-            [['name', 'image'], 'safe'],
+            [['title', 'image'], 'safe'],
         ];
     }
 
@@ -41,10 +51,21 @@ class PanelProjectSearch extends PanelProject
      */
     public function search($params)
     {
-        $query = PanelProject::find();
+        $query = PanelProject::find()->joinWith(['translationDefault']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => [
+                    'title' => [
+                        'asc' => ['title' => SORT_ASC],
+                        'desc' => ['title' => SORT_DESC],
+                    ],
+                    'id',
+                    'active',
+                    'image'
+                ],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -57,7 +78,7 @@ class PanelProjectSearch extends PanelProject
             'position' => $this->position,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
