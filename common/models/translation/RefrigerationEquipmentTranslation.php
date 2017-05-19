@@ -3,7 +3,9 @@
 namespace common\models\translation;
 
 use Yii;
-use \common\models\RefrigerationEquipment;
+
+use common\models\RefrigerationEquipment;
+
 
 /**
  * This is the model class for table "{{%refrigeration_equipment_translation}}".

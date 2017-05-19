@@ -7,6 +7,14 @@ use \yii\web\NotFoundHttpException;
 use yii\web\Response;
 use \yii\bootstrap\ActiveForm;
 use \frontend\forms\FeedbackForm;
+use \frontend\models\search\MenuSearch;
+use \frontend\models\search\PageSearch;
+use \frontend\models\search\CheckerboardSearch;
+use \frontend\models\search\PanelProjectSearch;
+use \frontend\models\search\PhoneSearch;
+use \frontend\models\search\RefrigerationEquipmentSearch;
+use \frontend\models\search\WidgetTextSearch;
+
 
 /**
  * Site controller
@@ -22,6 +30,11 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction'
             ],
+            'glide' => '\\trntv\\glide\\actions\\GlideAction',
+            'set-locale'=>[
+                'class'=>'common\actions\SetLocaleAction',
+                'locales'=>array_keys(Yii::$app->params['availableLocales'])
+            ]
         ];
     }
     
@@ -41,6 +54,13 @@ class SiteController extends Controller
     {
         return $this->render('index', [
             'model' => Yii::createObject(FeedbackForm::className()),
+            'menu' => MenuSearch::getAll(),
+            'page' => PageSearch::getOne(),
+            'checkerboard' => CheckerboardSearch::getAll(),
+            'project' => PanelProjectSearch::getAll(),
+            'phone' => PhoneSearch::getAll(),
+            'equipment' => RefrigerationEquipmentSearch::getAll(),
+            'widgetText' => WidgetTextSearch::getAll(),
         ]);
     }
     

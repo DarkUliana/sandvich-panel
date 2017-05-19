@@ -101,14 +101,6 @@ class WidgetText extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getWidgetTextTranslations()
-    {
-        return $this->hasMany(WidgetTextTranslation::className(), ['widget_id' => 'id']);
-    }
-
-    /**
      * @inheritdoc
      * @return WidgetTextQuery the active query used by this AR class.
      */

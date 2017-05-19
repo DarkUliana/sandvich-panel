@@ -24,6 +24,8 @@ class PanelProject extends \yii\db\ActiveRecord
 {
     const STATUS_ACTIVE = true;
     
+    public $mainImage;
+    
     public function behaviors()
     {
         return [
@@ -37,18 +39,12 @@ class PanelProject extends \yii\db\ActiveRecord
                 'translationClassName' => PanelProjectTranslation::className(),
             ],
             PositionBehavior::className(),
-//            [
-//                'class' => UploadBehavior::className(),
-//                'attribute' => 'attachments',
-//                'multiple' => false,
-//                'uploadRelation' => 'articleAttachments',
-//                'pathAttribute' => 'path',
-//                'baseUrlAttribute' => 'base_url',
-//                'orderAttribute' => 'order',
-//                'typeAttribute' => 'type',
-//                'sizeAttribute' => 'size',
-//                'nameAttribute' => 'name',
-//            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'mainImage',
+                'pathAttribute' => 'image',
+                'baseUrlAttribute' => 'image_url',
+            ],
         ];
     }
     /**
@@ -68,6 +64,7 @@ class PanelProject extends \yii\db\ActiveRecord
             [['image'], 'required'],
             [['active', 'position'], 'integer'],
             [['name', 'image'], 'string', 'max' => 255],
+            [['mainImage'], 'safe'],
         ];
     }
 
@@ -113,6 +110,11 @@ class PanelProject extends \yii\db\ActiveRecord
     public static function find()
     {
         return new PanelProjectQuery(get_called_class());
+    }
+    
+    public function getGlideImage()
+    {
+        return ['/glide', 'path' => $this->image, 'w' => 210, 'h' => 158, 'fit' => 'fill'];
     }
     
     public static function statuses()

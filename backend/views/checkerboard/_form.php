@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use common\models\translation\CheckerboardTranslation;
+use trntv\filekit\widget\Upload;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Checkerboard */
@@ -17,8 +18,6 @@ use common\models\translation\CheckerboardTranslation;
 
     <?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?php echo $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
-
     <?php echo $form->field($model, 'position')->textInput() ?>
 
     <?= \backend\widgets\TranslationWidget::widget([
@@ -27,6 +26,14 @@ use common\models\translation\CheckerboardTranslation;
         'translationClass' => CheckerboardTranslation::className(),
         'view' => '_form_lang',
     ]) ?>
+    
+    <?php echo $form->field($model, 'mainImage')->widget(
+        Upload::className(),
+        [
+            'url' => ['/file-storage/upload'],
+            'maxFileSize' => 5000000, // 5 MiB
+        ]);
+    ?>
     
     <?php echo $form->field($model, 'active')->label(Yii::t('common', "Active"))->checkbox() ?>
     

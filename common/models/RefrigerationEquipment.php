@@ -6,6 +6,7 @@ use Yii;
 use backend\behaviors\TranslationSaveBehavior;
 use common\models\translation\RefrigerationEquipmentTranslation;
 use creocoder\translateable\TranslateableBehavior;
+use trntv\filekit\behaviors\UploadBehavior;
 
 /**
  * This is the model class for table "{{%refrigeration_equipment}}".
@@ -20,7 +21,16 @@ use creocoder\translateable\TranslateableBehavior;
  */
 class RefrigerationEquipment extends \yii\db\ActiveRecord
 {
+    /**
+     * @const boolean
+     */
     const STATUS_ACTIVE = true;
+    
+    /**
+     * @var array
+     */
+    public $mainImage;
+    
     /**
      * @inheritdoc
      */
@@ -35,7 +45,12 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
                 'class' => TranslationSaveBehavior::className(),
                 'translationClassName' => RefrigerationEquipmentTranslation::className(),
             ],
-
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'mainImage',
+                'pathAttribute' => 'image',
+                'baseUrlAttribute' => 'image_url',
+            ],
         ];
     }
     
@@ -50,9 +65,9 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image'], 'required'],
             [['active', 'position'], 'integer'],
             [['name', 'image'], 'string', 'max' => 255],
+            [['mainImage'], 'safe'],
         ];
     }
 
@@ -86,20 +101,17 @@ class RefrigerationEquipment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRefrigerationEquipmentTranslations()
-    {
-        return $this->hasMany(RefrigerationEquipmentTranslation::className(), ['equipment_id' => 'id']);
-    }
-
-    /**
      * @inheritdoc
      * @return RefrigerationEquipmentQuery the active query used by this AR class.
      */
     public static function find()
     {
         return new RefrigerationEquipmentQuery(get_called_class());
+    }
+    
+    public function getGlideImage()
+    {
+        return ['/glide', 'path' => $this->image, 'w' => 250, 'h' => 154, 'fit' => 'fill'];
     }
     
     public static function statuses()

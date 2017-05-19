@@ -207,6 +207,13 @@ $pathInfo = Yii::$app->request->getPathInfo();
                             
                         ]
                     ],
+                    [
+                        'label' => Yii::t('backend', 'Feedback'),
+                        'url' => ['/feedback/index'],
+                        'icon' => '<i class="fa fa-phone"></i>',
+                        'badge' => Feedback::find()->notCheck()->count(),
+                        'badgeBgClass' => 'label-danger',
+                    ],
                     
                     [
                         'label' => Yii::t('backend', 'System'),
@@ -254,14 +261,7 @@ $pathInfo = Yii::$app->request->getPathInfo();
                             ],
                         ]
                     ],
-                    [
-                        'label' => Yii::t('backend', 'Feedback'),
-                        'url' => ['/feedback/index'],
-                        'icon' => '<i class="fa fa-phone"></i>',
-                        'badge' => Feedback::find()->notCheck()->count(),
-                        'badgeBgClass' => 'label-danger',
-                    ],
-    ]
+                ]
             ]) ?>
         </section>
         <!-- /.sidebar -->

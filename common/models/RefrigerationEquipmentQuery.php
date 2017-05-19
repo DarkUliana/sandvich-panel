@@ -9,15 +9,16 @@ namespace common\models;
  */
 class RefrigerationEquipmentQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+    public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
-    /**
-     * @inheritdoc
-     * @return RefrigerationEquipment[]|array
-     */
+        return $this->andWhere([RefrigerationEquipment::tableName() . '.active' => true]);
+    }
+    
+    public function defaultOrder()
+    {
+        return $this->orderBy([RefrigerationEquipment::tableName() . '.position' => 'SORT_ASC']);
+    }
+    
     public function all($db = null)
     {
         return parent::all($db);

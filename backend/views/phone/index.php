@@ -52,6 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => Html::clearSearchLink([
                     'except' => ['id', 'active', '_pjax'],
                     ]),
+
             ],
         ],
     ]); ?>

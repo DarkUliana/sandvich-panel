@@ -9,6 +9,11 @@ namespace common\models;
  */
 class WidgetTextQuery extends \yii\db\ActiveQuery
 {
+    public function active()
+    {
+        return $this->andWhere([WidgetText::tableName() . '.status' => true]);
+    }
+    
     /**
      * @inheritdoc
      * @return WidgetText[]|array

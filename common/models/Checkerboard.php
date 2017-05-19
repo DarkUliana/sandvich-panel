@@ -5,6 +5,7 @@ namespace common\models;
 use backend\behaviors\TranslationSaveBehavior;
 use common\models\translation\CheckerboardTranslation;
 use creocoder\translateable\TranslateableBehavior;
+use trntv\filekit\behaviors\UploadBehavior;
 use Yii;
 
 /**
@@ -13,6 +14,7 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property string $image
+ * @property string $image_url
  * @property integer $active
  * @property integer $position
  *
@@ -21,6 +23,8 @@ use Yii;
 class Checkerboard extends \yii\db\ActiveRecord
 {
     const STATUS_ACTIVE = true;
+    
+    public $mainImage;
     
     public function behaviors()
     {
@@ -32,6 +36,12 @@ class Checkerboard extends \yii\db\ActiveRecord
             [
                 'class' => TranslationSaveBehavior::className(),
                 'translationClassName' => CheckerboardTranslation::className(),
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'mainImage',
+                'pathAttribute' => 'image',
+                'baseUrlAttribute' => 'image_url',
             ],
 
         ];
@@ -50,9 +60,9 @@ class Checkerboard extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image'], 'required'],
             [['active', 'position'], 'integer'],
             [['name', 'image'], 'string', 'max' => 255],
+            [['mainImage'], 'safe'],
         ];
     }
 
@@ -98,6 +108,11 @@ class Checkerboard extends \yii\db\ActiveRecord
     public static function find()
     {
         return new CheckerboardQuery(get_called_class());
+    }
+    
+    public function getGlideImage()
+    {
+        return ['/glide', 'path' => $this->image, 'w' => 570, 'h' => 290, 'fit' => 'fill'];
     }
     
     public static function statuses()
