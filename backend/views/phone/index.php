@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'phone',
-            'position',
             [
                 'attribute' => 'active',
                 'filter' => Phone::statuses(),

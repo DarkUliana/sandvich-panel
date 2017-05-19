@@ -18,7 +18,7 @@ class WidgetTextSearch extends WidgetText
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['key', 'name'], 'safe'],
         ];
     }
@@ -54,8 +54,7 @@ class WidgetTextSearch extends WidgetText
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+
         ]);
 
         $query->andFilterWhere(['like', 'key', $this->key])

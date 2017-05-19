@@ -47,12 +47,12 @@ class Feedback extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'name' => Yii::t('common', 'Name'),
-            'phone' => Yii::t('common', 'Phone'),
-            'email' => Yii::t('common', 'Email'),
-            'datetime' => Yii::t('common', 'Datetime'),
-            'check' => Yii::t('common', 'Check'),
+            'id' => Yii::t('backend', 'ID'),
+            'name' => Yii::t('backend', 'Name'),
+            'phone' => Yii::t('backend', 'Phone'),
+            'email' => Yii::t('backend', 'Email'),
+            'datetime' => Yii::t('backend', 'Datetime'),
+            'check' => Yii::t('backend', 'Revised'),
         ];
     }
 
@@ -68,8 +68,8 @@ class Feedback extends \yii\db\ActiveRecord
     public static function statuses()
     {
         return [
-            !self::STATUS_CHECKED => Yii::t('common', "Not checked"),
-            self::STATUS_CHECKED => Yii::t('common', "Checked"),
+            !self::STATUS_CHECKED => Yii::t('backend', "Not revised"),
+            self::STATUS_CHECKED => Yii::t('backend', "Revised"),
         ];
     }
 }

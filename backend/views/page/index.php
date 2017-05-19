@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'title',
-            'slug',
             [
                 'attribute' => 'status',
                 'filter' => Page::statuses(),

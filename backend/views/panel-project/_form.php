@@ -16,8 +16,6 @@ use trntv\filekit\widget\Upload;
     <?php echo $form->errorSummary($model); ?>
 
     <?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?php echo $form->field($model, 'position')->textInput() ?>
     
     <?= \backend\widgets\TranslationWidget::widget([
         'activeForm' => $form,
@@ -34,7 +32,7 @@ use trntv\filekit\widget\Upload;
         ]);
     ?>
     
-    <?php echo $form->field($model, 'active')->label(Yii::t('common', "Active"))->checkbox() ?>
+    <?php echo $form->field($model, 'active')->checkbox() ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

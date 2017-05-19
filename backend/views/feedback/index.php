@@ -28,19 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            
-            [
-                'attribute' => 'name',
-                'label' => Yii::t('backend', 'Name')
-            ],
-            [
-                'attribute' => 'phone',
-                'label' => Yii::t('backend', 'Phone')
-            ],
+            'name',
+            'phone',
             'email:email',
             [
                 'attribute' => 'datetime',
-                'label' => Yii::t('backend', 'Datetime'),
                 'filter' => kartik\daterange\DateRangePicker::widget([
                     'model' => $searchModel,
                     'attribute' => 'datetime_range',
@@ -57,7 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'check',
-                'label' => Yii::t('backend', 'Revised'),
                 'filter' => \common\models\Feedback::statuses(),
                 'content' => function ($model) {
                     /** @var $model \common\models\Feedback */

@@ -176,6 +176,7 @@ return [
     'Create refrigeration equipment' => 'Создать холодильное оборудование',
     'Create page' => 'Создать страницу',
     'Create widget text' => 'Создать текстовый виджет',
+    'Create feedback' => 'Создать запрос на обратную связь',
     'Feedback' => 'Обратная связь',
     'Other' => 'Другие',
     'Phone' => 'Телефон',
@@ -189,6 +190,7 @@ return [
     'Update phone' => 'Редактирование телефона',
     'Update refrigeration equipments' => 'Редактировать холодильное оборудование',
     'Update widget text' => 'Редактировать текстовый виджет',
+    'Update checkerboard' => 'Редактировать преимущество панелей',
     'Name' => 'Имя',
     'Active' => 'Активно',
     'Inactive' => 'Не активно',
@@ -200,5 +202,6 @@ return [
     'Title' => 'Заголовок',
     'Body' => 'Текст',
     'Checkerboards' => 'Преимущества панелей',
+    'Checkerboard' => 'Преимущество панелей',
     'Status' => 'Статус'
 ];

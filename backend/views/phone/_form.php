@@ -19,13 +19,11 @@ use yii\bootstrap\ActiveForm;
     <?php echo $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
     
     <?php echo $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-
-    <?php echo $form->field($model, 'position')->textInput() ?>
     
-    <?php echo $form->field($model, 'active')->label(Yii::t('common', "Active"))->checkbox() ?>
+    <?php echo $form->field($model, 'active')->checkbox() ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

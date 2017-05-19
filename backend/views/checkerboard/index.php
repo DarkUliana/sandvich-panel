@@ -28,8 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'name',
-            'image',
+            'title',
             [
                 'attribute' => 'active',
                 'filter' => Checkerboard::statuses(),
@@ -45,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 },
             ],
-            'position',
 
             [
                 'class' => 'yii\grid\ActionColumn',

@@ -15,9 +15,9 @@ use trntv\yii\datetime\DateTimeWidget;
 
     <?php echo $form->errorSummary($model); ?>
 
-    <?php echo $form->field($model, 'name')->textInput(['maxlength' => true])->label(Yii::t('backend', 'Name')) ?>
+    <?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?php echo $form->field($model, 'phone')->textInput(['maxlength' => true])->label(Yii::t('backend', 'Phone')) ?>
+    <?php echo $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <?php echo $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
@@ -28,7 +28,7 @@ use trntv\yii\datetime\DateTimeWidget;
         ]
     )->label(Yii::t('backend', 'Datetime')) ?>
 
-    <?php echo $form->field($model, 'check')->label(Yii::t('backend', 'Revised'))->checkbox() ?>
+    <?php echo $form->field($model, 'check')->checkbox() ?>
 
     <div class="form-group">
         <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

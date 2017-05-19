@@ -19,7 +19,7 @@ class CheckerboardSearch extends Checkerboard
     {
         return [
             [['id', 'active', 'position'], 'integer'],
-            [['name', 'image'], 'safe'],
+            [['title', 'image'], 'safe'],
         ];
     }
 
@@ -45,6 +45,16 @@ class CheckerboardSearch extends Checkerboard
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'attributes' => [
+                    'title' => [
+                        'asc' => ['title' => SORT_ASC],
+                        'desc' => ['title' => SORT_DESC],
+                    ],
+                    'id',
+                    'active',
+                ],
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -54,11 +64,9 @@ class CheckerboardSearch extends Checkerboard
         $query->andFilterWhere([
             'id' => $this->id,
             'active' => $this->active,
-            'position' => $this->position,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'image', $this->image]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }
