@@ -49,10 +49,10 @@ class MenuController extends Controller
             return;
         }
         
-        $Menu = Menu::findOne(Yii::$app->request->get('id'));
-        if ($Menu instanceof Menu) {
+        $menu = Menu::findOne(Yii::$app->request->get('id'));
+        if ($menu instanceof Menu) {
             $active = (bool)Yii::$app->request->get('active');
-            $Menu->updateAttributes(['active' => $active]);
+            $menu->updateAttributes(['active' => $active]);
         }
     }
 

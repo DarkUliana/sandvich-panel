@@ -49,10 +49,10 @@ class PageController extends Controller
             return;
         }
         
-        $Page = Page::findOne(Yii::$app->request->get('id'));
-        if ($Page instanceof Page) {
+        $page = Page::findOne(Yii::$app->request->get('id'));
+        if ($page instanceof Page) {
             $status = (bool)Yii::$app->request->get('status');
-            $Page->updateAttributes(['status' => $status]);
+            $page->updateAttributes(['status' => $status]);
         }
     }
 

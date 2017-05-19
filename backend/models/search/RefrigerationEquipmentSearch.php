@@ -18,7 +18,7 @@ class RefrigerationEquipmentSearch extends RefrigerationEquipment
     public function rules()
     {
         return [
-            [['id', 'active', 'position'], 'integer'],
+            [['id', 'active'], 'integer'],
             [['title', 'image'], 'safe'],
         ];
     }

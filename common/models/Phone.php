@@ -41,12 +41,12 @@ class Phone extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'phone' => Yii::t('app', 'Phone'),
-            'active' => Yii::t('app', 'Active'),
-            'position' => Yii::t('app', 'Position'),
-            'slug' => Yii::t('app', 'Slug'),
+            'id' => Yii::t('backend', 'ID'),
+            'name' => Yii::t('backend', 'Name'),
+            'phone' => Yii::t('backend', 'Phone'),
+            'active' => Yii::t('backend', 'Active'),
+            'position' => Yii::t('backend', 'Position'),
+            'slug' => Yii::t('backend', 'Slug'),
 
         ];
     }

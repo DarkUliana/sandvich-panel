@@ -18,7 +18,7 @@ class PhoneSearch extends Phone
     public function rules()
     {
         return [
-            [['id', 'active', 'position'], 'integer'],
+            [['id', 'active'], 'integer'],
             [['name', 'phone'], 'safe'],
         ];
     }

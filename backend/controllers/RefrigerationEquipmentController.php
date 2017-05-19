@@ -49,10 +49,10 @@ class RefrigerationEquipmentController extends Controller
             return;
         }
         
-        $Equipment = RefrigerationEquipment::findOne(Yii::$app->request->get('id'));
-        if ($Equipment instanceof RefrigerationEquipment) {
+        $equipment = RefrigerationEquipment::findOne(Yii::$app->request->get('id'));
+        if ($equipment instanceof RefrigerationEquipment) {
             $active = (bool)Yii::$app->request->get('active');
-            $Equipment->updateAttributes(['active' => $active]);
+            $equipment->updateAttributes(['active' => $active]);
         }
     }
 

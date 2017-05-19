@@ -49,10 +49,10 @@ class CheckerboardController extends Controller
             return;
         }
         
-        $Checkerboard = Checkerboard::findOne(Yii::$app->request->get('id'));
-        if ($Checkerboard instanceof Checkerboard) {
+        $checkerboard = Checkerboard::findOne(Yii::$app->request->get('id'));
+        if ($checkerboard instanceof Checkerboard) {
             $active = (bool)Yii::$app->request->get('active');
-            $Checkerboard->updateAttributes(['active' => $active]);
+            $checkerboard->updateAttributes(['active' => $active]);
         }
     }
 

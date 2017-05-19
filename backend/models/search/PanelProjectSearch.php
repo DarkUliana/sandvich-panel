@@ -28,7 +28,7 @@ class PanelProjectSearch extends PanelProject
     public function rules()
     {
         return [
-            [['id', 'active', 'position'], 'integer'],
+            [['id', 'active'], 'integer'],
             [['title', 'image'], 'safe'],
         ];
     }

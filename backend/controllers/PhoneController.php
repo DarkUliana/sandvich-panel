@@ -49,10 +49,10 @@ class PhoneController extends Controller
             return;
         }
         
-        $Phone = Phone::findOne(Yii::$app->request->get('id'));
-        if ($Phone instanceof Phone) {
+        $phone = Phone::findOne(Yii::$app->request->get('id'));
+        if ($phone instanceof Phone) {
             $active = (bool)Yii::$app->request->get('active');
-            $Phone->updateAttributes(['active' => $active]);
+            $phone->updateAttributes(['active' => $active]);
         }
     }
 

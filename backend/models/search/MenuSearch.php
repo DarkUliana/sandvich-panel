@@ -29,7 +29,7 @@ class MenuSearch extends Menu
     public function rules()
     {
         return [
-            [['id', 'active', 'position'], 'integer'],
+            [['id', 'active'], 'integer'],
             [['title', 'slug'], 'safe'],
         ];
     }
