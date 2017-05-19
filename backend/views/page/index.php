@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'columns' => [
             'id',
-            'name',
+            'title',
             'slug',
             [
                 'attribute' => 'status',

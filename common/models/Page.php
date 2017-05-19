@@ -106,7 +106,7 @@ class Page extends ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'slug' => Yii::t('common', 'Slug'),
-            'name' => Yii::t('backend', 'Name'),
+            'title' => Yii::t('backend', 'Title'),
             'view' => Yii::t('backend', 'Page View'),
             'status' => Yii::t('common', 'Active'),
             'created_at' => Yii::t('common', 'Created At'),
