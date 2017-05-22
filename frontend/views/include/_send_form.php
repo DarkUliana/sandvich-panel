@@ -5,8 +5,8 @@
 ?>
 <div class="ownbox-content form form-content">
     <a class="ownbox-close" href="javascript:void(0);"></a>
-    <div class="ownbox-title">Замовити дзвінок</div>
-    <div class="ownbox-description">Наші менеджери зв'яжуться з Вами найближчим часом</div>
+    <div class="ownbox-title"><?= Yii::t('frontend', 'Get a call') ?></div>
+    <div class="ownbox-description"><?= Yii::t('frontend', 'Our managers will contact you shortly') ?></div>
     <?php $form = \yii\bootstrap\ActiveForm::begin([
         'enableClientValidation' => true,
         'validateOnBlur' => true,
@@ -19,7 +19,7 @@
             ])->textInput([
                 'class' => 'ownbox-field-input',
                 'maxlength' => true,
-                'placeholder' => "Введіть Ваше ім`я",
+                'placeholder' => Yii::t('frontend', 'Enter your name'),
             ]) ?>
         </div>
         <div class="ownbox-field ownbox-field--email">
@@ -28,7 +28,7 @@
             ])->textInput([
                 'class' => 'ownbox-field-input',
                 'maxlength' => true,
-                'placeholder' => "Введіть Ваш email",
+                'placeholder' => Yii::t('frontend', 'Enter your email'),
             ]) ?>
         </div>
         <div class="ownbox-field ownbox-field--phone">
@@ -37,7 +37,7 @@
             ])->textInput([
                 'class' => 'ownbox-field-input',
                 'maxlength' => true,
-                'placeholder' => "Введіть Ваш телефон",
+                'placeholder' => Yii::t('frontend', 'Enter your phone'),
             ]) ?>
         </div>
         <div class="ownbox-field">

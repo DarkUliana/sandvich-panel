@@ -15,7 +15,6 @@ use \frontend\models\search\PhoneSearch;
 use \frontend\models\search\RefrigerationEquipmentSearch;
 use \frontend\models\search\WidgetTextSearch;
 
-
 /**
  * Site controller
  */
@@ -61,6 +60,10 @@ class SiteController extends Controller
             'phone' => PhoneSearch::getAll(),
             'equipment' => RefrigerationEquipmentSearch::getAll(),
             'widgetText' => WidgetTextSearch::getAll(),
+            'key' => [
+                'email' => Yii::$app->keyStorage->get('feedback_email'),
+                        'address' => Yii::$app->keyStorage->get('address_'.Yii::$app->language),
+                    ],
         ]);
     }
     
