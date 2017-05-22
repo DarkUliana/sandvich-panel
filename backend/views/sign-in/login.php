@@ -21,6 +21,12 @@ $this->params['body-class'] = 'login-page';
             <?php echo $form->field($model, 'username') ?>
             <?php echo $form->field($model, 'password')->passwordInput() ?>
             <?php echo $form->field($model, 'rememberMe')->checkbox(['class'=>'simple']) ?>
+            
+            <?php if ($model->scenario === \backend\models\LoginForm::SCENARIO_PROD) : ?>
+                <?= $form->field($model, 'reCaptcha')->label(false)->widget(
+                    \himiklab\yii2\recaptcha\ReCaptcha::className()
+                ) ?>
+            <?php endif; ?>
         </div>
         <div class="footer">
             <?php echo Html::submitButton(Yii::t('backend', 'Sign me in'), [

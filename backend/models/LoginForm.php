@@ -16,15 +16,36 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $rememberMe = true;
+    public $reCaptcha;
 
     private $user = false;
+    
+    const SCENARIO_DEV = 'development_scenario';
+    const SCENARIO_PROD = 'production_scenario';
 
+    public function init()
+    {
+        parent::init();
+
+        $this->scenario = self::SCENARIO_DEV;
+        if (YII_ENV_PROD && env('GOOGLE_CAPTCHA_SITE_KEY') && env('GOOGLE_CAPTCHA_SECRET_KEY')) {
+            $this->scenario = self::SCENARIO_PROD;
+        }
+    }
+    
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_DEV => ['username', 'password', 'rememberMe'],
+            self::SCENARIO_PROD => ['username', 'password', 'rememberMe', 'reCaptcha'],
+        ];
+    }
     /**
      * @inheritdoc
      */
     public function rules()
     {
-        return [
+        $rules = [
             // username and password are both required
             [['username', 'password'], 'required'],
             // rememberMe must be a boolean value
@@ -32,6 +53,15 @@ class LoginForm extends Model
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
+        if (YII_ENV_PROD && env('GOOGLE_CAPTCHA_SITE_KEY') && env('GOOGLE_CAPTCHA_SECRET_KEY')) {
+            $rules[] = [
+                'reCaptcha',
+                \himiklab\yii2\recaptcha\ReCaptchaValidator::className(),
+                'uncheckedMessage' => Yii::t('backend', "Please check «I am not Robot»"),
+                'secret' => env('GOOGLE_CAPTCHA_SECRET_KEY')
+            ];
+        }
+        return $rules;
     }
 
     /**
@@ -42,7 +72,8 @@ class LoginForm extends Model
         return [
             'username' => Yii::t('backend', 'Username'),
             'password' => Yii::t('backend', 'Password'),
-            'rememberMe' => Yii::t('backend', 'Remember Me')
+            'rememberMe' => Yii::t('backend', 'Remember Me'),
+            'reCaptcha' => Yii::t('backend', 'Captcha'),
         ];
     }
 

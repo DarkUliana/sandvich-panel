@@ -37,6 +37,7 @@ $config = [
             'enableAutoLogin' => true,
             'as afterLogin' => common\behaviors\LoginTimestampBehavior::class
         ],
+        
     ],
     'modules' => [
         'i18n' => [
@@ -86,6 +87,15 @@ $config = [
         ]
     ]
 ];
+
+if (YII_ENV_PROD && env('GOOGLE_CAPTCHA_SITE_KEY') && env('GOOGLE_CAPTCHA_SECRET_KEY')) {
+    $config['components']['reCaptcha'] = [
+        'name' => 'reCaptcha',
+        'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+        'siteKey' => env('GOOGLE_CAPTCHA_SITE_KEY'),
+        'secret' => env('GOOGLE_CAPTCHA_SECRET_KEY'),
+    ];
+}
 
 if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
