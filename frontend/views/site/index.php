@@ -7,7 +7,6 @@ use \yii\helpers\Url;
 use \yii\bootstrap\ActiveForm;
 
 $this->title = Yii::$app->name;
-//print_r($page);
 ?>
 <!--= Header =-->
 <header class="header" id="header">
@@ -31,8 +30,10 @@ $this->title = Yii::$app->name;
 
         <!--= Phones =-->
         <div class="phones">
-            <a class="phones__item" href="<?= $phone[0]['slug'] ?>"><?= $phone[0]['phone'] ?></a>
-            <a class="phones__link ownbox-show" href="<?= Url::to(['/send']) ?>">замовити дзвінок</a>
+            <?php foreach ($phone as $value) : ?>
+                <a class="phones__item" href="<?= $value['slug'] ?>"><?= $value['phone'] ?></a>
+            <?php endforeach; ?>
+            <a class="phones__link ownbox-show" href="<?= Url::to(['/send']) ?>"><?= Yii::t('frontend', 'get a call') ?></a>
         </div>
         <!--= End phones =-->
         
@@ -57,8 +58,10 @@ $this->title = Yii::$app->name;
                         <?php endif; ?>
 
                         <div class="mobile-menu__phones">
-                            <a class="mobile-menu__phones-item" href="<?= $phone[0]['slug'] ?>"><?= $phone[0]['phone'] ?></a>
-                            <a class="mobile-menu__phones-link ownbox-show" href="<?= Url::to(['/send']) ?>">замовити дзвінок</a>
+                            <?php foreach ($phone as $value) : ?>
+                                <a class="mobile-menu__phones-item" href="<?= $value['slug'] ?>"><?= $value['phone'] ?></a>
+                            <?php endforeach; ?>
+                            <a class="mobile-menu__phones-link ownbox-show" href="<?= Url::to(['/send']) ?>"><?=Yii::t('frontend', 'offer') ?></a>
                         </div>
 
                     </div>
@@ -82,7 +85,7 @@ $this->title = Yii::$app->name;
                 <div class="slider__button">
                     <div class="slider__button-line slider__button-line--before"></div>
                     <div class="slider__button-line slider__button-line--after"></div>
-                    <a class="slider__button-btn" href="#proposition">Детальніше
+                    <a class="slider__button-btn" href="#proposition"><?= Yii::t('frontend', 'More') ?>
                         <span class="slider__button-btn-arrow"></span>
                     </a>
                 </div>
@@ -94,44 +97,44 @@ $this->title = Yii::$app->name;
     <!--= Proposition =-->
     <div class="proposition bounceInUp wow" id="proposition" data-wow-delay="0.2s">
         <div class="container">
-            <div class="proposition__title">пропонуємо</div>
-            <div class="proposition__title-bg">Панелі</div>
+            <div class="proposition__title"><?= Yii::t('frontend', 'offer') ?></div>
+            <div class="proposition__title-bg"><?= Yii::t('frontend', 'Panels') ?></div>
             <div class="proposition__list">
                 <div class="proposition__item-wrapper">
                     <div class="proposition__item fadeIn wow">
                         <div class="proposition__item-title">
-                            <img class="proposition__item-icon" src="data/proposition/wall.png" alt="">Сендвіч панелі
-                            <b>для Стін</b>
+                            <img class="proposition__item-icon" src="data/proposition/wall.png" alt=""><?= Yii::t('frontend', 'Sandwich panels') ?>
+                            <b><?= Yii::t('frontend', 'for wall') ?></b>
                         </div>
                         <div class="proposition__item-box">
                             <div class="proposition__item-table">
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Ширина</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Width') ?></div>
                                     <div class="proposition__item-value">1,02, 1.18 м</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Товщина</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Depth') ?></div>
                                     <div class="proposition__item-value">40-200мм</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Щільність</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Density') ?></div>
                                     <div class="proposition__item-value">43кг/м</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Зовнішня товщина металу</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Outer metal depth') ?></div>
                                     <div class="proposition__item-value">0,5-0,75 мм</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Внутрішня товщина металу</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Internal metal depth') ?></div>
                                     <div class="proposition__item-value">0,5мм</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Покриття</div>
-                                    <div class="proposition__item-value">Кольоровий полімер</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Coating') ?></div>
+                                    <div class="proposition__item-value"><?= Yii::t('frontend', 'Colored polymer') ?></div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Захисне покриття</div>
-                                    <div class="proposition__item-value">Плівка</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Resist') ?></div>
+                                    <div class="proposition__item-value"><?= Yii::t('frontend', 'Film') ?></div>
                                 </div>
                             </div>
                         </div>
@@ -140,38 +143,38 @@ $this->title = Yii::$app->name;
                 <div class="proposition__item-wrapper">
                     <div class="proposition__item fadeIn wow">
                         <div class="proposition__item-title">
-                            <img class="proposition__item-icon" src="data/proposition/roof.png" alt="">Сендвіч панелі
-                            <b>для даху</b>
+                            <img class="proposition__item-icon" src="data/proposition/roof.png" alt=""><?= Yii::t('frontend', 'Sandwich panels') ?>
+                            <b><?= Yii::t('frontend', 'for roof') ?></b>
                         </div>
                         <div class="proposition__item-box">
                             <div class="proposition__item-table">
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Ширина</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Width') ?></div>
                                     <div class="proposition__item-value">1,02, 1.18 м</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Товщина</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Depth') ?></div>
                                     <div class="proposition__item-value">30-150мм</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Щільність</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Density') ?></div>
                                     <div class="proposition__item-value">43кг/м</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Зовнішня товщина металу</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Outer metal depth') ?></div>
                                     <div class="proposition__item-value">0,5-0,75 мм</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Внутрішня товщина металу</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Internal metal depth') ?></div>
                                     <div class="proposition__item-value">0,5мм</div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Покриття</div>
-                                    <div class="proposition__item-value">Кольоровий полімер</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Coating') ?></div>
+                                    <div class="proposition__item-value"><?= Yii::t('frontend', 'Colored polymer') ?></div>
                                 </div>
                                 <div class="proposition__item-field">
-                                    <div class="proposition__item-name">Захисне покриття</div>
-                                    <div class="proposition__item-value">Плівка</div>
+                                    <div class="proposition__item-name"><?= Yii::t('frontend', 'Resist') ?></div>
+                                    <div class="proposition__item-value"><?= Yii::t('frontend', 'Film') ?></div>
                                 </div>
                             </div>
                         </div>
@@ -187,8 +190,8 @@ $this->title = Yii::$app->name;
         <div class="profit" id="profit">
             <div class="container">
 
-                <div class="profit__title">Переваги
-                    <span class="profit__title-accent">сендвіч-панелей</span>
+                <div class="profit__title"><?= Yii::t('frontend', 'Advantages') ?>
+                    <span class="profit__title-accent"><?= Yii::t('frontend', 'sandiwich-panels') ?></span>
                 </div>
                 <div class="profit__list">
                     <?php foreach ($checkerboard as $key => $value) : ?>
@@ -213,7 +216,7 @@ $this->title = Yii::$app->name;
     <div class="calculation" style="background-image: url(data/calculation/bg.png);">
         <div class="container">
             <div class="calculation__box zoomIn wow">
-                <div class="calculation__title">ОТРИМАЙТЕ індивідуальний прорахунок ВАРТОСТІ</div>
+                <div class="calculation__title"><?= Yii::t('frontend', 'GET VALUE individual miscalculation') ?></div>
                 <?php $form = ActiveForm::begin([
                     'options' => [
                         'class' => 'calculation__field',
@@ -230,7 +233,7 @@ $this->title = Yii::$app->name;
                         ])->textInput([
                             'class' => 'calculation__input',
                             'maxlength' => true,
-                            'placeholder' => "Введіть Ваше ім`я",
+                            'placeholder' => Yii::t('frontend', 'Enter your name'),
                         ]) ?>
                     </div>
                     <div class="calculation__field-item calculation__field-item--phone">
@@ -239,7 +242,7 @@ $this->title = Yii::$app->name;
                         ])->textInput([
                             'class' => 'calculation__input',
                             'maxlength' => true,
-                            'placeholder' => "Введіть Ваш телефон",
+                            'placeholder' => Yii::t('frontend', 'Enter your phone'),
                         ]) ?>
                     </div>
                     <div class="calculation__field-item">
@@ -255,7 +258,7 @@ $this->title = Yii::$app->name;
         <!--= Projects =-->
         <div class="projects fadeInUp wow" id="projects">
             <div class="container">
-                <div class="projects__title">Проекти з сендвіч-панелей</div>
+                <div class="projects__title"><?= Yii::t('frontend', 'Projects of sandwich panels') ?></div>
                 <div class="projects__list">
                     <?php foreach ($project as $value) : ?>
                         <div class="projects__item zoomIn wow">
@@ -277,7 +280,7 @@ $this->title = Yii::$app->name;
         <!--= Equipment =-->
         <div class="equipment">
             <div class="container">
-                <div class="equipment__title">Холодильне обладнання</div>
+                <div class="equipment__title"><?= Yii::t('frontend', 'Refrigeration equipment') ?></div>
                 <div class="equipment__list">
                     <?php foreach ($equipment as $value) : ?>
                         <div class="equipment__item fadeInRight wow">
@@ -299,13 +302,17 @@ $this->title = Yii::$app->name;
     <div class="contacts bounceInUp wow" id="contacts">
         <div class="contacts__info">
             <div class="contacts__wrapper">
-                <div class="contacts__title">КОНТАКТИ</div>
-                <div class="contacts__address">м.Рівне вул. Старицького 45</div>
-                <a class="contacts__phone" href="<?= $phone[0]['slug'] ?>"><?= $phone[0]['phone'] ?></a>
-                <div class="contacts__email">sandvich.panels@gmail.com</div>
-                <div class="contacts__subtitle">ЗАЛИШИЛИСЯ ЗАПИТАННЯ?</div>
-                <div class="contacts__text">Замовте зворотній дзвінок і наші менеджери зв'яжуться з Вами найближчим часом</div>
-                <a class="contacts__button ownbox-show" href="<?= Url::to(['/send']) ?>">замовити дзвінок</a>
+                <div class="contacts__title"><?= Yii::t('frontend', 'CONTACTS') ?></div>
+                <div class="contacts__address"><?= $key['address'] ?></div>
+                
+                <?php foreach ($phone as $value) : ?>
+                    <a class="contacts__phone" href="<?= $value['slug'] ?>"><?= $value['phone'] ?></a>
+                <?php endforeach; ?>
+                    
+                <div class="contacts__email"><?= $key['email'] ?></div>
+                <div class="contacts__subtitle"><?= Yii::t('frontend', 'STILL HAVE QUESTIONS?') ?></div>
+                <div class="contacts__text"><?= Yii::t('frontend', 'Sign up for a call back and our managers will contact you shortly') ?></div>
+                <a class="contacts__button ownbox-show" href="<?= Url::to(['/send']) ?>"><?= Yii::t('frontend', 'get a call') ?></a>
             </div>
         </div>
 
