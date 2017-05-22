@@ -14,8 +14,6 @@ use \frontend\models\search\PanelProjectSearch;
 use \frontend\models\search\PhoneSearch;
 use \frontend\models\search\RefrigerationEquipmentSearch;
 use \frontend\models\search\WidgetTextSearch;
-use \frontend\models\search\KeyStorageItemSearch;
-
 
 /**
  * Site controller
