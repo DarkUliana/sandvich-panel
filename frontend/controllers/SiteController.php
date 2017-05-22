@@ -14,6 +14,7 @@ use \frontend\models\search\PanelProjectSearch;
 use \frontend\models\search\PhoneSearch;
 use \frontend\models\search\RefrigerationEquipmentSearch;
 use \frontend\models\search\WidgetTextSearch;
+use \frontend\models\search\KeyStorageItemSearch;
 
 
 /**
@@ -61,6 +62,7 @@ class SiteController extends Controller
             'phone' => PhoneSearch::getAll(),
             'equipment' => RefrigerationEquipmentSearch::getAll(),
             'widgetText' => WidgetTextSearch::getAll(),
+            'email' => Yii::$app->keyStorage->get('feedback_email'),
         ]);
     }
     

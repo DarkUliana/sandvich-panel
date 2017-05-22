@@ -4,6 +4,6 @@
 ?>
 <div class="ownbox-content form form-success">
     <a class="ownbox-close" href="#"></a>
-    <div class="ownbox-title">Дякуємо за звернення</div>
-    <div class="ownbox-description">Наші менеджери зв'яжуться з Вами найближчим часом</div>
+    <div class="ownbox-title"><?= Yii::t('frontend', 'thanks') ?></div>
+    <div class="ownbox-description"><?= Yii::t('frontend', 'managers') ?></div>
 </div>
