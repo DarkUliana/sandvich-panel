@@ -32,6 +32,8 @@ class PageController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new PageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -39,6 +41,19 @@ class PageController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $page = Page::findOne(Yii::$app->request->get('id'));
+        if ($page instanceof Page) {
+            $status = (bool)Yii::$app->request->get('status');
+            $page->updateAttributes(['status' => $status]);
+        }
     }
 
     /**

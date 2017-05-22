@@ -11,9 +11,11 @@ use yii\helpers\Html;
 <head>
     <meta charset="<?php echo Yii::$app->charset ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
     <title><?php echo Html::encode($this->title) ?></title>
     <?php $this->head() ?>
     <?php echo Html::csrfMetaTags() ?>
+    <script type="text/javascript" language="JavaScript">CI_ROOT = '<?= rtrim(Yii::$app->homeUrl, '/'), '/' ?>';</script>
 </head>
 <body>
 <?php $this->beginBody() ?>

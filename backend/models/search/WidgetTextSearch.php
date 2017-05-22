@@ -7,6 +7,9 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\WidgetText;
 
+/**
+ * WidgetTextSearch represents the model behind the search form about `common\models\WidgetText`.
+ */
 class WidgetTextSearch extends WidgetText
 {
     /**
@@ -16,7 +19,7 @@ class WidgetTextSearch extends WidgetText
     {
         return [
             [['id', 'status'], 'integer'],
-            [['key', 'title', 'body'], 'safe'],
+            [['key', 'name'], 'safe'],
         ];
     }
 
@@ -31,11 +34,14 @@ class WidgetTextSearch extends WidgetText
 
     /**
      * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
     {
-        $query = WidgetText::find();
+        $query = WidgetText::find()->joinWith(['translationDefault']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -48,11 +54,11 @@ class WidgetTextSearch extends WidgetText
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
+
         ]);
 
         $query->andFilterWhere(['like', 'key', $this->key])
-            ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'body', $this->body]);
+            ->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

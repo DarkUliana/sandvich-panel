@@ -1,20 +1,25 @@
 <?php
+
+use \yii\web\Request;
+$baseUrl = str_replace('/frontend/web', '', (new Request)->getBaseUrl());
+
+
 $config = [
     'homeUrl'=>Yii::getAlias('@frontendUrl'),
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'site/index',
     'bootstrap' => ['maintenance'],
     'modules' => [
-        'user' => [
-            'class' => 'frontend\modules\user\Module',
-            'shouldBeActivated' => false
-        ],
-        'api' => [
-            'class' => 'frontend\modules\api\Module',
-            'modules' => [
-                'v1' => 'frontend\modules\api\v1\Module'
-            ]
-        ]
+//        'user' => [
+//            'class' => 'frontend\modules\user\Module',
+//            'shouldBeActivated' => false
+//        ],
+//        'api' => [
+//            'class' => 'frontend\modules\api\Module',
+//            'modules' => [
+//                'v1' => 'frontend\modules\api\v1\Module'
+//            ]
+//        ]
     ],
     'components' => [
         'authClientCollection' => [
@@ -49,7 +54,8 @@ $config = [
             }
         ],
         'request' => [
-            'cookieValidationKey' => env('FRONTEND_COOKIE_VALIDATION_KEY')
+            'cookieValidationKey' => env('FRONTEND_COOKIE_VALIDATION_KEY'),
+            'baseUrl' => env('FRONTEND_BASE_URL', $baseUrl)
         ],
         'user' => [
             'class'=>'yii\web\User',

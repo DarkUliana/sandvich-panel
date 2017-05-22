@@ -7,17 +7,14 @@ use common\models\translation\PageTranslation;
 use creocoder\translateable\TranslateableBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-
 
 /**
  * This is the model class for table "page".
  *
  * @property integer $id
+ * @property string $name
  * @property string $slug
- * @property string $title
- * @property string $body
  * @property string $view
  * @property integer $status
  * @property integer $created_at
@@ -42,7 +39,6 @@ class Page extends ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
             'slug' => [
                 'class' => SluggableBehavior::className(),
                 'attributes' => [
@@ -63,6 +59,9 @@ class Page extends ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function transactions()
     {
         return [
@@ -85,19 +84,17 @@ class Page extends ActiveRecord
     {
         return $this->hasOne(PageTranslation::className(), ['page_id' => 'id'])->andOnCondition(['language' => Yii::$app->language]);
     }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['title', 'body'], 'required'],
-            [['body'], 'string'],
             [['status'], 'integer'],
             [['slug'], 'unique'],
             [['slug'], 'string', 'max' => 2048],
-            [['title'], 'string', 'max' => 512],
-            [['view'], 'string', 'max' => 255]
+            [['view', 'name'], 'string', 'max' => 255]
         ];
     }
 
@@ -109,12 +106,24 @@ class Page extends ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'slug' => Yii::t('common', 'Slug'),
-            'title' => Yii::t('common', 'Title'),
-            'body' => Yii::t('common', 'Body'),
-            'view' => Yii::t('common', 'Page View'),
+            'title' => Yii::t('backend', 'Title'),
+            'view' => Yii::t('backend', 'Page View'),
             'status' => Yii::t('common', 'Active'),
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Updated At'),
         ];
     }
+
+    /**
+     * Return page statuses
+     * @return array
+     */
+    public static function statuses()
+    {
+        return [
+            self::STATUS_DRAFT => Yii::t('backend', "Inactive"),
+            self::STATUS_PUBLISHED => Yii::t('backend', "Active"),
+        ];
+    }
+    
 }

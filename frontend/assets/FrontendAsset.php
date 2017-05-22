@@ -7,10 +7,7 @@
 
 namespace frontend\assets;
 
-use yii\bootstrap\BootstrapAsset;
 use yii\web\AssetBundle;
-use yii\web\YiiAsset;
-use common\assets\Html5shiv;
 
 /**
  * Frontend application asset
@@ -30,22 +27,37 @@ class FrontendAsset extends AssetBundle
      * @var array
      */
     public $css = [
-        'css/style.css',
+        'css/main.min.css',
+        'https://fonts.googleapis.com/css?family=Roboto:400,700&amp;amp;subset=cyrillic',
     ];
 
     /**
      * @var array
      */
     public $js = [
-        'js/app.js',
+        'js/main.min.js',
+        'js/own.box.min.js',
+        'js/wow.min.js',
+        'js/index.js',
     ];
 
     /**
      * @var array
      */
     public $depends = [
-        YiiAsset::class,
-        BootstrapAsset::class,
-        Html5shiv::class,
+        '\\frontend\\assets\\JqueryAsset',
     ];
+    
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        // resetting BootstrapAsset to not load own css files
+        \Yii::$app->assetManager->bundles['yii\\bootstrap\\BootstrapAsset'] = [
+            'css' => [],
+            'js' => [],
+        ];
+    }
 }

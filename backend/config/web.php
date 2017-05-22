@@ -1,4 +1,8 @@
 <?php
+
+use \yii\web\Request;
+$baseUrl = str_replace('/backend/web', '', (new Request)->getBaseUrl());
+
 $config = [
     'homeUrl' => Yii::getAlias('@backendUrl'),
     'controllerNamespace' => 'backend\controllers',
@@ -24,7 +28,7 @@ $config = [
         ],
         'request' => [
             'cookieValidationKey' => env('BACKEND_COOKIE_VALIDATION_KEY'),
-            'baseUrl' => env('BACKEND_BASE_URL')
+            'baseUrl' => env('BACKEND_BASE_URL', $baseUrl)
         ],
         'user' => [
             'class' => yii\web\User::class,

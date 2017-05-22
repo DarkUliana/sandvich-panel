@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
+use \backend\helpers\Html;
 use yii\grid\GridView;
+use common\models\Page;
+use \yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel \backend\models\search\PageSearch */
@@ -15,28 +17,47 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
-    'modelClass' => 'Page',
-]), ['create'], ['class' => 'btn btn-success']) ?>
+        
+        
+        
+        <?php echo Html::a(Yii::t('backend', 'Create page'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php Pjax::begin(); ?>
+    
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'options' => [
-            'class' => 'grid-view table-responsive'
-        ],
+
         'columns' => [
             'id',
             'title',
-            'slug',
-            'status',
+            [
+                'attribute' => 'status',
+                'filter' => Page::statuses(),
+                'content' => function ($model) {
+                    /** @var $model WidgetText */
+                    $text = $model->status ? Yii::t('backend', "Active") : Yii::t('backend', "Inactive");
+                    $title = $model->status ? Yii::t('backend', "Set inactive") : Yii::t('backend', "Set active");
+                    $class = $model->status ? 'success' : 'warning';
+                    return Html::a($text, ['index', 'id' => $model->id, 'status' => !$model->status], [
+                        'class' => 'btn btn-sm btn-' . $class,
+                        'title' => $title,
+                        'alt' => $text,
+                    ]);
+                },
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>'{update} {delete}'
+                'template'=>'{update} {delete}',
+                'header' => Html::clearSearchLink([
+                    'except' => ['id', 'active', '_pjax'],
+                    ]),
             ],
         ],
     ]); ?>
+    
+    <?php Pjax::end(); ?>
 
 </div>

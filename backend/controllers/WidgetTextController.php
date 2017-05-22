@@ -2,9 +2,9 @@
 
 namespace backend\controllers;
 
-use backend\models\search\WidgetTextSearch;
 use Yii;
 use common\models\WidgetText;
+use backend\models\search\WidgetTextSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -32,12 +32,39 @@ class WidgetTextController extends Controller
      */
     public function actionIndex()
     {
+        $this->actionPjax();
+        
         $searchModel = new WidgetTextSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionPjax()
+    {
+        if (!Yii::$app->request->isPjax) {
+            return;
+        }
+        
+        $widgetText = WidgetText::findOne(Yii::$app->request->get('id'));
+        if ($widgetText instanceof WidgetText) {
+            $status = (bool)Yii::$app->request->get('status');
+            $widgetText->updateAttributes(['status' => $status]);
+        }
+    }
+
+    /**
+     * Displays a single WidgetText model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -49,6 +76,7 @@ class WidgetTextController extends Controller
     public function actionCreate()
     {
         $model = new WidgetText();
+        $model->status = WidgetText::STATUS_ACTIVE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
