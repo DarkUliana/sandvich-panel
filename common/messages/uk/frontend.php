@@ -95,7 +95,6 @@ return [
     'Projects of sandwich panels' => 'Проекти з сендвіч-панелей',
     'Refrigeration equipment' => 'Холодильне обладнання',
     'CONTACTS' => 'КОНТАКТИ',
-    'Rivne Str. Staritskogo 45' => 'м.Рівне вул. Старицького 45',
     'STILL HAVE QUESTIONS?' => 'ЗАЛИШИЛИСЯ ЗАПИТАННЯ?',
     'Sign up for a call back and our managers will contact you shortly' => "Замовте зворотній дзвінок і наші менеджери зв'яжуться з Вами найближчим часом",
     'Thank you for writing' => 'Дякуємо за звернення',

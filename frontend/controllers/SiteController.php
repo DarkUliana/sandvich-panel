@@ -60,7 +60,10 @@ class SiteController extends Controller
             'phone' => PhoneSearch::getAll(),
             'equipment' => RefrigerationEquipmentSearch::getAll(),
             'widgetText' => WidgetTextSearch::getAll(),
-            'email' => Yii::$app->keyStorage->get('feedback_email'),
+            'key' => [
+                'email' => Yii::$app->keyStorage->get('feedback_email'),
+                        'address' => Yii::$app->keyStorage->get('address_'.Yii::$app->language),
+                    ],
         ]);
     }
     

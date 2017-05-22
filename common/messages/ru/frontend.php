@@ -95,7 +95,6 @@ return [
     'Projects of sandwich panels' => 'Проекты из сэндвич-панелей',
     'Refrigeration equipment' => 'Холодильное оборудование',
     'CONTACTS' => 'КОНТАКТЫ',
-    'Rivne Str. Staritskogo 45' => 'г.Ровно ул. Старицкого 45',
     'STILL HAVE QUESTIONS?' => 'ОСТАЛИСЬ ВОПРОСЫ?',
     'Sign up for a call back and our managers will contact you shortly' => "Закажите обратный звонок и наши менеджеры свяжутся с Вами в ближайшее время",
     'Thank you for writing' => 'Спасибо за обращение',

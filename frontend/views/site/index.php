@@ -303,13 +303,13 @@ $this->title = Yii::$app->name;
         <div class="contacts__info">
             <div class="contacts__wrapper">
                 <div class="contacts__title"><?= Yii::t('frontend', 'CONTACTS') ?></div>
-                <div class="contacts__address"><?= Yii::t('frontend', 'Rivne Str. Staritskogo 45') ?></div>
+                <div class="contacts__address"><?= $key['address'] ?></div>
                 
                 <?php foreach ($phone as $value) : ?>
                     <a class="contacts__phone" href="<?= $value['slug'] ?>"><?= $value['phone'] ?></a>
                 <?php endforeach; ?>
                     
-                <div class="contacts__email"><?= $email ?></div>
+                <div class="contacts__email"><?= $key['email'] ?></div>
                 <div class="contacts__subtitle"><?= Yii::t('frontend', 'STILL HAVE QUESTIONS?') ?></div>
                 <div class="contacts__text"><?= Yii::t('frontend', 'Sign up for a call back and our managers will contact you shortly') ?></div>
                 <a class="contacts__button ownbox-show" href="<?= Url::to(['/send']) ?>"><?= Yii::t('frontend', 'get a call') ?></a>
