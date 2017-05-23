@@ -49,7 +49,7 @@ class PageTranslation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'page_id' => Yii::t('app', 'ID'),
+            'page_id' => Yii::t('backend', 'ID'),
             'language' => Yii::t('backend', 'Language'),
             'title' => Yii::t('backend', 'Title'),
             'body' => Yii::t('backend', 'Body'),

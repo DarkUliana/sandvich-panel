@@ -203,5 +203,6 @@ return [
     'Body' => 'Текст',
     'Checkerboards' => 'Переваги панелей',
     'Checkerboard' => 'Перевага панелей',
-    'Status' => 'Статус'
+    'Status' => 'Статус',
+    'Slug' => 'ЧПУ',
 ];

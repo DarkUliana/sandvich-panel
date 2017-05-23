@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'active',
                 'filter' => PanelProject::statuses(),
                 'content' => function ($model) {
-                    /** @var $model WidgetText */
+                    /** @var $model PanelProject */
                     $text = $model->active ? Yii::t('backend', "Active") : Yii::t('backend', "Inactive");
                     $title = $model->active ? Yii::t('backend', "Set inactive") : Yii::t('backend', "Set active");
                     $class = $model->active ? 'success' : 'warning';

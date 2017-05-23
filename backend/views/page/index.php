@@ -20,9 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         
         
         
-        <?php echo Html::a(Yii::t('backend', 'Create page', [
-    'modelClass' => 'Page',
-]), ['create'], ['class' => 'btn btn-success']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Create page'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
