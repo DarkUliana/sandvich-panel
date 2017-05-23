@@ -20,8 +20,8 @@ class FeedbackForm extends \yii\base\Model
     {
         return [
             [['name', 'phone'], 'required'],
-            [['name', 'phone'], 'string', 'max'=> 255],
-            [['email'], 'email'],
+            [['name', 'phone', 'email'], 'string', 'max'=> 255],
+
         ];
     }
     

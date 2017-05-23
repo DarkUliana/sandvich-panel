@@ -26,7 +26,7 @@ use trntv\yii\datetime\DateTimeWidget;
         [
             'phpDatetimeFormat' => 'yyyy-MM-dd\'T\'HH:mm:ssZZZZZ'
         ]
-    )->label(Yii::t('backend', 'Datetime')) ?>
+    ) ?>
 
     <?php echo $form->field($model, 'check')->checkbox() ?>
 

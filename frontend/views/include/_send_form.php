@@ -22,15 +22,7 @@
                 'placeholder' => Yii::t('frontend', 'Enter your name'),
             ]) ?>
         </div>
-        <div class="ownbox-field ownbox-field--email">
-            <?= $form->field($model, 'email', [
-                'template' => '{input}',
-            ])->textInput([
-                'class' => 'ownbox-field-input',
-                'maxlength' => true,
-                'placeholder' => Yii::t('frontend', 'Enter your email'),
-            ]) ?>
-        </div>
+
         <div class="ownbox-field ownbox-field--phone">
             <?= $form->field($model, 'phone', [
                 'template' => '{input}',
@@ -38,6 +30,16 @@
                 'class' => 'ownbox-field-input',
                 'maxlength' => true,
                 'placeholder' => Yii::t('frontend', 'Enter your phone'),
+            ]) ?>
+        </div>
+    
+        <div class="ownbox-field ownbox-field--email">
+            <?= $form->field($model, 'email', [
+                'template' => '{input}',
+            ])->textInput([
+                'class' => 'ownbox-field-input',
+                'maxlength' => true,
+                'placeholder' => Yii::t('frontend', 'Enter your message'),
             ]) ?>
         </div>
         <div class="ownbox-field">

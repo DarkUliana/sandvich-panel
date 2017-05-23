@@ -63,11 +63,11 @@ class Menu extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
+            'id' => Yii::t('backend', 'ID'),
             'name' => Yii::t('backend', 'Name'),
             'active' => Yii::t('backend', 'Active'),
             'position' => Yii::t('backend', 'Position'),
-            'slug' => Yii::t('common', 'Slug'),
+            'slug' => Yii::t('backend', 'Slug'),
             'title' => Yii::t('backend', 'Title'),
         ];
     }

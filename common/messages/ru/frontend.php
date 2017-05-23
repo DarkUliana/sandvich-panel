@@ -103,6 +103,7 @@ return [
     'Enter your name' => "Введите Ваше имя",
     'Enter your email' => 'Введите Ваш email',
     'Enter your phone' => 'Введите Ваш телефон',
+    'Enter your message' => 'Введите Ваше сообщение',
     
     
 ];

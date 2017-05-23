@@ -36,8 +36,7 @@ class Feedback extends \yii\db\ActiveRecord
             [['name', 'phone'], 'required'],
             [['datetime'], 'safe'],
             [['check'], 'boolean'],
-            [['name', 'phone'], 'string', 'max' => 255],
-            [['email'], 'email'],
+            [['name', 'phone', 'email'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,7 +49,7 @@ class Feedback extends \yii\db\ActiveRecord
             'id' => Yii::t('backend', 'ID'),
             'name' => Yii::t('backend', 'Name'),
             'phone' => Yii::t('backend', 'Phone'),
-            'email' => Yii::t('backend', 'Email'),
+            'email' => Yii::t('backend', 'Message'),
             'datetime' => Yii::t('backend', 'Datetime'),
             'check' => Yii::t('backend', 'Revised'),
         ];

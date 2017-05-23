@@ -103,5 +103,6 @@ return [
     'Enter your name' => "Введіть Ваше ім`я",
     'Enter your email' => 'Введіть Ваш email',
     'Enter your phone' => 'Введіть Ваш телефон',
+    'Enter your message' => 'Введіть Ваше повідомлення',
     
 ];
