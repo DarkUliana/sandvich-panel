@@ -21,7 +21,6 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model, 'active') ?>
 
-    <?php echo $form->field($model, 'position') ?>
 
     <div class="form-group">
         <?php echo Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

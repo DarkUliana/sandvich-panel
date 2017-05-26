@@ -77,6 +77,7 @@ class Checkerboard extends \yii\db\ActiveRecord
             'image' => Yii::t('backend', 'Image'),
             'active' => Yii::t('backend', 'Active'),
             'position' => Yii::t('backend', 'Position'),
+            'title' => Yii::t('backend', 'Title'),
         ];
     }
 

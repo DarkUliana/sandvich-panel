@@ -14,8 +14,6 @@ use trntv\filekit\widget\Upload;
     <?php $form = ActiveForm::begin(); ?>
 
     <?php echo $form->errorSummary($model); ?>
-
-    <?php echo $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     
     <?= \backend\widgets\TranslationWidget::widget([
         'activeForm' => $form,
