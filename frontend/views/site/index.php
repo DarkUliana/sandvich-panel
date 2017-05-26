@@ -203,7 +203,7 @@ $this->title = Yii::$app->name;
                             </div>
                             <div class="profit__data">
                                 <div class="profit__data-number">0<?= $key+1 ?></div>
-                                <div class="profit__data-title"><?= $valuet->title ?></div>
+                                <div class="profit__data-title"><?= $value->title ?></div>
                                 <div class="profit__data-text"><?= $value->body ?></div>
                             </div>
                         </div>
@@ -305,13 +305,13 @@ $this->title = Yii::$app->name;
         <div class="contacts__info">
             <div class="contacts__wrapper">
                 <div class="contacts__title"><?= Yii::t('frontend', 'CONTACTS') ?></div>
-                <div class="contacts__address"><?= $key['address'] ?></div>
+                <div class="contacts__address"><?= $key_value['address'] ?></div>
                 
                 <?php foreach ($phone as $value) : ?>
                     <a class="contacts__phone" href="<?= $value['slug'] ?>"><?= $value['phone'] ?></a>
                 <?php endforeach; ?>
                     
-                <div class="contacts__email"><?= $key['email'] ?></div>
+                <div class="contacts__email"><?= $key_value['email'] ?></div>
                 <div class="contacts__subtitle"><?= Yii::t('frontend', 'STILL HAVE QUESTIONS?') ?></div>
                 <div class="contacts__text"><?= Yii::t('frontend', 'Sign up for a call back and our managers will contact you shortly') ?></div>
                 <a class="contacts__button ownbox-show" href="<?= Url::to(['/send']) ?>"><?= Yii::t('frontend', 'get a call') ?></a>

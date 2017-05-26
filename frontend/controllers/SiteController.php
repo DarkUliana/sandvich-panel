@@ -51,6 +51,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        //var_dump(Yii::$app->keyStorage->get('address_'.Yii::$app->language));die();
         return $this->render('index', [
             'model' => Yii::createObject(FeedbackForm::className()),
             'menu' => MenuSearch::getAll(),
@@ -60,9 +61,9 @@ class SiteController extends Controller
             'phone' => PhoneSearch::getAll(),
             'equipment' => RefrigerationEquipmentSearch::getAll(),
             'widgetText' => WidgetTextSearch::getAll(),
-            'key' => [
+            'key_value' => [
                 'email' => Yii::$app->keyStorage->get('feedback_email'),
-                        'address' => Yii::$app->keyStorage->get('address_'.Yii::$app->language),
+                'address' => Yii::$app->keyStorage->get('address_'.Yii::$app->language),
                     ],
         ]);
     }

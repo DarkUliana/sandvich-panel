@@ -37,14 +37,14 @@ class PanelProject extends \yii\db\ActiveRecord
             [
                 'class' => TranslationSaveBehavior::className(),
                 'translationClassName' => PanelProjectTranslation::className(),
-            ],
-            PositionBehavior::className(),
+            ],            
             [
                 'class' => UploadBehavior::className(),
                 'attribute' => 'mainImage',
                 'pathAttribute' => 'image',
                 'baseUrlAttribute' => 'image_url',
             ],
+            PositionBehavior::className(),
         ];
     }
     /**
@@ -61,7 +61,6 @@ class PanelProject extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image'], 'required'],
             [['active', 'position'], 'integer'],
             [['name', 'image'], 'string', 'max' => 255],
             [['mainImage'], 'safe'],
