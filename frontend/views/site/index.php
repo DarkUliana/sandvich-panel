@@ -30,10 +30,12 @@ $this->title = Yii::$app->name;
 
         <!--= Phones =-->
         <div class="phones">
-            <?php foreach ($phone as $value) : ?>
-                <a class="phones__item" href="<?= $value['slug'] ?>"><?= $value['phone'] ?></a>
-            <?php endforeach; ?>
-            <a class="phones__link ownbox-show" href="<?= Url::to(['/send']) ?>"><?= Yii::t('frontend', 'get a call') ?></a>
+            <a class="phones__button ownbox-show" href="<?= Url::to(['/send']) ?>"><?= Yii::t('frontend', 'get a call') ?></a>
+            <div class="phones__list">
+                <?php foreach ($phone as $value) : ?>
+                    <a class="phones__item" href="<?= $value['slug'] ?>"><?= $value['phone'] ?></a>
+                <?php endforeach; ?>
+            </div>
         </div>
         <!--= End phones =-->
         
@@ -322,6 +324,10 @@ $this->title = Yii::$app->name;
 
     </div>
     <!--= End contacts =-->
+    
+    <!--= Pageup =-->
+    <a class="pageup" id="top" href="javascript:void(0);"></a>
+    <!--= End pageup =-->
 
 </main>
 <!--= End main =-->
