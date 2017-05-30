@@ -55,21 +55,10 @@ class MenuSearch extends Menu
         $query = Menu::find()->joinWith(['translationDefault'])->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
+            'key' => 'id',
             'query' => $query,
-            'sort' => [
-                'attributes' => [
-                    'title' => [
-                        'asc' => ['title' => SORT_ASC],
-                        'desc' => ['title' => SORT_DESC],
-                    ],
-                    'id',
-                    'slug',
-                    'active' => [
-                        'asc' => ['active' => SORT_ASC],
-                        'desc' => ['active' => SORT_DESC],
-                    ],
-                ],
-            ],
+            'sort' => false,
+            'pagination' => false,
         ]);
 
         if (!($this->load($params) && $this->validate())) {

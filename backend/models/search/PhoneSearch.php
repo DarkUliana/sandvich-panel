@@ -44,7 +44,10 @@ class PhoneSearch extends Phone
         $query = Phone::find()->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
+            'key' => 'id',
             'query' => $query,
+            'sort' => false,
+            'pagination' => false,
         ]);
 
         if (!($this->load($params) && $this->validate())) {

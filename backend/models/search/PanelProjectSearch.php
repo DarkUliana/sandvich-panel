@@ -54,18 +54,10 @@ class PanelProjectSearch extends PanelProject
         $query = PanelProject::find()->joinWith(['translationDefault'])->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
+            'key' => 'id',
             'query' => $query,
-            'sort' => [
-                'attributes' => [
-                    'title' => [
-                        'asc' => ['title' => SORT_ASC],
-                        'desc' => ['title' => SORT_DESC],
-                    ],
-                    'id',
-                    'active',
-                    'image'
-                ],
-            ],
+            'sort' => false,
+            'pagination' => false,
         ]);
 
         if (!($this->load($params) && $this->validate())) {
