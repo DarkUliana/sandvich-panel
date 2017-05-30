@@ -55,6 +55,15 @@ class CheckerboardController extends Controller
             $checkerboard->updateAttributes(['active' => $active]);
         }
     }
+    
+    public function actionPosition()
+    {
+        if (!Yii::$app->request->isAjax) {
+            throw new NotFoundHttpException();
+        }
+
+        Checkerboard::savePositions(Yii::$app->request->post('positions'));
+    }
 
     /**
      * Displays a single Checkerboard model.

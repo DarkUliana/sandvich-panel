@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use backend\behaviors\PositionBehavior;
 
 /**
  * This is the model class for table "{{%phone}}".
@@ -19,6 +20,14 @@ class Phone extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    
+    public function behaviors() {
+        
+        return [
+            PositionBehavior::className(),
+        ];
+    }
+    
     public static function tableName()
     {
         return '{{%phone}}';
@@ -66,5 +75,20 @@ class Phone extends \yii\db\ActiveRecord
             !self::STATUS_ACTIVE => Yii::t('backend', "Inactive"),
             self::STATUS_ACTIVE => Yii::t('backend', "Active"),
         ];
+    }
+    
+    public static function savePositions($data)
+    {
+        if (empty($data) || !is_array($data)) {
+            return false;
+        }
+
+        foreach ($data as $id => $position) {
+            Yii::$app->db->createCommand()->update(self::tableName(), [
+                'position' => (int)$position,
+            ], 'id = ' . (int)$id)->execute();
+        }
+
+        return true;
     }
 }

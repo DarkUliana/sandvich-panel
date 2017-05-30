@@ -55,6 +55,15 @@ class MenuController extends Controller
             $menu->updateAttributes(['active' => $active]);
         }
     }
+    
+    public function actionPosition()
+    {
+        if (!Yii::$app->request->isAjax) {
+            throw new NotFoundHttpException();
+        }
+
+        Menu::savePositions(Yii::$app->request->post('positions'));
+    }
 
     /**
      * Displays a single Menu model.

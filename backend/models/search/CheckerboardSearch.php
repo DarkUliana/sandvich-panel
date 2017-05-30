@@ -41,20 +41,13 @@ class CheckerboardSearch extends Checkerboard
      */
     public function search($params)
     {
-        $query = Checkerboard::find()->joinWith(['translationDefault']);
+        $query = Checkerboard::find()->joinWith(['translationDefault'])->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
+            'key' => 'id',
             'query' => $query,
-            'sort' => [
-                'attributes' => [
-                    'title' => [
-                        'asc' => ['title' => SORT_ASC],
-                        'desc' => ['title' => SORT_DESC],
-                    ],
-                    'id',
-                    'active',
-                ],
-            ],
+            'sort' => false,
+            'pagination' => false,
         ]);
 
         if (!($this->load($params) && $this->validate())) {

@@ -55,6 +55,15 @@ class PanelProjectController extends Controller
             $panelProject->updateAttributes(['active' => $active]);
         }
     }
+    
+    public function actionPosition()
+    {
+        if (!Yii::$app->request->isAjax) {
+            throw new NotFoundHttpException();
+        }
+
+        PanelProject::savePositions(Yii::$app->request->post('positions'));
+    }
 
     /**
      * Displays a single PanelProject model.

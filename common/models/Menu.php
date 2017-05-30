@@ -109,4 +109,20 @@ class Menu extends \yii\db\ActiveRecord
             self::STATUS_ACTIVE => Yii::t('backend', "Active"),
         ];
     }
+    
+    public static function savePositions($data)
+    {
+        if (empty($data) || !is_array($data)) {
+            return false;
+        }
+
+        foreach ($data as $id => $position) {
+            Yii::$app->db->createCommand()->update(self::tableName(), [
+                'position' => (int)$position,
+            ], 'id = ' . (int)$id)->execute();
+        }
+
+        return true;
+    }
+
 }

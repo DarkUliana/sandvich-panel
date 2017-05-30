@@ -4,10 +4,14 @@ use yii\grid\GridView;
 use common\models\PanelProject;
 use \yii\widgets\Pjax;
 use \backend\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\PanelProjectSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+\backend\assets\SortableAsset::register($this);
+
 
 $this->title = Yii::t('backend', 'Panel projects');
 $this->params['breadcrumbs'][] = $this->title;
@@ -25,6 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'id' => 'mainGrid',
+        'tableOptions' => [
+            'class' => 'table table-striped table-bordered sorted-table',
+            'data' => [
+                'sort-url' => Url::toRoute(['position']),
+            ],
+        ],
         'columns' => [
 
             'id',
