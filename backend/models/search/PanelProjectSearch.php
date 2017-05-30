@@ -51,7 +51,7 @@ class PanelProjectSearch extends PanelProject
      */
     public function search($params)
     {
-        $query = PanelProject::find()->joinWith(['translationDefault']);
+        $query = PanelProject::find()->joinWith(['translationDefault'])->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

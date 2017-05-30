@@ -52,7 +52,7 @@ class MenuSearch extends Menu
      */
     public function search($params)
     {
-        $query = Menu::find()->joinWith(['translationDefault']);
+        $query = Menu::find()->joinWith(['translationDefault'])->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -55,6 +55,15 @@ class PhoneController extends Controller
             $phone->updateAttributes(['active' => $active]);
         }
     }
+    
+    public function actionPosition()
+    {
+        if (!Yii::$app->request->isAjax) {
+            throw new NotFoundHttpException();
+        }
+
+        Phone::savePositions(Yii::$app->request->post('positions'));
+    }
 
     /**
      * Displays a single Phone model.

@@ -41,7 +41,7 @@ class CheckerboardSearch extends Checkerboard
      */
     public function search($params)
     {
-        $query = Checkerboard::find()->joinWith(['translationDefault']);
+        $query = Checkerboard::find()->joinWith(['translationDefault'])->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

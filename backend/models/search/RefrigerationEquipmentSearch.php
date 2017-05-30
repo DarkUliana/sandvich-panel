@@ -41,7 +41,7 @@ class RefrigerationEquipmentSearch extends RefrigerationEquipment
      */
     public function search($params)
     {
-        $query = RefrigerationEquipment::find()->joinWith(['translationDefault']);
+        $query = RefrigerationEquipment::find()->joinWith(['translationDefault'])->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -41,7 +41,7 @@ class PhoneSearch extends Phone
      */
     public function search($params)
     {
-        $query = Phone::find();
+        $query = Phone::find()->defaultOrder();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

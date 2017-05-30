@@ -31,4 +31,9 @@ class CheckerboardQuery extends \yii\db\ActiveQuery
     {
         return parent::one($db);
     }
+    
+    public function defaultOrder()
+    {
+        return $this->orderBy([Checkerboard::tableName() . '.position' => SORT_ASC]);
+    }
 }
