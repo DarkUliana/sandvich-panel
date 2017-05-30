@@ -63,7 +63,7 @@ $this->title = Yii::$app->name;
                             <?php foreach ($phone as $value) : ?>
                                 <a class="mobile-menu__phones-item" href="<?= $value['slug'] ?>"><?= $value['phone'] ?></a>
                             <?php endforeach; ?>
-                            <a class="mobile-menu__phones-link ownbox-show" href="<?= Url::to(['/send']) ?>"><?=Yii::t('frontend', 'offer') ?></a>
+                            <a class="mobile-menu__phones-button ownbox-show" href="<?= Url::to(['/send']) ?>"><?=Yii::t('frontend', 'get a call') ?></a>
                         </div>
 
                     </div>
