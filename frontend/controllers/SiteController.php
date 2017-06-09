@@ -87,7 +87,7 @@ class SiteController extends Controller
             }
         }
         
-        if ($form->load($_POST) && $form->save()) {
+        if ($form->load(Yii::$app->request->post()) && $form->save()) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             Yii::$app->response->data = ['status' => true];
             Yii::$app->response->send();

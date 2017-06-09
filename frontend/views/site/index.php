@@ -241,10 +241,12 @@ $this->title = Yii::$app->name;
                     <div class="calculation__field-item calculation__field-item--phone">
                         <?= $form->field($model, 'phone', [
                             'template' => '{input}',
-                        ])->textInput([
-                            'class' => 'calculation__input',
-                            'maxlength' => true,
-                            'placeholder' => Yii::t('frontend', 'Enter your phone'),
+                        ])->widget(\yii\widgets\MaskedInput::className(), [
+                            'mask' => '+38 - (999) - 999 - 99 - 99',
+                            'options' => [
+                                'class' => 'calculation__input',
+                                'maxlength' => true,
+                                'placeholder' => Yii::t('frontend', 'Enter your phone'),]
                         ]) ?>
                     </div>
                     <div class="calculation__field-item">

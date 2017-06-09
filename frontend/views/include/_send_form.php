@@ -26,10 +26,13 @@
         <div class="ownbox-field ownbox-field--phone">
             <?= $form->field($model, 'phone', [
                 'template' => '{input}',
-            ])->textInput([
-                'class' => 'ownbox-field-input',
-                'maxlength' => true,
-                'placeholder' => Yii::t('frontend', 'Enter your phone'),
+            ])->widget(\yii\widgets\MaskedInput::className(), [
+                'mask' => '+38 - (999) - 999 - 99 - 99',
+                'options' => [
+                    'id' => 'click-feedback-phone',
+                    'class' => 'ownbox-field-input',
+                    'maxlength' => true,
+                    'placeholder' => Yii::t('frontend', 'Enter your phone'),]
             ]) ?>
         </div>
     
