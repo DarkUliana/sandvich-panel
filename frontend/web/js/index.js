@@ -38,6 +38,7 @@ $(document).on('click', '.ownbox-show', function(e){
         
         if ('status' in response && response.status) {
             own_box_show('/result');
+            $(form)[0].reset();
         }
     }).error(function(error) {
         sending = false;

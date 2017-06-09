@@ -45,7 +45,7 @@ class FrontendAsset extends AssetBundle
      * @var array
      */
     public $depends = [
-        '\\frontend\\assets\\JqueryAsset',
+        //'\\frontend\\assets\\JqueryAsset',
     ];
     
     /**
