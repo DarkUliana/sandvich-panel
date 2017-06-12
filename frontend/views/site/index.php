@@ -26,6 +26,17 @@ $this->title = Yii::$app->name;
             <?php endforeach; ?>
         </ul>
         <!--= End menu =-->
+        
+        <!--= Language =-->
+            <div class="language">
+                <?php foreach ($locale as $key => $value) : ?>
+                    <div class="language__item">
+                        <a class="language__link <?php if($language == $key) echo 'language__link--active'; ?>" href="<?= Url::toRoute(['/set-locale', 'locale' => $key]) ?>"><?= $value ?></a>
+                    </div>
+                <?php endforeach; ?>
+                
+            </div>
+        <!--= End language =-->
         <?php endif; ?>
 
         <!--= Phones =-->
@@ -65,7 +76,13 @@ $this->title = Yii::$app->name;
                             <?php endforeach; ?>
                             <a class="mobile-menu__phones-button ownbox-show" href="<?= Url::to(['/send']) ?>"><?=Yii::t('frontend', 'get a call') ?></a>
                         </div>
-
+                        <div class="mobile-menu__lang">
+                            <?php foreach ($locale as $key => $value) : ?>
+                                <div class="mobile-menu__lang-item">
+                                    <a class="mobile-menu__lang-link <?php if($language == $key) echo 'mobile-menu__lang-link--active'; ?>" href="<?= Url::toRoute(['/set-locale', 'locale' => $key]) ?>"><?= $value ?></a>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -317,6 +334,13 @@ $this->title = Yii::$app->name;
                 <div class="contacts__subtitle"><?= Yii::t('frontend', 'STILL HAVE QUESTIONS?') ?></div>
                 <div class="contacts__text"><?= Yii::t('frontend', 'Sign up for a call back and our managers will contact you shortly') ?></div>
                 <a class="contacts__button ownbox-show" href="<?= Url::to(['/send']) ?>"><?= Yii::t('frontend', 'get a call') ?></a>
+                <div class="contacts__lang">
+                    <?php foreach ($locale as $key => $value) : ?>
+                        <div class="contacts__lang-item">
+                            <a class="contacts__lang-link <?php if($language == $key) echo 'contacts__lang-link--active'; ?>" href="<?= Url::toRoute(['/set-locale', 'locale' => $key]) ?>"><?= $value ?></a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
 
