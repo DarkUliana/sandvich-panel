@@ -92,6 +92,7 @@ return [
     'Advantages' => 'Переваги',
     'sandiwich-panels' => 'сендвіч-панелей',
     'GET VALUE individual miscalculation' => 'ОТРИМАЙТЕ індивідуальний прорахунок ВАРТОСТІ',
+    'Get miscalculation' => 'Отримати розрахунок',
     'Projects of sandwich panels' => 'Проекти з сендвіч-панелей',
     'Refrigeration equipment' => 'Холодильне обладнання',
     'CONTACTS' => 'КОНТАКТИ',
