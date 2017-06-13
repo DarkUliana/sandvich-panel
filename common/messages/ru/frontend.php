@@ -92,6 +92,7 @@ return [
     'Advantages' => 'Преимущества',
     'sandiwich-panels' => 'сэндвич-панелей',
     'GET VALUE individual miscalculation' => 'ПОЛУЧИТЕ индивидуальный расчет СТОИМОСТИ',
+    'Get miscalculation' => 'Получить расчет',
     'Projects of sandwich panels' => 'Проекты из сэндвич-панелей',
     'Refrigeration equipment' => 'Холодильное оборудование',
     'CONTACTS' => 'КОНТАКТЫ',

@@ -267,7 +267,7 @@ $this->title = Yii::$app->name;
                         ]) ?>
                     </div>
                     <div class="calculation__field-item">
-                        <input class="calculation__button ajax-submit" type="button" value="Отримати розрахунок">
+                        <input class="calculation__button ajax-submit" type="button" value="<?= Yii::t('frontend', 'Get miscalculation') ?>">
                     </div>
                 <?php ActiveForm::end(); ?>
             </div>
