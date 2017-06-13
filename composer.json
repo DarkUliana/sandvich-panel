@@ -51,7 +51,8 @@
     "creocoder/yii2-translateable": "^1.0",
     "studio32x32/components/yii2-migration": "^1.0",
     "kartik-v/yii2-date-range": "*",
-    "himiklab/yii2-recaptcha-widget": "*"
+    "himiklab/yii2-recaptcha-widget": "*",
+    "pheme/yii2-i18n-url": "@dev"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",
