@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a54c0bac9c7a5e063c5098fd5a9d8358",
+    "content-hash": "0ac033f61de301801a6a72fee47898d4",
     "packages": [
         {
             "name": "asofter/yii2-imperavi-redactor",
@@ -1432,6 +1432,49 @@
                 "yii"
             ],
             "time": "2017-01-06T23:35:14+00:00"
+        },
+        {
+            "name": "pheme/yii2-i18n-url",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phemellc/yii2-i18n-url.git",
+                "reference": "eec2feecb7f5733b269c79260e27b713b8807343"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phemellc/yii2-i18n-url/zipball/eec2feecb7f5733b269c79260e27b713b8807343",
+                "reference": "eec2feecb7f5733b269c79260e27b713b8807343",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "pheme\\i18n\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aris Karageorgos",
+                    "email": "aris@phe.me"
+                }
+            ],
+            "description": "Internationalize your urls",
+            "keywords": [
+                " i18n",
+                " manager",
+                " url",
+                "yii2"
+            ],
+            "time": "2015-12-10T12:33:16+00:00"
         },
         {
             "name": "psr/http-message",
@@ -5073,7 +5116,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "asofter/yii2-imperavi-redactor": 20,
-        "trntv/cheatsheet": 20
+        "trntv/cheatsheet": 20,
+        "pheme/yii2-i18n-url": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

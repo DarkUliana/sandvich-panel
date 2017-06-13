@@ -1,6 +1,8 @@
 <?php
 return [
-    'class' => 'yii\web\UrlManager',
+    'class' => 'pheme\i18n\I18nUrlManager',
+    'languages' => ['ua', 'ru'],
+    'aliases' => ['ua' => 'uk-UA', 'ru' => 'ru-RU'],
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'enableStrictParsing' => true,

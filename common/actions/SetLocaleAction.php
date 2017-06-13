@@ -83,6 +83,8 @@ class SetLocaleAction extends Action
                 $locale
             ]);
         }
-        return Yii::$app->response->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
+        
+        $url = Yii::$app->homeUrl . '/' . Yii::$app->params['availableLocales'][$locale];
+        return Yii::$app->response->redirect($url);
     }
 }
